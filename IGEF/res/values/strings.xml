@@ -20,7 +20,7 @@
 
     <string name="admission_year">Choose Admission Year</string>
 
-    <string-array name="admission_array">
+    <string-array name="admission_arrayy">
         <item>2010</item>
         <item>2011</item>
         <item>2012</item>
