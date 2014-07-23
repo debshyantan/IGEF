@@ -1,0 +1,81 @@
+<com.nirhart.parallaxscroll.views.ParallaxScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F2F992"
+    app:inner_parallax_factor="1.9"
+    app:parallax_factor="1.9"
+    app:parallax_views_num="9"
+    tools:context="com.SocialNetwork.igef.IgefSocailNetwork$PlaceholderFragment" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@drawable/indogloablclg" />
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="-50dp"
+            android:src="@drawable/igef" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal"
+            android:text="Welcome to IGEF Networks"
+            android:textSize="25sp" />
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/adminblock" />
+
+        <ImageView
+            android:id="@+id/newsfeeds"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/collegenewsfeed" />
+
+        <ImageView
+            android:id="@+id/chat"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/chat" />
+
+        <ImageView
+            android:id="@+id/assignment"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/professorassignment" />
+
+        <ImageView
+            android:id="@+id/signupbutton"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/signupbutton"
+            android:visibility="gone" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="By creating your account your aggree to IGEF&apos;s Terms of Service , Privacy policy and cokkie use. Your profile will be public. Your can change this in Account Settings." />
+    </LinearLayout>
+
+</com.nirhart.parallaxscroll.views.ParallaxScrollView>
