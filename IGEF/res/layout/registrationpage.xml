@@ -114,7 +114,7 @@
             android:layout_height="wrap_content"
             android:hint="Enter Contact no"
             android:inputType="phone"
-            android:maxLength="5" />
+            android:maxLength="10" />
 
         <TextView
             android:id="@+id/emailid"
