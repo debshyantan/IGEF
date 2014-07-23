@@ -1,17 +1,18 @@
 package com.SocialNetwork.igef;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
-import android.view.animation.AnimationUtils;
+import android.webkit.WebView.FindListener;
 import android.widget.ImageView;
 
 public class IgefSocailNetwork extends ActionBarActivity {
@@ -20,15 +21,11 @@ public class IgefSocailNetwork extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_igef_socail_network);
-//asbsdbvfjsadbvkjadsbvjkhbsdabsdvjdbs
+
 		if (savedInstanceState == null) {
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.container, new PlaceholderFragment()).commit();
-			
-			//sdvakjsdjvbasdj
-			//my change
-			
-			
+
 		}
 	}
 
@@ -58,9 +55,6 @@ public class IgefSocailNetwork extends ActionBarActivity {
 	public static class PlaceholderFragment extends Fragment implements
 			AnimationListener {
 		ImageView signup;
-		// Animation
-		Animation animRotate, animFadein;;
-		Handler handel;
 
 		public PlaceholderFragment() {
 		}
@@ -70,33 +64,18 @@ public class IgefSocailNetwork extends ActionBarActivity {
 				Bundle savedInstanceState) {
 			View rootView = inflater.inflate(
 					R.layout.fragment_igef_socail_network, container, false);
-
-			
 			signup = (ImageView) rootView.findViewById(R.id.signupbutton);
-			handel = new Handler();
-			animRotate = AnimationUtils.loadAnimation(getActivity(),
-					R.anim.rotate);
 
-			
-			// create button
-			animFadein = AnimationUtils.loadAnimation(getActivity(),
-					R.anim.fade_in);
-
-			// set animation listener
-			animFadein.setAnimationListener(this);
-			handel.postDelayed(new Runnable() {
+			// on click of Signup button
+			signup.setOnClickListener(new OnClickListener() {
 
 				@Override
-				public void run() {
-					
-					signup.setVisibility(View.VISIBLE);
-
-					// start the animation
-					signup.startAnimation(animFadein);
-
+				public void onClick(View v) {
+					Intent intent = new Intent(getActivity(), Register.class);
+					getActivity().startActivity(intent);
 				}
 
-			}, 3000);
+			});
 
 			return rootView;
 		}

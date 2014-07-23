@@ -2,7 +2,30 @@
 <resources>
 
     <string name="app_name">IGEF</string>
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="branch_prompt">Choose Your Department</string>
+
+    <string-array name="branch_array">
+        <item>B.Tech CSE/IT</item>
+        <item>B.Tech ECE</item>
+        <item>B.Tech Mech</item>
+        <item>B.Tech Civil</item>
+        <item>MBA</item>
+        <item>M.tech CSE</item>
+        <item>M.tech ECE</item>
+        <item>Diploma</item>
+        <item>B.Arch</item>
+        <item>B.ED</item>
+    </string-array>
+
+    <string name="admission_year">Choose Admission Year</string>
+
+    <string-array name="admission_array">
+        <item>2010</item>
+        <item>2011</item>
+        <item>2012</item>
+        <item>2013</item>
+        <item>2014</item>
+    </string-array>
 
 </resources>
