@@ -34,17 +34,20 @@ public class Register extends ActionBarActivity {
 	Spinner branchSpinner,year;
 	Button submit;
 	EditText name, roll, contact, email, password;
-	RadioGroup rdg;
-	RadioButton rb;
-	String d_name, d_roll, d_dept, d_year, d_contact, d_gender, d_email, d_password;
+	RadioGroup rdg_g,rdg_s;
+	RadioButton rb1,rb2;
+	String d_name, d_roll, d_dept, d_year, d_contact, d_gender, d_email, d_password, d_section;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.registrationpage);
-		rdg=(RadioGroup)findViewById(R.id.radioSex);
-		int selectedID=rdg.getCheckedRadioButtonId();
-		rb=(RadioButton)findViewById(selectedID);
+		rdg_g=(RadioGroup)findViewById(R.id.radioSex);
+		int selectedID=rdg_g.getCheckedRadioButtonId();
+		rb1=(RadioButton)findViewById(selectedID);
+		rdg_s=(RadioGroup)findViewById(R.id.radioSection);
+		int selectID=rdg_s.getCheckedRadioButtonId();
+		rb2=(RadioButton)findViewById(selectID);
 		branchSpinner=(Spinner)findViewById(R.id.branch);
 		year=(Spinner)findViewById(R.id.year);
 		submit=(Button)findViewById(R.id.submit);
@@ -62,14 +65,14 @@ public class Register extends ActionBarActivity {
 				
 				d_name=name.getText().toString();
 				d_roll=roll.getText().toString();
-				d_gender=rb.getText().toString();
+				d_gender=rb1.getText().toString();
 				d_contact=contact.getText().toString();
 				d_email=email.getText().toString();
 				d_password=password.getText().toString();
 				d_dept=String.valueOf(branchSpinner.getSelectedItem());
 				d_year=String.valueOf(year.getSelectedItem());
-				
-System.out.println(d_name + d_roll + d_dept + d_year + d_contact + d_email + d_gender + d_password);
+				d_section=rb2.getText().toString();
+System.out.println(d_name + d_roll + d_dept + d_section + d_year + d_contact + d_email + d_gender + d_password);
 
 				new AsyncTask<Void, Void, Void>(){
 					
@@ -95,6 +98,7 @@ System.out.println(d_name + d_roll + d_dept + d_year + d_contact + d_email + d_g
 				        nameValuePairs.add(new BasicNameValuePair("gender", d_gender));
 				        nameValuePairs.add(new BasicNameValuePair("department", d_dept));
 				        nameValuePairs.add(new BasicNameValuePair("year",d_year));
+				        nameValuePairs.add(new BasicNameValuePair("section", d_section));
 				        nameValuePairs.add(new BasicNameValuePair("contactno",d_contact));
 				        nameValuePairs.add(new BasicNameValuePair("email",d_email));
 				        nameValuePairs.add(new BasicNameValuePair("password",d_password));
