@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView android:layout_width="match_parent"
-    android:layout_height="match_parent" xmlns:android="http://schemas.android.com/apk/res/android">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,7 +13,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
             android:src="@drawable/igef" />
 
         <TextView
@@ -29,6 +30,8 @@
             android:id="@+id/enterstudentname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
             android:hint="Enter Full Name" />
 
         <TextView
@@ -45,6 +48,8 @@
             android:id="@+id/enterrollno"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
             android:hint="Enter College Roll No."
             android:inputType="number"
             android:maxLength="5" />
@@ -72,9 +77,8 @@
                     android:id="@+id/radioMale"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="30dp"
                     android:checked="true"
-                    
-                    
                     android:text="Male" />
             </RadioGroup>
 
@@ -85,105 +89,112 @@
                 android:layout_alignParentTop="true"
                 android:layout_toRightOf="@+id/radioSex"
                 android:text="Female" />
-
         </RelativeLayout>
-    
 
-    <TextView
-        android:id="@+id/departmentselector"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:gravity="center"
-        android:text="Select Your Department"
-        android:textColor="#C61F25"
-        android:textSize="20sp" />
+        <TextView
+            android:id="@+id/departmentselector"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:text="Select Your Department"
+            android:textColor="#C61F25"
+            android:textSize="20sp" />
 
-    <Spinner
-        android:id="@+id/branch"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:entries="@array/branch_array"
-        android:prompt="@string/branch_prompt" />
+        <Spinner
+            android:id="@+id/branch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:entries="@array/branch_array"
+            android:prompt="@string/branch_prompt" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:gravity="center"
-        android:text="Select Year of Joining"
-        android:textColor="#C61F25"
-        android:textSize="20sp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:text="Select Year of Joining"
+            android:textColor="#C61F25"
+            android:textSize="20sp" />
 
-    <Spinner
-        android:id="@+id/year"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:entries="@array/admission_arrayy"
-        android:prompt="@string/admission_year" />
+        <Spinner
+            android:id="@+id/year"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:entries="@array/admission_arrayy"
+            android:prompt="@string/admission_year" />
 
-    <TextView
-        android:id="@+id/contactno"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:gravity="center"
-        android:text="Contact No."
-        android:textColor="#C61F25"
-        android:textSize="20sp" />
+        <TextView
+            android:id="@+id/contactno"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:text="Contact No."
+            android:textColor="#C61F25"
+            android:textSize="20sp" />
 
-    <EditText
-        android:id="@+id/econtactno"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter Contact no"
-        android:inputType="phone"
-        android:maxLength="10" />
+        <EditText
+            android:id="@+id/econtactno"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:hint="Enter Contact no"
+            android:inputType="phone"
+            android:maxLength="10" />
 
-    <TextView
-        android:id="@+id/emailid"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:gravity="center"
-        android:text="Email id"
-        android:textColor="#C61F25"
-        android:textSize="20sp" />
+        <TextView
+            android:id="@+id/emailid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:text="Email id"
+            android:textColor="#C61F25"
+            android:textSize="20sp" />
 
-    <EditText
-        android:id="@+id/eemailid"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:hint="Email Id"
-        android:inputType="textEmailAddress" />
+        <EditText
+            android:id="@+id/eemailid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:hint="Email Id"
+            android:inputType="textEmailAddress" />
 
-    <TextView
-        android:id="@+id/username1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:gravity="center"
-        android:text="Username"
-        android:textColor="#C61F25"
-        android:textSize="20sp" />
+        <TextView
+            android:id="@+id/username1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:text="Username"
+            android:textColor="#C61F25"
+            android:textSize="20sp" />
 
-    <EditText
-        android:id="@+id/epassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter Password"
-        android:inputType="textPassword" />
+        <EditText
+            android:id="@+id/epassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:hint="Enter Password"
+            android:inputType="textPassword" />
 
-    <Button
-        android:id="@+id/submit"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:text="register"
-        android:textColor="#C61F25" />
-
-  </LinearLayout>
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="200dp"
+            android:layout_height="75dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="register"
+            android:textSize="20sp"
+            android:textColor="#C61F25" />
+    </LinearLayout>
 
 </ScrollView>
