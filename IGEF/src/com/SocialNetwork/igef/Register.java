@@ -36,19 +36,21 @@ public class Register extends ActionBarActivity {
 		email=(EditText)findViewById(R.id.eemailid);
 		password=(EditText)findViewById(R.id.epassword);
 		
-		d_name=name.getText().toString();
-		d_roll=roll.getText().toString();
-		d_gender=rb.getText().toString();
-		d_contact=contact.getText().toString();
-		d_email=email.getText().toString();
-		d_password=password.getText().toString();
-		d_dept=String.valueOf(branchSpinner.getSelectedItem());
-		d_year=String.valueOf(year.getSelectedItem());
 		
 		submit.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
+				
+				d_name=name.getText().toString();
+				d_roll=roll.getText().toString();
+				d_gender=rb.getText().toString();
+				d_contact=contact.getText().toString();
+				d_email=email.getText().toString();
+				d_password=password.getText().toString();
+				d_dept=String.valueOf(branchSpinner.getSelectedItem());
+				d_year=String.valueOf(year.getSelectedItem());
+				
 				Toast.makeText(Register.this, d_name + d_roll + d_contact + d_email, 1000).show();
 				Log.i("name", d_name);
 				System.out.println(d_name);
