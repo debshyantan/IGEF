@@ -65,7 +65,7 @@ public class Register extends ActionBarActivity implements
 		
 
 	}
-
+//Got it.!!
 	
 
 	// LOGIN FRAGMENT
