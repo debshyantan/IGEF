@@ -12,7 +12,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
-import android.webkit.WebView.FindListener;
+import android.widget.Button;
 import android.widget.ImageView;
 
 public class IgefSocailNetwork extends ActionBarActivity {
@@ -55,6 +55,7 @@ public class IgefSocailNetwork extends ActionBarActivity {
 	public static class PlaceholderFragment extends Fragment implements
 			AnimationListener {
 		ImageView signup;
+		Button login;
 
 		public PlaceholderFragment() {
 		}
@@ -65,6 +66,7 @@ public class IgefSocailNetwork extends ActionBarActivity {
 			View rootView = inflater.inflate(
 					R.layout.fragment_igef_socail_network, container, false);
 			signup = (ImageView) rootView.findViewById(R.id.signupbutton);
+			login=(Button)rootView.findViewById(R.id.login);
 
 			// on click of Signup button
 			signup.setOnClickListener(new OnClickListener() {
@@ -75,6 +77,16 @@ public class IgefSocailNetwork extends ActionBarActivity {
 					getActivity().startActivity(intent);
 				}
 
+			});
+			//Login Button
+			login.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					Intent intent1 = new Intent(getActivity(), Login.class);
+					getActivity().startActivity(intent1);
+					
+				}
 			});
 
 			return rootView;

@@ -30,6 +30,7 @@
             android:id="@+id/enterstudentname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginTop="5dp"
             android:hint="Enter Full Name" />
@@ -48,6 +49,7 @@
             android:id="@+id/enterrollno"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginTop="5dp"
             android:hint="Enter College Roll No."
@@ -80,15 +82,15 @@
                     android:layout_marginRight="30dp"
                     android:checked="true"
                     android:text="Male" />
-            </RadioGroup>
 
-            <RadioButton
-                android:id="@+id/radioFemale"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_toRightOf="@+id/radioSex"
-                android:text="Female" />
+                <RadioButton
+                    android:id="@+id/radioFemale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/radioSex"
+                    android:text="Female" />
+            </RadioGroup>
         </RelativeLayout>
 
         <TextView
@@ -125,6 +127,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
             android:entries="@array/admission_arrayy"
             android:prompt="@string/admission_year" />
 
@@ -142,6 +145,7 @@
             android:id="@+id/econtactno"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginTop="5dp"
             android:hint="Enter Contact no"
@@ -162,6 +166,7 @@
             android:id="@+id/eemailid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginTop="5dp"
             android:hint="Email Id"
@@ -181,6 +186,7 @@
             android:id="@+id/epassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginTop="5dp"
             android:hint="Enter Password"
@@ -193,8 +199,18 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:text="register"
-            android:textSize="20sp"
-            android:textColor="#C61F25" />
+            android:textColor="#C61F25"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/login"
+            android:layout_width="200dp"
+            android:layout_height="75dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Login Now"
+            android:textColor="#C61F25"
+            android:textSize="20sp" />
     </LinearLayout>
 
 </ScrollView>

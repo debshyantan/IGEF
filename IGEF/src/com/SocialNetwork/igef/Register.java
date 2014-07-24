@@ -1,13 +1,13 @@
 package com.SocialNetwork.igef;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Spinner;
 
-public class Register extends Activity {
+public class Register extends ActionBarActivity {
 	Spinner branchSpinner,year;
 	Button submit;
 	@Override
@@ -26,6 +26,7 @@ public class Register extends Activity {
 				
 System.out.println(""+String.valueOf(branchSpinner.getSelectedItem()));
 System.out.println(""+String.valueOf(year.getSelectedItem()));
+//System.out.println();
 				
 			}
 		});		
