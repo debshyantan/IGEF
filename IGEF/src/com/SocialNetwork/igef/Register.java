@@ -142,10 +142,10 @@ System.out.println(d_name + d_roll + d_dept + d_section + d_year + d_contact + d
 					@Override
 					protected void onPostExecute(Void result) {
 						pd.dismiss();
-						
+						System.out.println(""+value);
 						Intent in=new Intent(Register.this,MainActivity.class);
 						startActivity(in);
-						System.out.println(""+value);
+						
 					};
 					
 				}.execute();
