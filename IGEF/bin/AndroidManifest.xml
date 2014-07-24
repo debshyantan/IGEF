@@ -1,31 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.SocialNetwork.igef"
+    
     android:versionCode="1"
     android:versionName="1.0" >
 
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="19" />
+    
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS"/>
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
-    <application
+    <permission android:name="com.SocialNetwork.igef.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+    
+    <uses-permission android:name="com.SocialNetwork.igef.permission.C2D_MESSAGE" />
+    
+ <uses-permission 
+      android:name="android.permission.SYSTEM_ALERT_WINDOW"
+     />
+ 
+ <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+ <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+ <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+ <uses-permission android:name="android.permission.VIBRATE"/>
+
+    <application android:name="com.gcm.MainApp"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
+        
         android:label="@string/app_name"
         android:theme="@style/Theme.Socialnetwork" >
+        
         <activity
             android:name="com.SocialNetwork.igef.IgefSocailNetwork"
             android:label="@string/app_name" >
+            
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
+        <activity android:name="com.gcm.MainActivity"></activity>
+        
         <activity android:name="com.SocialNetwork.igef.Register" >
         </activity>
+        
+         <meta-data android:name="com.google.android.gms.version"
+       android:value="@integer/google_play_services_version" />
+         
+        <service android:name="com.gcm.GcmIntentService"
+            ></service>
+        
+        <receiver android:name="com.gcm.GcmBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND"></receiver>
+        
         <activity android:name="com.SocialNetwork.igef.Login"></activity>
+        
     </application>
+    
 
 </manifest>
