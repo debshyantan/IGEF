@@ -13,7 +13,7 @@
         android:src="@drawable/igef" />
 
     <TextView
-        android:id="@+id/rollno"
+        
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -23,7 +23,7 @@
         android:textSize="20sp" />
 
     <EditText
-        android:id="@+id/email"
+        android:id="@+id/loginrollno"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
@@ -32,18 +32,18 @@
         android:hint="Enter Roll No." />
 
     <TextView
-        android:id="@+id/password"
+       
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="5dp"
         android:gravity="center"
         android:text="Enter Password:"
-        android:textColor="#FFA319"
+        android:textColor="#C61F25"
         android:textSize="20sp" />
 
     <EditText
-        android:id="@+id/enterpassword"
+        android:id="@+id/loginpassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
