@@ -57,6 +57,7 @@ public class Register extends ActionBarActivity {
 		email=(EditText)findViewById(R.id.eemailid);
 		password=(EditText)findViewById(R.id.epassword);
 		
+		//new commit
 		
 		submit.setOnClickListener(new OnClickListener() {
 			
