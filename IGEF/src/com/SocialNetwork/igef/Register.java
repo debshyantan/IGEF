@@ -1,5 +1,23 @@
 package com.SocialNetwork.igef;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.ParseException;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
+
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -51,12 +69,77 @@ public class Register extends ActionBarActivity {
 				d_dept=String.valueOf(branchSpinner.getSelectedItem());
 				d_year=String.valueOf(year.getSelectedItem());
 				
-				Toast.makeText(Register.this, d_name + d_roll + d_contact + d_email, 1000).show();
-				Log.i("name", d_name);
-				System.out.println(d_name);
-System.out.println(d_name + d_roll + d_dept + d_year);
-System.out.println(d_contact + d_email + d_gender + d_password);
-				
+System.out.println(d_name + d_roll + d_dept + d_year + d_contact + d_email + d_gender + d_password);
+
+				new AsyncTask<Void, Void, Void>(){
+					
+					ProgressDialog pd;
+					
+					String value;
+					@Override
+					protected void onPreExecute() {
+						
+						 pd=new ProgressDialog(Register.this);
+						 pd.setMessage("Requesting Server..");
+						 pd.show();
+						
+					};
+					@Override
+					protected Void doInBackground(Void... params) {
+						// TODO Auto-generated method stub
+						HttpClient httpclient = new DefaultHttpClient();
+					    HttpPost httppost = new HttpPost("http://shypal.com/IGEF/task_manager/v1/register");
+					    List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+				        nameValuePairs.add(new BasicNameValuePair("full_name",d_name));
+				        nameValuePairs.add(new BasicNameValuePair("roll_no", d_roll));
+				        nameValuePairs.add(new BasicNameValuePair("gender", d_gender));
+				        nameValuePairs.add(new BasicNameValuePair("department", d_dept));
+				        nameValuePairs.add(new BasicNameValuePair("year",d_year));
+				        nameValuePairs.add(new BasicNameValuePair("contactno",d_contact));
+				        nameValuePairs.add(new BasicNameValuePair("email",d_email));
+				        nameValuePairs.add(new BasicNameValuePair("password",d_password));
+				       
+				        try {
+							httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+						} catch (UnsupportedEncodingException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+
+				        // Execute HTTP Post Request
+				        HttpResponse response = null;
+						try {
+							response = httpclient.execute(httppost);
+						} catch (ClientProtocolException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+				        
+				      try {
+						value=EntityUtils.toString(response.getEntity());
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				      System.out.println(value);
+						return null;
+					}
+					
+					@Override
+					protected void onPostExecute(Void result) {
+						pd.dismiss();
+						
+						
+						System.out.println(""+value);
+					};
+					
+				}.execute();
 			}
 		});		
 
