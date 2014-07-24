@@ -17,7 +17,6 @@
             android:src="@drawable/igef" />
 
         <TextView
-            android:id="@+id/studentname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -36,7 +35,6 @@
             android:hint="Enter Full Name" />
 
         <TextView
-            android:id="@+id/rollno"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -201,16 +199,7 @@
             android:text="register"
             android:textColor="#C61F25"
             android:textSize="20sp" />
-
-        <Button
-            android:id="@+id/login"
-            android:layout_width="200dp"
-            android:layout_height="75dp"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:text="Login Now"
-            android:textColor="#C61F25"
-            android:textSize="20sp" />
     </LinearLayout>
+
 
 </ScrollView>

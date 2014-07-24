@@ -24,6 +24,7 @@
         </activity>
         <activity android:name="com.SocialNetwork.igef.Register" >
         </activity>
+        <activity android:name="com.SocialNetwork.igef.Login"></activity>
     </application>
 
 </manifest>

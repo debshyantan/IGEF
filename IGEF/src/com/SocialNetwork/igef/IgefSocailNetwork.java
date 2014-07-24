@@ -79,16 +79,7 @@ public class IgefSocailNetwork extends ActionBarActivity {
 
 			});
 			//Login Button
-			login.setOnClickListener(new OnClickListener() {
-				
-				@Override
-				public void onClick(View v) {
-					Intent intent1 = new Intent(getActivity(), Login.class);
-					getActivity().startActivity(intent1);
-					
-				}
-			});
-
+			
 			return rootView;
 		}
 
