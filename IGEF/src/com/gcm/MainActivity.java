@@ -61,7 +61,7 @@ public class MainActivity extends ActionBarActivity {
      */
     public static class PlaceholderFragment extends Fragment {
     	//EditText t;
-    	Handler hand;
+    	
     	Button b;
         public PlaceholderFragment() {
         }
@@ -78,12 +78,7 @@ public class MainActivity extends ActionBarActivity {
 				
 				@Override
 				public void onClick(View v) {
-					hand=new Handler();
-					hand.postDelayed(new Runnable() {
-						
-						@Override
-						public void run() {
-							// TODO Auto-generated method stub
+					
 							new AsyncTask<Void, Void, Void>(){
 
 								@Override
@@ -96,8 +91,7 @@ public class MainActivity extends ActionBarActivity {
 								  
 								
 							}.execute();
-						}
-					}, 10000);
+						
 					
 					// TODO Auto-generated method stub
 					

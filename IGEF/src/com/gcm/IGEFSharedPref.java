@@ -7,7 +7,7 @@ public class IGEFSharedPref {
 	
 	public static String DEVICE_TOKEN="devicetoken";
 	
-	static IGEFSharedPref scomixpref;
+	static IGEFSharedPref Igefpref;
 	
 	static SharedPreferences pref;
 	public IGEFSharedPref(Context context)

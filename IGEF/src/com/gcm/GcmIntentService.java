@@ -74,7 +74,7 @@ public class GcmIntentService extends IntentService
     private void sendNotification(String msg, Bundle extras)
     {
 	mNotificationManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
-
+	System.out.println(msg);
 	Intent intent = new Intent(this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 	// If this is a notification type message include the data from the message 
 	// with the intent
@@ -94,8 +94,9 @@ public class GcmIntentService extends IntentService
 		.setContentText(msg)
 		.setTicker(msg)
 		.setAutoCancel(true)
+		.setContentTitle("IGEF")
 		.setSound(Settings.System.DEFAULT_NOTIFICATION_URI);
-
+	
 	mBuilder.setContentIntent(contentIntent);
 	mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
 	

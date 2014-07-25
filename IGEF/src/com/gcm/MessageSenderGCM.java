@@ -44,7 +44,9 @@ public static String AndroidPush(String message, FragmentActivity fragmentActivi
        formparams.add(new BasicNameValuePair("data.message", message));
        // UrlEncodedFormEntity entity = new UrlEncodedFormEntity(formparams,
        // "UTF-8");
-
+       
+       
+       System.out.println(message  +  regId);
       
        HttpResponse response = null;
 

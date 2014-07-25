@@ -15,7 +15,11 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+
+import com.gcm.MainActivity;
+
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -232,9 +236,9 @@ public class Register extends ActionBarActivity implements
 							protected void onPostExecute(Void result) {
 								pd.dismiss();
 
-//								Intent in = new Intent(Register.this,MainActivity.class);
-//								startActivity(in);
-//								System.out.println("" + value);
+								Intent in = new Intent(getActivity(),MainActivity.class);
+								startActivity(in);
+								System.out.println("" + value);
 							};
 
 						}.execute();
