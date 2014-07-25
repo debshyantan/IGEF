@@ -16,6 +16,8 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
+import com.userscreen.UserScreen;
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -68,7 +70,7 @@ public class Register extends ActionBarActivity implements
 		
 
 	}
-//Got it.!!
+
 	
 
 	// LOGIN FRAGMENT
@@ -139,6 +141,7 @@ public class Register extends ActionBarActivity implements
 							}
 					        
 					        try {
+					        	
 								value=EntityUtils.toString(response.getEntity());
 							} catch (ParseException e) {
 								// TODO Auto-generated catch block
@@ -153,7 +156,10 @@ public class Register extends ActionBarActivity implements
 						@Override
 						protected void onPostExecute(Void result) {
 							pd.dismiss();
+							
 							Toast.makeText(getActivity(), "Login Successful", Toast.LENGTH_LONG).show();
+							Intent intt=new Intent(getActivity(), UserScreen.class);
+							getActivity().startActivity(intt);
 						};
 						
 					}.execute();

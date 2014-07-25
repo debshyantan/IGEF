@@ -62,6 +62,8 @@
             android:permission="com.google.android.c2dm.permission.SEND"></receiver>
         
         <activity android:name="com.SocialNetwork.igef.Login"></activity>
+        <activity android:name="com.userscreen.UserScreen"></activity>
+        
         
     </application>
     

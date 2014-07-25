@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/card"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/stuImage"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_launcher" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/stuImage"
+            android:layout_marginLeft="34dp"
+            android:layout_toRightOf="@+id/stuImage"
+            android:text="NAME"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+        
+        <TextView android:id="@+id/status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sample status update"
+            android:layout_below="@+id/stuImage"
+            android:layout_marginTop="5dp"/>
+        
+        <Button android:id="@+id/like"
+            android:layout_below="@+id/status"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginLeft="30dp"
+            android:text="LIKE"
+            android:gravity="left"/>
+        <Button android:id="@+id/comment"
+            android:layout_below="@+id/status"
+            android:layout_toRightOf="@+id/like"
+            android:layout_marginLeft="80dp"
+            android:gravity="right"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="COMMENT"
+            />
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:gravity="center"
-        android:text="Enter College Roll No."
+        android:text="Enter Email Id"
         android:textColor="#C61F25"
         android:textSize="20sp" />
 
@@ -31,7 +31,8 @@
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="5dp"
-        android:hint="Enter Roll No." />
+        android:inputType="textEmailAddress"
+        android:hint="Enter Email ID" />
 
     <TextView
        
