@@ -30,7 +30,7 @@
  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
  <uses-permission android:name="android.permission.VIBRATE"/>
 
-    <application android:name="com.gcm.MainApp"
+    <application android:name="com.SocialNetwork.igef.MainApp"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         
@@ -48,7 +48,7 @@
             </intent-filter>
         </activity>
         
-        <activity android:name="com.gcm.MainActivity"></activity>
+        <activity android:name="com.SocialNetwork.igef.MainActivity"></activity>
         
         <activity android:name="com.SocialNetwork.igef.Register" >
         </activity>
@@ -56,10 +56,9 @@
          <meta-data android:name="com.google.android.gms.version"
        android:value="@integer/google_play_services_version" />
          
-        <service android:name="com.gcm.GcmIntentService"
-            ></service>
+ <service android:name="com.SocialNetwork.igef.GcmIntentService" ></service>
         
-        <receiver android:name="com.gcm.GcmBroadcastReceiver"
+        <receiver android:name="com.SocialNetwork.igef.GcmBroadcastReceiver"
             android:permission="com.google.android.c2dm.permission.SEND"></receiver>
         
         <activity android:name="com.SocialNetwork.igef.Login"></activity>

@@ -1,4 +1,4 @@
-package com.gcm;
+package com.SocialNetwork.igef;
 
 import java.io.IOException;
 import java.io.InputStream;

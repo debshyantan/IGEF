@@ -16,8 +16,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
-import com.gcm.MainActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -37,6 +35,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 public class Register extends ActionBarActivity implements
 		ActionBar.TabListener {
@@ -95,8 +94,69 @@ public class Register extends ActionBarActivity implements
 					@Override
 					public void onClick(View v) {
 						
-					String roll_no1=	rollno1.getText().toString();
-					String login_password= password1.getText().toString();
+					final String roll_no1=	rollno1.getText().toString();
+					final String login_password= password1.getText().toString();
+					new AsyncTask<Void, Void, Void>(){
+
+						ProgressDialog pd;
+						
+						String value;
+						@Override
+						protected void onPreExecute() {
+							
+							 pd=new ProgressDialog(getActivity());
+							 pd.setMessage("Login");
+							 pd.show();
+							
+						};
+
+						@Override
+						protected Void doInBackground(Void... params) {
+							// TODO Auto-generated method stub
+							
+							HttpClient httpclient = new DefaultHttpClient();
+						    HttpPost httppost = new HttpPost("http://shypal.com/IGEF/task_manager/v1/register");
+					        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+					        nameValuePairs.add(new BasicNameValuePair("roll_no", roll_no1));
+					        nameValuePairs.add(new BasicNameValuePair("password", login_password));
+					        try {
+								httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+							} catch (UnsupportedEncodingException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+
+					        // Execute HTTP Post Request
+					        HttpResponse response = null;
+							try {
+								response = httpclient.execute(httppost);
+							} catch (ClientProtocolException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+					        
+					        try {
+								value=EntityUtils.toString(response.getEntity());
+							} catch (ParseException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+					        System.out.println(value);
+							return null;
+						}
+						@Override
+						protected void onPostExecute(Void result) {
+							pd.dismiss();
+							Toast.makeText(getActivity(), "Login Successful", Toast.LENGTH_LONG).show();
+						};
+						
+					}.execute();
 					
 						
 					}

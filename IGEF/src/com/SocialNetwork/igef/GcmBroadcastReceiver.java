@@ -1,4 +1,4 @@
-package com.gcm;
+package com.SocialNetwork.igef;
 
 import android.app.Activity;
 import android.content.ComponentName;

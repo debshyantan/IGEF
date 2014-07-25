@@ -1,4 +1,4 @@
-package com.gcm;
+package com.SocialNetwork.igef;
 
 import com.SocialNetwork.igef.R;
 import com.google.android.gms.gcm.GoogleCloudMessaging;

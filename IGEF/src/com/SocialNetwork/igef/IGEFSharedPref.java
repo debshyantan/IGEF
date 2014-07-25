@@ -1,4 +1,4 @@
-package com.gcm;
+package com.SocialNetwork.igef;
 
 import android.content.Context;
 import android.content.SharedPreferences;
