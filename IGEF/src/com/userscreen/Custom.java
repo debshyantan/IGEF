@@ -2,7 +2,15 @@ package com.userscreen;
 
 public class Custom {
 
-	String name,status;
+	String name,status,timestamp;
+
+	public String getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp(String timestamp) {
+		this.timestamp = timestamp;
+	}
 
 	public String getName() {
 		return name;

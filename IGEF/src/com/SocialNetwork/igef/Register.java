@@ -119,7 +119,7 @@ public class Register extends ActionBarActivity implements
 							HttpClient httpclient = new DefaultHttpClient();
 						    HttpPost httppost = new HttpPost("http://shypal.com/IGEF/task_manager/v1/login");
 					        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-					        nameValuePairs.add(new BasicNameValuePair("email", roll_no1));
+					        nameValuePairs.add(new BasicNameValuePair("roll_no", roll_no1));
 					        nameValuePairs.add(new BasicNameValuePair("password", login_password));
 					        try {
 								httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
@@ -158,8 +158,11 @@ public class Register extends ActionBarActivity implements
 							pd.dismiss();
 							
 							Toast.makeText(getActivity(), "Login Successful", Toast.LENGTH_LONG).show();
+							
 							Intent intt=new Intent(getActivity(), UserScreen.class);
 							getActivity().startActivity(intt);
+							rollno1.setText(null);
+							password1.setText(null);
 						};
 						
 					}.execute();
@@ -304,6 +307,11 @@ public class Register extends ActionBarActivity implements
 
 								Intent in = new Intent(getActivity(),MainActivity.class);
 								startActivity(in);
+								name.setText(null);
+								roll.setText(null);
+								contact.setText(null);
+								email.setText(null);
+								password.setText(null);
 								System.out.println("" + value);
 							};
 

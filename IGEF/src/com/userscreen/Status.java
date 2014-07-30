@@ -20,9 +20,9 @@ import android.widget.TextView;
 
 public class Status extends Fragment{
 	ListView lv;
-	ImageView iv;
-	TextView name,status;
-	Button like, comment;
+	ImageView profile_iv, status_iv;
+	TextView name,status,timestamp;
+	
 	
 	ArrayList<Custom> list;
 	
@@ -43,8 +43,9 @@ MyAdapter adapter;
 		list=new ArrayList<Custom>();
 		
 		Custom c=new Custom();
-		c.setName("Rahul");
-		c.setStatus("skvkjsvkjdvjkhbsdvjhsdvhjsd");
+		c.setName("Rahul Manchanda");
+		c.setTimestamp("July 30,2014 11.15 AM");
+		c.setStatus("Welcome to IGEF Networks..!!");
 		
 		list.add(c);
 		
@@ -68,13 +69,16 @@ class MyAdapter extends BaseAdapter
 		// TODO Auto-generated method stub
 		LayoutInflater inflater=(LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		convertView=inflater.inflate(R.layout.status, parent, false);
-		iv=(ImageView)convertView.findViewById(R.id.stuImage);
+		profile_iv=(ImageView)convertView.findViewById(R.id.profilePic);
 		name=(TextView)convertView.findViewById(R.id.name);
-		status=(TextView)convertView.findViewById(R.id.status);
-		like=(Button)convertView.findViewById(R.id.like);
-		comment=(Button)convertView.findViewById(R.id.comment);
-		iv.setImageResource(R.drawable.ic_launcher);
+		timestamp=(TextView)convertView.findViewById(R.id.timestamp);
+		status=(TextView)convertView.findViewById(R.id.txtStatusMsg);
+		
+		status_iv=(ImageView)convertView.findViewById(R.id.feedImage1);
+		profile_iv.setImageResource(R.drawable.ic_launcher);
+		status_iv.setImageResource(R.drawable.adminblock);
 		name.setText(list.get(position).name);
+		timestamp.setText(list.get(position).timestamp);
 		status.setText(list.get(position).status);
 		
 		

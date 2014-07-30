@@ -2,53 +2,89 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/card"
+    android:background="@color/feed_bg"
     android:orientation="vertical" >
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <ImageView
-            android:id="@+id/stuImage"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/ic_launcher" />
-
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="wrap_content"
+ 
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+ 
+        android:layout_marginLeft="@dimen/feed_item_margin"
+        android:layout_marginRight="@dimen/feed_item_margin"
+        android:layout_marginTop="@dimen/feed_item_margin"
+        android:background="@drawable/bg_parent_rounded_corner"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/feed_item_padding_top_bottom"
+        android:paddingTop="@dimen/feed_item_padding_top_bottom" >
+ 
+        <LinearLayout
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/stuImage"
-            android:layout_marginLeft="34dp"
-            android:layout_toRightOf="@+id/stuImage"
-            android:text="NAME"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-        
-        <TextView android:id="@+id/status"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/feed_item_padding_left_right"
+            android:paddingRight="@dimen/feed_item_padding_left_right" >
+ 
+            <ImageView
+                android:id="@+id/profilePic"
+                android:layout_width="@dimen/feed_item_profile_pic"
+                android:layout_height="@dimen/feed_item_profile_pic"
+                android:scaleType="fitCenter" 
+                android:src="@drawable/ic_launcher">
+            </ImageView>
+ 
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/feed_item_profile_info_padd" >
+ 
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/feed_item_profile_name"
+                    android:textStyle="bold"
+                    android:text="Profile Name" />
+ 
+                <TextView
+                    android:id="@+id/timestamp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/timestamp"
+                    android:textSize="@dimen/feed_item_timestamp" 
+                    android:text="Date and Time"/>
+            </LinearLayout>
+        </LinearLayout>
+ 
+        <TextView
+            android:id="@+id/txtStatusMsg"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:paddingLeft="@dimen/feed_item_status_pad_left_right"
+            android:paddingRight="@dimen/feed_item_status_pad_left_right"
+            android:paddingTop="@dimen/feed_item_status_pad_top"
+            android:text="This is a sample status post.!!" />
+ 
+        <TextView
+            android:id="@+id/txtUrl"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:linksClickable="true"
+            android:paddingBottom="10dp"
+            android:paddingLeft="@dimen/feed_item_status_pad_left_right"
+            android:paddingRight="@dimen/feed_item_status_pad_left_right"
+            android:textColorLink="@color/link"
+            android:text="http://www.androidhive.info/2014/06/android-facebook-like-custom-listview-feed-using-volley/" />
+ 
+        <ImageView
+            android:id="@+id/feedImage1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sample status update"
-            android:layout_below="@+id/stuImage"
-            android:layout_marginTop="5dp"/>
-        
-        <Button android:id="@+id/like"
-            android:layout_below="@+id/status"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_marginLeft="30dp"
-            android:text="LIKE"
-            android:gravity="left"/>
-        <Button android:id="@+id/comment"
-            android:layout_below="@+id/status"
-            android:layout_toRightOf="@+id/like"
-            android:layout_marginLeft="80dp"
-            android:gravity="right"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:text="COMMENT"
-            />
-
-    </RelativeLayout>
-
+            android:background="@color/white"
+            android:scaleType="fitXY"
+            android:visibility="visible"
+            android:src="@drawable/adminblock" />
+    </LinearLayout>
+ 
 </LinearLayout>
