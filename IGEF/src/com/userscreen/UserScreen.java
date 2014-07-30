@@ -25,7 +25,7 @@ public class UserScreen extends ActionBarActivity implements TabListener {
 
 		act = getSupportActionBar();
 		act.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-
+		
 		act.addTab(act.newTab().setIcon(R.drawable.statusupdates)
 				.setTabListener(this));
 
@@ -33,6 +33,9 @@ public class UserScreen extends ActionBarActivity implements TabListener {
 				.setTabListener(this));
 		act.addTab(act.newTab().setIcon(R.drawable.friendlist)
 				.setTabListener(this));
+		
+		act.addTab(act.newTab().setText("Post").setTabListener(this));
+
 
 	}
 
@@ -61,6 +64,12 @@ public class UserScreen extends ActionBarActivity implements TabListener {
 
 			getSupportFragmentManager().beginTransaction()
 					.replace(R.id.container, new FreindsList()).commit();
+		}
+		
+		
+		else if (arg0.getPosition() == 3) {
+			
+			getSupportFragmentManager().beginTransaction().replace(R.id.container, new PostStatus()).commit();
 		}
 	}
 
