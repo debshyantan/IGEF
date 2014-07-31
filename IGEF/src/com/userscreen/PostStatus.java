@@ -95,9 +95,13 @@ public class PostStatus extends Fragment {
 						
 						HttpClient httpclient = new DefaultHttpClient();
 					    HttpPost httppost = new HttpPost("http://shypal.com/IGEF/task_manager/v1/tasks");
+					    					
+					    httppost.addHeader("Authorization", "a25a361f3f78fec6d48b4baeb848c766");
+					    
+//					    setHeader();
 				        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 				        nameValuePairs.add(new BasicNameValuePair("task", statusUpdates));
-				        nameValuePairs.add(new BasicNameValuePair("api_key", "a25a361f3f78fec6d48b4baeb848c766"));
+				        
 				        
 				        
 				        try {
@@ -141,6 +145,7 @@ public class PostStatus extends Fragment {
 						Intent intt=new Intent(getActivity(), UserScreen.class);
 						getActivity().startActivity(intt);
 						statusUpdate.setText("");
+						
 					};
 					
 				}.execute();
