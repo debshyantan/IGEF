@@ -82,7 +82,7 @@ public class Register extends ActionBarActivity implements
 		EditText rollno1, password1;
 			Button login;
 			 String login_password,login_roll_no;
-			 TextView incorrectlogin;
+			 TextView incorrectloginnn;
 
 		public PlaceholderFragment1() {
 		}
@@ -231,10 +231,10 @@ public class Register extends ActionBarActivity implements
 											if(jsonObj.getString("message").equals("Login failed. Incorrect credentials"))
 											{
 											
-											incorrectlogin=(TextView)rootView.findViewById(R.id.incorrectlogin);
-											
-											incorrectlogin.setText("galat roll no hai chore");
-//											incorrectlogin.setVisibility(View.VISIBLE);
+//											incorrectloginnn=(TextView)rootView.findViewById(R.id.incorrectlogin);
+//											
+//											incorrectloginnn.setText("galat roll no hai chore");
+////											incorrectlogin.setVisibility(View.VISIBLE);
 											
 											}
 										}

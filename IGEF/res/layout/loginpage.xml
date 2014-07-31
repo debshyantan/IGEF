@@ -16,13 +16,12 @@
             android:layout_marginTop="15dp"
             android:src="@drawable/igef" />
 
-        <TextView
+    <!--    <TextView
             android:id="@+id/incorrectlogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Incorrect Roll No. or Password"
-            android:textColor="@android:color/holo_red_dark" >
-        </TextView>
+            android:text="Incorrect Roll No. or Password" >
+        </TextView>-->  
 
         <TextView
             android:layout_width="match_parent"
