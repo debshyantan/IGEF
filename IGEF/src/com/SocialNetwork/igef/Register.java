@@ -15,7 +15,10 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import com.Prefrence.IGEFSharedPrefrence;
 import com.userscreen.UserScreen;
 
 import android.app.ProgressDialog;
@@ -37,6 +40,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class Register extends ActionBarActivity implements
@@ -77,6 +81,8 @@ public class Register extends ActionBarActivity implements
 	public static class PlaceholderFragment1 extends Fragment {
 		EditText rollno1, password1;
 			Button login;
+			 String login_password,login_roll_no;
+			 TextView incorrectlogin;
 
 		public PlaceholderFragment1() {
 		}
@@ -84,7 +90,7 @@ public class Register extends ActionBarActivity implements
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.loginpage, container,
+			final View rootView = inflater.inflate(R.layout.loginpage, container,
 					false);
 			
 
@@ -96,13 +102,14 @@ public class Register extends ActionBarActivity implements
 					@Override
 					public void onClick(View v) {
 						
-					final String roll_no1=	rollno1.getText().toString();
-					final String login_password= password1.getText().toString();
+					login_roll_no=	rollno1.getText().toString();
+					 login_password= password1.getText().toString();
 					new AsyncTask<Void, Void, Void>(){
 
 						ProgressDialog pd;
-						
+						String jsonStr,id11, full_name11,roll_no11, gender11, department11, year11, section11, contactno11, email11, devicetoken11, apiKey11, status11,createdAt11;
 						String value;
+						
 						@Override
 						protected void onPreExecute() {
 							
@@ -119,7 +126,7 @@ public class Register extends ActionBarActivity implements
 							HttpClient httpclient = new DefaultHttpClient();
 						    HttpPost httppost = new HttpPost("http://shypal.com/IGEF/task_manager/v1/login");
 					        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-					        nameValuePairs.add(new BasicNameValuePair("roll_no", roll_no1));
+					        nameValuePairs.add(new BasicNameValuePair("roll_no", login_roll_no));
 					        nameValuePairs.add(new BasicNameValuePair("password", login_password));
 					        try {
 								httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
@@ -143,6 +150,105 @@ public class Register extends ActionBarActivity implements
 					        try {
 					        	
 								value=EntityUtils.toString(response.getEntity());
+								
+								jsonStr=value;
+								
+								 if (jsonStr != null) {
+									 JSONObject jsonObj = null;
+									try {
+										jsonObj = new JSONObject(jsonStr);
+									} catch (JSONException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									}
+									 
+									try {
+										if(jsonObj.getString("error").equals("false"))
+										{
+										
+										id11 = jsonObj.getString("id");
+										  full_name11 = jsonObj.getString("full_name");										
+										roll_no11=jsonObj.getString("roll_no");
+										gender11 = jsonObj.getString("gender");
+										department11 = jsonObj.getString("department");
+										year11 = jsonObj.getString("year");
+										section11 = jsonObj.getString("section");
+										contactno11 = jsonObj.getString("contactno");
+										email11 = jsonObj.getString("email");
+										devicetoken11 = jsonObj.getString("devicetoken");
+										apiKey11 = jsonObj.getString("apiKey");
+										status11 = jsonObj.getString("status");
+										createdAt11 = jsonObj.getString("createdAt");
+										
+										System.out.println(id11);
+										System.out.println(full_name11);
+				                        System.out.println(roll_no11);
+				                        System.out.println(gender11);
+				                        System.out.println(department11);
+				                        System.out.println(year11);
+				                        System.out.println(section11);
+				                        System.out.println(contactno11);
+				                        System.out.println(email11);
+				                        System.out.println(devicetoken11);
+				                        System.out.println(apiKey11);
+				                        System.out.println(status11);
+				                        System.out.println(createdAt11);
+				                        
+				                        // storing in shared preffrence
+				                        
+				                        final IGEFSharedPrefrence obj = new IGEFSharedPrefrence(getActivity());
+				                        
+				                        IGEFSharedPrefrence.setID(id11);
+				                        IGEFSharedPrefrence.setFULL_NAME(full_name11);
+				                        IGEFSharedPrefrence.setROLL_NO(login_roll_no);
+				                        IGEFSharedPrefrence.setGENDER(gender11);
+				                        IGEFSharedPrefrence.setDEPARTMENT(department11);
+				                        IGEFSharedPrefrence.setYEAR(year11);
+				                        IGEFSharedPrefrence.setSECTION(section11);
+				                        IGEFSharedPrefrence.setCONTACTNO(contactno11);
+				                        IGEFSharedPrefrence.setEMAIL(email11);
+				                        IGEFSharedPrefrence.setDEVICETOKEN(devicetoken11);
+				                        IGEFSharedPrefrence.setAPI_KEY(apiKey11);
+				                        IGEFSharedPrefrence.setSTATUS(status11);
+				                        IGEFSharedPrefrence.setCREATEDAT(createdAt11);
+				                        IGEFSharedPrefrence.setPASSWORD(login_password);
+				                        
+				    				//	Toast.makeText(getActivity(),"Roll_no: " + IGEFSharedPrefrence.getROLL_NO()+ " Full Name : " + IGEFSharedPrefrence.getFULL_NAME(),Toast.LENGTH_SHORT).show();
+				                        
+				                        
+				                        
+				                        Intent intt=new Intent(getActivity(), UserScreen.class);
+										getActivity().startActivity(intt);
+										
+										
+										
+										
+										
+										}
+										
+										else 
+										{
+											if(jsonObj.getString("message").equals("Login failed. Incorrect credentials"))
+											{
+											
+											incorrectlogin=(TextView)rootView.findViewById(R.id.incorrectlogin);
+											
+											incorrectlogin.setText("galat roll no hai chore");
+//											incorrectlogin.setVisibility(View.VISIBLE);
+											
+											}
+										}
+										
+
+									} catch (JSONException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									}
+									
+									}
+								
+								
+								
 							} catch (ParseException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
@@ -157,12 +263,12 @@ public class Register extends ActionBarActivity implements
 						protected void onPostExecute(Void result) {
 							pd.dismiss();
 							
-							Toast.makeText(getActivity(), "Login Successful", Toast.LENGTH_LONG).show();
 							
-							Intent intt=new Intent(getActivity(), UserScreen.class);
-							getActivity().startActivity(intt);
+							
 							rollno1.setText(null);
 							password1.setText(null);
+							
+							
 						};
 						
 					}.execute();
