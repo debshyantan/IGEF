@@ -1,8 +1,5 @@
 package com.SocialNetwork.igef;
 
-import com.SocialNetwork.igef.R;
-import com.google.android.gms.gcm.GoogleCloudMessaging;
-
 import android.app.IntentService;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -12,6 +9,8 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+
+import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 public class GcmIntentService extends IntentService
 {

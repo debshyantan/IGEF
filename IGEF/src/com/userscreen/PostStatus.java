@@ -16,15 +16,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
-import com.SocialNetwork.igef.R;
-
-
-
-
-
-
-
-import android.R.string;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -37,6 +28,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.Prefrence.IGEFSharedPrefrence;
+import com.SocialNetwork.igef.R;
 
 
 public class PostStatus extends Fragment {
@@ -75,6 +69,10 @@ public class PostStatus extends Fragment {
 				final String statusUpdates=statusUpdate.getText().toString();
 				
 				
+				System.out.println("shared preference " + IGEFSharedPrefrence.getFULL_NAME());
+				System.out.println("shared preference " + IGEFSharedPrefrence.getROLL_NO());
+				
+				
 				new AsyncTask<Void, Void, Void>(){
 
 					ProgressDialog pd;
@@ -94,13 +92,16 @@ public class PostStatus extends Fragment {
 						// TODO Auto-generated method stub
 						
 						HttpClient httpclient = new DefaultHttpClient();
-					    HttpPost httppost = new HttpPost("http://shypal.com/IGEF/task_manager/v1/tasks");
+					    HttpPost httppost = new HttpPost("http://shypal.com/IGEF/task_manager/v1/status");
 					    					
-					    httppost.addHeader("Authorization", "a25a361f3f78fec6d48b4baeb848c766");
 					    
-//					    setHeader();
 				        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-				        nameValuePairs.add(new BasicNameValuePair("task", statusUpdates));
+				        nameValuePairs.add(new BasicNameValuePair("status", statusUpdates));
+				        nameValuePairs.add(new BasicNameValuePair("full_name", IGEFSharedPrefrence.getFULL_NAME()));
+				        nameValuePairs.add(new BasicNameValuePair("roll_no", IGEFSharedPrefrence.getROLL_NO()));
+				        nameValuePairs.add(new BasicNameValuePair("department", IGEFSharedPrefrence.getDEPARTMENT()));
+				        nameValuePairs.add(new BasicNameValuePair("year", IGEFSharedPrefrence.getYEAR()));
+				        nameValuePairs.add(new BasicNameValuePair("section", IGEFSharedPrefrence.getSECTION()));
 				        
 				        
 				        
@@ -140,7 +141,7 @@ public class PostStatus extends Fragment {
 					protected void onPostExecute(Void result) {
 						pd.dismiss();
 						
-						Toast.makeText(getActivity(), "Status Posted", Toast.LENGTH_LONG).show();
+						//Toast.makeText(getActivity(), "Status Posted", Toast.LENGTH_LONG).show();
 						
 						Intent intt=new Intent(getActivity(), UserScreen.class);
 						getActivity().startActivity(intt);

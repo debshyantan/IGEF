@@ -18,9 +18,6 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.Prefrence.IGEFSharedPrefrence;
-import com.userscreen.UserScreen;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -42,6 +39,9 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.Prefrence.IGEFSharedPrefrence;
+import com.userscreen.UserScreen;
 
 public class Register extends ActionBarActivity implements
 		ActionBar.TabListener {
@@ -199,7 +199,7 @@ public class Register extends ActionBarActivity implements
 				                        final IGEFSharedPrefrence obj = new IGEFSharedPrefrence(getActivity());
 				                        
 				                        IGEFSharedPrefrence.setID(id11);
-				                        IGEFSharedPrefrence.setFULL_NAME(full_name11);
+				                        IGEFSharedPrefrence.setFULL_NAME(full_name11);				                       
 				                        IGEFSharedPrefrence.setROLL_NO(login_roll_no);
 				                        IGEFSharedPrefrence.setGENDER(gender11);
 				                        IGEFSharedPrefrence.setDEPARTMENT(department11);
@@ -213,7 +213,12 @@ public class Register extends ActionBarActivity implements
 				                        IGEFSharedPrefrence.setCREATEDAT(createdAt11);
 				                        IGEFSharedPrefrence.setPASSWORD(login_password);
 				                        
-				    				//	Toast.makeText(getActivity(),"Roll_no: " + IGEFSharedPrefrence.getROLL_NO()+ " Full Name : " + IGEFSharedPrefrence.getFULL_NAME(),Toast.LENGTH_SHORT).show();
+				                  
+				                       
+												
+										
+//										Toast.makeText(getActivity(),"Roll_no: " + IGEFSharedPrefrence.getROLL_NO()+ " Full Name : " + IGEFSharedPrefrence.getFULL_NAME(),Toast.LENGTH_SHORT).show();
+
 				                        
 				                        
 				                        
@@ -225,7 +230,7 @@ public class Register extends ActionBarActivity implements
 										
 										
 										}
-										
+													
 										else 
 										{
 											if(jsonObj.getString("message").equals("Login failed. Incorrect credentials"))
@@ -234,7 +239,9 @@ public class Register extends ActionBarActivity implements
 //											incorrectloginnn=(TextView)rootView.findViewById(R.id.incorrectlogin);
 //											
 //											incorrectloginnn.setText("galat roll no hai chore");
-////											incorrectlogin.setVisibility(View.VISIBLE);
+//											incorrectlogin.setVisibility(View.VISIBLE);
+//												
+											//	System.out.println("you ENtered to the Login Failed Loop");
 											
 											}
 										}
@@ -267,6 +274,13 @@ public class Register extends ActionBarActivity implements
 							
 							rollno1.setText(null);
 							password1.setText(null);
+							
+							
+
+							
+							
+							
+							
 							
 							
 						};

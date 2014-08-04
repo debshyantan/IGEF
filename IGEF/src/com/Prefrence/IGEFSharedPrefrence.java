@@ -21,6 +21,8 @@ public class IGEFSharedPrefrence {
 	static String API_KEY = "api_key";
 	static String STATUS = "status";
 	static String CREATEDAT = "createdAt";
+	
+	
 
 	public IGEFSharedPrefrence(Context ctx) {
 		prefobj = ctx
