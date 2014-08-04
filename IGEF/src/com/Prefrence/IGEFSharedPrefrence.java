@@ -26,7 +26,7 @@ public class IGEFSharedPrefrence {
 
 	public IGEFSharedPrefrence(Context ctx) {
 		prefobj = ctx
-				.getSharedPreferences("MyPreference", Context.MODE_PRIVATE);
+				.getSharedPreferences("IGEFSharedPrefrence", Context.MODE_PRIVATE);
 
 	}
 
@@ -35,7 +35,7 @@ public class IGEFSharedPrefrence {
 	}
 
 	public static void setID(String iD) {
-		prefobj.edit().putString("username", iD).commit();
+		prefobj.edit().putString(ID, iD).commit();
 	}
 
 	public static String getFULL_NAME() {
@@ -43,21 +43,22 @@ public class IGEFSharedPrefrence {
 	}
 
 	public static void setFULL_NAME(String fULL_NAME) {
-		prefobj.edit().putString("username", fULL_NAME).commit();	}
+		prefobj.edit().putString(FULL_NAME, fULL_NAME).commit();	}
 
 	public static String getROLL_NO() {
 		return prefobj.getString(ROLL_NO, "");
 	}
 
 	public static void setROLL_NO(String rOLL_NO) {
-		prefobj.edit().putString("username", rOLL_NO).commit();	}
+		
+		prefobj.edit().putString(ROLL_NO, rOLL_NO).commit();	}
 
 	public static String getGENDER() {
 		return prefobj.getString(GENDER, "");
 	}
 
 	public static void setGENDER(String gENDER) {
-		prefobj.edit().putString("username", gENDER).commit();
+		prefobj.edit().putString(GENDER, gENDER).commit();
 		}
 
 	public static String getDEPARTMENT() {
@@ -65,7 +66,7 @@ public class IGEFSharedPrefrence {
 	}
 
 	public static void setDEPARTMENT(String dEPARTMENT) {
-		prefobj.edit().putString("username", dEPARTMENT).commit();
+		prefobj.edit().putString(DEPARTMENT, dEPARTMENT).commit();
 		}
 
 	public static String getYEAR() {

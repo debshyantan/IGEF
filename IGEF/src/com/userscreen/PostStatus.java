@@ -44,6 +44,7 @@ public class PostStatus extends Fragment {
 			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.poststatus, container, false);
 		
+	
 		statusUpdate=(EditText)rootView.findViewById(R.id.statusUpdate);
 
 		post=(Button)rootView.findViewById(R.id.post);
@@ -68,9 +69,9 @@ public class PostStatus extends Fragment {
 			
 				final String statusUpdates=statusUpdate.getText().toString();
 				
-				
-				System.out.println("shared preference " + IGEFSharedPrefrence.getFULL_NAME());
-				System.out.println("shared preference " + IGEFSharedPrefrence.getROLL_NO());
+				IGEFSharedPrefrence obj = new IGEFSharedPrefrence(getActivity());
+				System.out.println("shared preference fullnae" + IGEFSharedPrefrence.getFULL_NAME());
+				System.out.println("shared preference rollno " + IGEFSharedPrefrence.getROLL_NO());
 				
 				
 				new AsyncTask<Void, Void, Void>(){
@@ -127,25 +128,24 @@ public class PostStatus extends Fragment {
 				        try {
 				        	
 							value=EntityUtils.toString(response.getEntity());
-						} catch (ParseException e) {
+						
+				        
+				        } catch (ParseException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-				        System.out.println(value);
+				        
+				        System.out.println("Status response" + value);
 						return null;
 					}
 					@Override
 					protected void onPostExecute(Void result) {
 						pd.dismiss();
 						
-						//Toast.makeText(getActivity(), "Status Posted", Toast.LENGTH_LONG).show();
 						
-						Intent intt=new Intent(getActivity(), UserScreen.class);
-						getActivity().startActivity(intt);
-						statusUpdate.setText("");
 						
 					};
 					
