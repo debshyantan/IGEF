@@ -3,9 +3,11 @@ package com.userscreen;
 import android.app.ActionBar;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar.Tab;
 import android.support.v7.app.ActionBar.TabListener;
 import android.support.v7.app.ActionBarActivity;
+import android.view.MenuItem;
 
 import com.SocialNetwork.igef.R;
 
@@ -33,11 +35,23 @@ public class UserScreen extends ActionBarActivity implements TabListener {
 				.setTabListener(this));
 		act.addTab(act.newTab().setIcon(R.drawable.friendlist)
 				.setTabListener(this));
-		act.setHomeButtonEnabled(true);
+		act.setDisplayHomeAsUpEnabled(true);
 		act.addTab(act.newTab().setText("Post").setTabListener(this));
 
 
 	}
+	
+	  @Override
+	  public boolean onOptionsItemSelected(MenuItem item) {
+	    switch (item.getItemId()) {
+	      // Respond to the action bar's Up/Home button
+	      case android.R.id.home:
+	        NavUtils.navigateUpFromSameTask(this);
+	        return true;
+	    }
+	 
+	    return super.onOptionsItemSelected(item);
+	  }
 
 	@Override
 	public void onTabReselected(Tab arg0, FragmentTransaction arg1) {
