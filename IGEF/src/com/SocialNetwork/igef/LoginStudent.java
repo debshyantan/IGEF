@@ -43,8 +43,11 @@ public class LoginStudent extends Fragment {
 	 int flag=0;
 
 	 ///////change in login
+	 //new login
 
 //rfkerf
+	 
+	 //
 	 //ckjdsxckjb hellodf sd
 	 //sfvhdfiuvh
  public LoginStudent() {
@@ -282,6 +285,7 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			//dcmdkm..kdc mkd
 			//zdxc
 			//cndsnck
+			//login details
 			
 				
 			}
