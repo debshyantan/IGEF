@@ -38,7 +38,6 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.Prefrence.IGEFSharedPrefrence;
 import com.userscreen.UserScreen;
@@ -55,6 +54,7 @@ public class Register extends ActionBarActivity implements
 	static RadioButton rb1, rb2;
 	static String d_name, d_roll, d_dept, d_year, d_contact, d_gender, d_email,
 			d_password, d_section;
+	static int i=0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -196,7 +196,7 @@ public class Register extends ActionBarActivity implements
 				                        
 				                        // storing in shared preffrence
 				                        
-				                        final IGEFSharedPrefrence obj = new IGEFSharedPrefrence(getActivity());
+//				                        final IGEFSharedPrefrence obj = new IGEFSharedPrefrence(getActivity());
 				                        
 				                        IGEFSharedPrefrence.setID(id11);
 				                        IGEFSharedPrefrence.setFULL_NAME(full_name11);				                       
@@ -213,6 +213,7 @@ public class Register extends ActionBarActivity implements
 				                        IGEFSharedPrefrence.setCREATEDAT(createdAt11);
 				                        IGEFSharedPrefrence.setPASSWORD(login_password);
 				                        
+				                        i=1;
 				                  
 				                       
 												
@@ -235,14 +236,13 @@ public class Register extends ActionBarActivity implements
 										{
 											if(jsonObj.getString("message").equals("Login failed. Incorrect credentials"))
 											{
+
+												
+												i=2;
 											
-//											incorrectloginnn=(TextView)rootView.findViewById(R.id.incorrectlogin);
-//											
-//											incorrectloginnn.setText("galat roll no hai chore");
-//											incorrectlogin.setVisibility(View.VISIBLE);
-//												
-											//	System.out.println("you ENtered to the Login Failed Loop");
-											
+											}
+											else{
+												i=3;
 											}
 										}
 										
@@ -274,6 +274,15 @@ public class Register extends ActionBarActivity implements
 							
 							rollno1.setText(null);
 							password1.setText(null);
+//							if(i==2){
+								
+//								incorrectloginnn=(TextView)rootView.findViewById(R.id.incorrectlogin);
+//								
+//								incorrectloginnn.setText("Wrong Credetials");
+//								incorrectlogin.setVisibility(View.VISIBLE);
+//									
+//									System.out.println("you ENtered to the Login Failed Loop");
+//							}
 							
 							
 

@@ -69,7 +69,7 @@ public class PostStatus extends Fragment {
 			
 				final String statusUpdates=statusUpdate.getText().toString();
 				
-				IGEFSharedPrefrence obj = new IGEFSharedPrefrence(getActivity());
+		//		IGEFSharedPrefrence obj = new IGEFSharedPrefrence(getActivity());
 				System.out.println("shared preference fullnae" + IGEFSharedPrefrence.getFULL_NAME());
 				System.out.println("shared preference rollno " + IGEFSharedPrefrence.getROLL_NO());
 				
