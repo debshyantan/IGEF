@@ -33,7 +33,7 @@ public class UserScreen extends ActionBarActivity implements TabListener {
 				.setTabListener(this));
 		act.addTab(act.newTab().setIcon(R.drawable.friendlist)
 				.setTabListener(this));
-		
+		act.setHomeButtonEnabled(true);
 		act.addTab(act.newTab().setText("Post").setTabListener(this));
 
 

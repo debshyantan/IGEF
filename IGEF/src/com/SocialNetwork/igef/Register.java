@@ -71,7 +71,7 @@ public class Register extends ActionBarActivity implements
 		act.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		act.addTab(act.newTab().setText("REGISTER NOW").setTabListener(this));
 		act.addTab(act.newTab().setText("LOGIN").setTabListener(this));
-		
+		act.setHomeButtonEnabled(true);
 
 	}
 

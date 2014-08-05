@@ -50,11 +50,15 @@
         
         <activity android:name="com.SocialNetwork.igef.MainActivity"></activity>
         
-        <activity android:name="com.SocialNetwork.igef.Register" >
+        <activity android:name="com.SocialNetwork.igef.Register" 
+            android:parentActivityName="com.SocialNetwork.igef.MainActivity">
         </activity>
         
          <meta-data android:name="com.google.android.gms.version"
        android:value="@integer/google_play_services_version" />
+         <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="com.SocialNetwork.igef.Register" />
          
  <service android:name="com.SocialNetwork.igef.GcmIntentService" ></service>
         
@@ -62,7 +66,8 @@
             android:permission="com.google.android.c2dm.permission.SEND"></receiver>
         
         <activity android:name="com.SocialNetwork.igef.Login"></activity>
-        <activity android:name="com.userscreen.UserScreen"></activity>
+        <activity android:name="com.userscreen.UserScreen"
+            android:parentActivityName="com.SocialNetwork.igef.Register"></activity>
         
         
     </application>
