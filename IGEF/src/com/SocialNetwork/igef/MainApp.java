@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.Prefrence.IGEFSharedPrefrence;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
@@ -49,7 +50,7 @@ public class MainApp extends Application {
 		//ACRA.init(this);
 		ctx=getApplicationContext();
 		
-		
+		IGEFSharedPrefrence obj=new IGEFSharedPrefrence(getApplicationContext());
 		postInitApplication();
 		
 	
