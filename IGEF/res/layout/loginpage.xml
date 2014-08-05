@@ -16,13 +16,6 @@
             android:layout_marginTop="15dp"
             android:src="@drawable/igef" />
 
-    <!--    <TextView
-            android:id="@+id/incorrectlogin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Incorrect Roll No. or Password" >
-        </TextView>-->  
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -62,6 +55,15 @@
             android:layout_marginTop="5dp"
             android:hint="Enter Password"
             android:inputType="textPassword" />
+
+        <TextView
+            android:id="@+id/incorrectlogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="#FF3300"
+            android:textSize="20sp"
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/login"
