@@ -2,22 +2,19 @@ package com.userscreen;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
 import org.apache.http.ParseException;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -27,7 +24,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.Prefrence.IGEFSharedPrefrence;
 import com.SocialNetwork.igef.R;
@@ -94,20 +90,35 @@ public class PostStatus extends Fragment {
 						
 						HttpClient httpclient = new DefaultHttpClient();
 					    HttpPost httppost = new HttpPost("http://shypal.com/IGEF/task_manager/v1/status");
-					    					
+					   				
+					    httppost.setHeader("Content-Type", "application/json");
+					    JSONObject obj = new JSONObject();
+					    try {
+							obj.put("status", statusUpdates);
+							obj.put("full_name", IGEFSharedPrefrence.getFULL_NAME());
+						    obj.put("roll_no", IGEFSharedPrefrence.getFULL_NAME());
+						    obj.put("department", IGEFSharedPrefrence.getDEPARTMENT());
+						    obj.put("year", IGEFSharedPrefrence.getYEAR());
+						    obj.put("section", IGEFSharedPrefrence.getSECTION());
+						} catch (JSONException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 					    
-				        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-				        nameValuePairs.add(new BasicNameValuePair("status", statusUpdates));
-				        nameValuePairs.add(new BasicNameValuePair("full_name", IGEFSharedPrefrence.getFULL_NAME()));
-				        nameValuePairs.add(new BasicNameValuePair("roll_no", IGEFSharedPrefrence.getROLL_NO()));
-				        nameValuePairs.add(new BasicNameValuePair("department", IGEFSharedPrefrence.getDEPARTMENT()));
-				        nameValuePairs.add(new BasicNameValuePair("year", IGEFSharedPrefrence.getYEAR()));
-				        nameValuePairs.add(new BasicNameValuePair("section", IGEFSharedPrefrence.getSECTION()));
+//					    
+//				        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+//				        nameValuePairs.add(new BasicNameValuePair("status", statusUpdates));
+//				        nameValuePairs.add(new BasicNameValuePair("full_name", IGEFSharedPrefrence.getFULL_NAME()));
+//				        nameValuePairs.add(new BasicNameValuePair("roll_no", IGEFSharedPrefrence.getROLL_NO()));
+//				        nameValuePairs.add(new BasicNameValuePair("department", IGEFSharedPrefrence.getDEPARTMENT()));
+//				        nameValuePairs.add(new BasicNameValuePair("year", IGEFSharedPrefrence.getYEAR()));
+//				        nameValuePairs.add(new BasicNameValuePair("section", IGEFSharedPrefrence.getSECTION()));
 				        
 				        
 				        
 				        try {
-							httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+				        	httppost.setEntity(new StringEntity(obj.toString(), "UTF-8"));
+//							httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 						} catch (UnsupportedEncodingException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -116,6 +127,7 @@ public class PostStatus extends Fragment {
 				        // Execute HTTP Post Request
 				        HttpResponse response = null;
 						try {
+						
 							response = httpclient.execute(httppost);
 						} catch (ClientProtocolException e) {
 							// TODO Auto-generated catch block
@@ -138,7 +150,7 @@ public class PostStatus extends Fragment {
 							e.printStackTrace();
 						}
 				        
-				        System.out.println("Status response" + value);
+				        System.out.println(value);
 						return null;
 					}
 					@Override
