@@ -67,7 +67,7 @@
         <receiver android:name="com.SocialNetwork.igef.GcmBroadcastReceiver"
             android:permission="com.google.android.c2dm.permission.SEND"></receiver>
         
-        <activity android:name="com.SocialNetwork.igef.Login"></activity>
+        <activity android:name="com.SocialNetwork.igef.LoginNow"></activity>
         <activity android:name="com.userscreen.UserScreen"
             android:parentActivityName="com.SocialNetwork.igef.GettingStarted">
                <meta-data

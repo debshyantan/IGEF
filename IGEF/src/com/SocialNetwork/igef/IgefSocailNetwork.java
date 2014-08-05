@@ -78,7 +78,7 @@ public class IgefSocailNetwork extends ActionBarActivity {
 				}
 
 			});
-			//Login Button
+			//LoginNow Button
 			
 			return rootView;
 		}
