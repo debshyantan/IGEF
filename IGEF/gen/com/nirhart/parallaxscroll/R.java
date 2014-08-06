@@ -8,13 +8,13 @@ package com.nirhart.parallaxscroll;
 
 public final class R {
 	public static final class attr {
-		public static final int circular_parallax = 0x7f01008d;
-		public static final int inner_parallax_factor = 0x7f01008b;
-		public static final int parallax_factor = 0x7f01008a;
-		public static final int parallax_views_num = 0x7f01008c;
+		public static final int circular_parallax = 0x7f01006d;
+		public static final int inner_parallax_factor = 0x7f01006b;
+		public static final int parallax_factor = 0x7f01006a;
+		public static final int parallax_views_num = 0x7f01006c;
 	}
 	public static final class styleable {
-		public static final int[] ParallaxScroll = { 0x7f01008a, 0x7f01008b, 0x7f01008c, 0x7f01008d };
+		public static final int[] ParallaxScroll = { 0x7f01006a, 0x7f01006b, 0x7f01006c, 0x7f01006d };
 		public static final int ParallaxScroll_circular_parallax = 3;
 		public static final int ParallaxScroll_inner_parallax_factor = 1;
 		public static final int ParallaxScroll_parallax_factor = 0;
