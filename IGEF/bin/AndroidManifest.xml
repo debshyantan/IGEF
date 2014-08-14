@@ -7,30 +7,30 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="10"
         android:targetSdkVersion="19" />
     
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS"/>
-    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+        <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
     <permission android:name="com.SocialNetwork.igef.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
-    
     <uses-permission android:name="com.SocialNetwork.igef.permission.C2D_MESSAGE" />
     
  <uses-permission 
       android:name="android.permission.SYSTEM_ALERT_WINDOW"
      />
- 
+ <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
  <uses-permission android:name="android.permission.VIBRATE"/>
+ <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 
-    <application android:name="com.SocialNetwork.igef.MainApp"
+    <application android:name="com.Chat.App"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         
@@ -39,19 +39,22 @@
         
         <activity
             android:name="com.SocialNetwork.igef.IgefSocailNetwork"
-            android:label="@string/app_name" >
+            android:label="@string/app_name" 
+            android:screenOrientation="portrait">
             
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>  
         </activity>
         
-        <activity android:name="com.SocialNetwork.igef.MainActivity"></activity>
+        
         
         <activity android:name="com.SocialNetwork.igef.GettingStarted" 
-            android:parentActivityName="com.SocialNetwork.igef.IgefSocailNetwork">
+            android:parentActivityName="com.SocialNetwork.igef.IgefSocailNetwork"
+            android:screenOrientation="portrait"
+            android:configChanges="keyboardHidden|orientation|screenSize">
             
              <meta-data
             android:name="android.support.PARENT_ACTIVITY"
@@ -59,22 +62,64 @@
          
         </activity>
         
-         <meta-data android:name="com.google.android.gms.version"
+   
+            <meta-data android:name="com.google.android.gms.version"
        android:value="@integer/google_play_services_version" />
+    
+        <activity android:name="com.Chat.MainActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" ></activity>
         
- <service android:name="com.SocialNetwork.igef.GcmIntentService" ></service>
+        <activity android:name="com.Chat.ChatActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"></activity>
         
-        <receiver android:name="com.SocialNetwork.igef.GcmBroadcastReceiver"
-            android:permission="com.google.android.c2dm.permission.SEND"></receiver>
+        <activity android:name="com.Chat.LoginActivity"></activity>
         
-        <activity android:name="com.SocialNetwork.igef.LoginNow"></activity>
+        <activity android:name="com.Chat.RegistrationActivity"></activity>
+        
         <activity android:name="com.userscreen.UserScreen"
-            android:parentActivityName="com.SocialNetwork.igef.GettingStarted">
+            android:parentActivityName="com.SocialNetwork.igef.GettingStarted"
+           android:configChanges="keyboardHidden|orientation|screenSize" >
                <meta-data
             android:name="android.support.PARENT_ACTIVITY"
             android:value="com.SocialNetwork.igef.Register" />
         </activity>
         
+        <activity android:name="com.Chat.MessagesActivity"></activity>
+        
+     <meta-data android:name="com.google.android.gms.version" 
+         android:value="@integer/google_play_services_version" /> 
+<!--  - <receiver android:name="com.Chat.GCMBroadcastReciever" 
+android:permission="com.google.android.c2dm.permission.SEND">
+- <intent-filter>
+  <action android:name="com.google.android.c2dm.intent.RECEIVE" /> 
+  <action android:name="com.google.android.c2dm.intent.REGISTRATION" /> 
+  <category android:name="com.SocialNetwork.igef" /> 
+  </intent-filter>
+  </receiver>
+  <service android:name="com.Chat.GCMIntentService" /> -->
+  
+  <service android:name="com.parse.PushService" />
+<receiver android:name="com.parse.ParseBroadcastReceiver">
+  <intent-filter>
+    <action android:name="android.intent.action.BOOT_COMPLETED" />
+    <action android:name="android.intent.action.USER_PRESENT" />
+  </intent-filter>
+</receiver>
+<receiver android:name="com.parse.GcmBroadcastReceiver"
+    android:permission="com.google.android.c2dm.permission.SEND">
+  <intent-filter>
+    <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+    <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+ 
+    <!--
+      IMPORTANT: Change "com.parse.starter" to match your app's package name.
+    -->
+    <category android:name="com.SocialNetwork.igef" />
+  </intent-filter>
+</receiver>
         
     </application>
     

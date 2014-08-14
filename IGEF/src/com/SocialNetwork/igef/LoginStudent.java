@@ -18,6 +18,7 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -29,10 +30,17 @@ import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.Chat.GCMBroadcastReciever;
+import com.Chat.MainActivity;
 import com.Prefrence.IGEFSharedPrefrence;
+import com.quickblox.core.QBCallback;
+import com.quickblox.core.QBSettings;
+import com.quickblox.core.result.Result;
+import com.quickblox.module.auth.QBAuth;
 import com.userscreen.UserScreen;
 
 public class LoginStudent extends Fragment {
@@ -42,6 +50,11 @@ public class LoginStudent extends Fragment {
 	 TextView incorrectloginnn;
 	 int flag=0;
 
+	 private static final String APP_ID = "13032";
+	    private static final String AUTH_KEY = "rQHh7DVeAbrOPmn";
+	    private static final String AUTH_SECRET = "5XXkbUK9pBg8L9c";
+	    static GCMBroadcastReciever recieve;
+	    private static ProgressBar progressBar;
 	 ///////change in login
 	 //new login
 
@@ -64,6 +77,7 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 		rollno1=(EditText)rootView.findViewById(R.id.loginrollno);
 		password1=(EditText)rootView.findViewById(R.id.loginpassword);
 		login=(Button)rootView.findViewById(R.id.login);
+		
 		login.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -185,8 +199,10 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 										
 								
 
-		                        
-		                      
+		                        progressBar = (ProgressBar)rootView.findViewById(R.id.progressBar);
+//		                		QBSettings.getInstance().fastConfigInit(APP_ID, AUTH_KEY, AUTH_SECRET);
+//		                        QBAuth.createSession(LoginStudent.this);
+//		                      
 								
 								
 								
@@ -278,14 +294,7 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				};
 				
 			}.execute();
-			//sdvnjdshfu
-			//dcdkcmdkn
-			//zxdvjefjv
-			//scksdkck
-			//dcmdkm..kdc mkd
-			//zdxc
-			//cndsnck
-			//login details
+			
 			
 				
 			}
@@ -295,4 +304,27 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	
 	return rootView;
 }
+
+//@Override
+//public void onComplete(Result result) {
+//	// TODO Auto-generated method stub
+//	 progressBar.setVisibility(View.GONE);
+//
+//     if (result.isSuccess()) {
+//         Intent intent = new Intent(getActivity(), UserScreen.class);
+//         startActivity(intent);
+//         getActivity().finish();
+//     } else {
+//         AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
+//         dialog.setMessage("Error(s) occurred. Look into DDMS log for details, " +
+//                 "please. Errors: " + result.getErrors()).create().show();
+//     }
+//	
+//}
+//
+//@Override
+//public void onComplete(Result result, Object context) {
+//	// TODO Auto-generated method stub
+//	
+//}
 }
