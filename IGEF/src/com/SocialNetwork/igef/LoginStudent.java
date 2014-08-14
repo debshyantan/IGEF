@@ -264,6 +264,7 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 						
 						  Intent intt=new Intent(getActivity(), UserScreen.class);
 						getActivity().startActivity(intt);
+						getActivity().finish();
 					}
 					
 					if(flag==2){

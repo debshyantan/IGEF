@@ -1,96 +1,147 @@
 package com.userscreen;
 
-import android.app.ActionBar;
+
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.NavUtils;
+import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBar.Tab;
-import android.support.v7.app.ActionBar.TabListener;
 import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 
 import com.SocialNetwork.igef.R;
 
-public class UserScreen extends ActionBarActivity implements TabListener {
+public class UserScreen extends ActionBarActivity implements ActionBar.TabListener{
 
-	android.support.v7.app.ActionBar act;
+	ActionBar actionBar;
+	private ViewPager viewPager;
+	 MyProfilePagerAdapter1 mAdapter;
+    private int[] tabs = { R.drawable.statusupdates, R.drawable.conversations,R.drawable.friendlist,R.drawable.ic_launcher};
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_igef_socail_network);
-		if (savedInstanceState == null) {
-			getSupportFragmentManager().beginTransaction()
-					.add(R.id.container, new Status()).commit();
-		}
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+// TODO Auto-generated method stub
+super.onCreate(savedInstanceState);
+setContentView(R.layout.first);
 
-		act = getSupportActionBar();
-		act.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-		
-		act.addTab(act.newTab().setIcon(R.drawable.statusupdates)
-				.setTabListener(this));
+ viewPager = (ViewPager) findViewById(R.id.viewPager);
+    actionBar = getSupportActionBar();
+    actionBar.setDisplayHomeAsUpEnabled(true);
+   
+    mAdapter = new MyProfilePagerAdapter1(getSupportFragmentManager());
 
-		act.addTab(act.newTab().setIcon(R.drawable.conversations)
-				.setTabListener(this));
-		act.addTab(act.newTab().setIcon(R.drawable.friendlist)
-				.setTabListener(this));
-		act.setDisplayHomeAsUpEnabled(true);
-		act.addTab(act.newTab().setText("Post").setTabListener(this));
+    viewPager.setAdapter(mAdapter);
+ //  viewPager.setBackgroundColor(getResources().getColor(android.R.color.white));
+    
+    viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+    	 
+        @Override
+        public void onPageSelected(int position) {
+            // on changing the page
+            // make respected tab selected
+            actionBar.setSelectedNavigationItem(position);
+            
+            
+        }
+     
+        @Override
+        public void onPageScrolled(int arg0, float arg1, int arg2) {
+        }
+     
+        @Override
+        public void onPageScrollStateChanged(int arg0) {
+        }
+    });
 
+    actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);        
 
-	}
+   //  Adding Tabs
+    for (int tab_name : tabs) {
+    	
+        actionBar.addTab(actionBar.newTab().setIcon(tab_name)
+                .setTabListener(this));
+    }
+
+//   for (int tab_name : tabs) {
+////    	  actionBar.addTab(actionBar.newTab().setCustomView(R.layout.tab_item)
+////                  .setTabListener(this));
+//	   LinearLayout view = (LinearLayout) getLayoutInflater().inflate(R.layout.tab_item, null);
+//	 
+//       Tab newtab=actionBar.newTab();
+//       newtab.setCustomView(view);
+//       ImageView icon = (ImageView) newtab.getCustomView().findViewById(R.id.image_tab);
+//       icon.setImageResource(tab_name);
+//       newtab.setTabListener(this);
+//       actionBar.addTab(newtab);
+//    
+//      }  
+    
+    
+}
+
+@Override
+public boolean onOptionsItemSelected(MenuItem item) { 
+switch (item.getItemId()) {
+    case android.R.id.home:
+        // app icon in action bar clicked; go home
+    	this.finish();
+    	
+        return true;
+        
+        default:
+        return super.onOptionsItemSelected(item); 
+}
+}
+
+@Override
+public void onConfigurationChanged(Configuration newConfig) {
+	// TODO Auto-generated method stub
+	super.onConfigurationChanged(newConfig);
 	
-	  @Override
-	  public boolean onOptionsItemSelected(MenuItem item) {
-	    switch (item.getItemId()) {
-	      // Respond to the action bar's Up/Home button
-	      case android.R.id.home:
-	        NavUtils.navigateUpFromSameTask(this);
-	        return true;
-	    }
-	 
-	    return super.onOptionsItemSelected(item);
-	  }
+	if ((getResources().getConfiguration().screenLayout &      Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_LARGE) {     
+    	setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
-	@Override
-	public void onTabReselected(Tab arg0, FragmentTransaction arg1) {
-		// TODO Auto-generated method stub
 
 	}
+	else if ((getResources().getConfiguration().screenLayout &      Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE) {     
+	 	setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
-	@Override
-	public void onTabSelected(Tab arg0, FragmentTransaction arg1) {
-		// TODO Auto-generated method stub
-		if (arg0.getPosition() == 0) {
 
-			getSupportFragmentManager().beginTransaction()
-					.replace(R.id.container, new Status()).commit();
-		}
-		if (arg0.getPosition() == 1) {
+	} 
+	else if ((getResources().getConfiguration().screenLayout &      Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_NORMAL) {     
+    	setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-			getSupportFragmentManager().beginTransaction()
-					.replace(R.id.container, new Conversation()).commit();
 
-		}
-
-		else if (arg0.getPosition() == 2) {
-
-			getSupportFragmentManager().beginTransaction()
-					.replace(R.id.container, new FreindsList()).commit();
-		}
-		
-		
-		else if (arg0.getPosition() == 3) {
-			
-			getSupportFragmentManager().beginTransaction().replace(R.id.container, new PostStatus()).commit();
-		}
+	} 
+	else if ((getResources().getConfiguration().screenLayout &      Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_SMALL) {     
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 	}
-
-	@Override
-	public void onTabUnselected(Tab arg0, FragmentTransaction arg1) {
-		// TODO Auto-generated method stub
-
+	else {
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 	}
+}
 
+
+@Override
+public void onTabReselected(Tab arg0, FragmentTransaction arg1) {
+// TODO Auto-generated method stub
+
+}
+@Override
+public void onTabSelected(Tab tab, FragmentTransaction arg1) {
+// TODO Auto-generated method stub
+viewPager.setCurrentItem(tab.getPosition());
+}
+@Override
+public void onTabUnselected(Tab arg0, FragmentTransaction arg1) {
+// TODO Auto-generated method stub
+
+}
 }

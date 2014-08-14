@@ -6,4 +6,11 @@
     <color name="feed_item_border">#c2c3c8</color>
     <color name="link">#0a80d1</color>
     <color name="timestamp">#a0a3a7</color> 
+    <color name="background_color">#fff</color>
+    <color name="black">#111</color>
+    <color name="green">#1cba48</color>
+    <color name="blue">#0073b9</color>
+    <color name="gray">#ff5a5b5f</color>
+    
+    <color name="blue_highlight">#990073b9</color>
 </resources>

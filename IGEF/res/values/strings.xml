@@ -4,6 +4,12 @@
     <string name="app_name">IGEF</string>
     <string name="action_settings">Settings</string>
     <string name="branch_prompt">Choose Your Department</string>
+    
+    <string name="qb_slogan">YOUR COMMUNICATION</string>
+    <string name="hint_enter_your_message">Enter Your message here</string>
+    <string name="send">Send notification to yourself</string>
+    <string name="received_messages">Received messages</string>
+    <string name="no_messages">No messages</string>
 
     <string-array name="branch_array">
         <item>B.Tech CSE/IT</item>

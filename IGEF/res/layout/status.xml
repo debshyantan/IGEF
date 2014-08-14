@@ -66,21 +66,12 @@
             android:paddingTop="@dimen/feed_item_status_pad_top"
             android:text="This is a sample status post.!!" />
  
-        <TextView
-            android:id="@+id/txtUrl"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:linksClickable="true"
-            android:paddingBottom="10dp"
-            android:paddingLeft="@dimen/feed_item_status_pad_left_right"
-            android:paddingRight="@dimen/feed_item_status_pad_left_right"
-            android:textColorLink="@color/link"
-            android:text="http://www.androidhive.info/2014/06/android-facebook-like-custom-listview-feed-using-volley/" />
+
  
         <ImageView
             android:id="@+id/feedImage1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
             android:background="@color/white"
             android:scaleType="fitXY"
             android:visibility="visible"
