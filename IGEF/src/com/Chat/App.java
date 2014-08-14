@@ -26,7 +26,7 @@ public class App extends Application {
     private Map<Integer, List<ChatMessage>> allMessages = new HashMap<Integer, List<ChatMessage>>();
     private QBChatRoom currentRoom;
     private static App instance;
-
+//check
     public static App getInstance() {
         return instance;
     }
