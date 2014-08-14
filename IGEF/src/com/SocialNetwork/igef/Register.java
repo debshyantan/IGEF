@@ -44,7 +44,7 @@ public class Register extends Fragment {
 	 public Register() {
 		// TODO Auto-generated constructor stub
 	}
-
+//hi
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {

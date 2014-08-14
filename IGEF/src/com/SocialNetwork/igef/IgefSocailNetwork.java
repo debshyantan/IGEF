@@ -36,7 +36,7 @@ public class IgefSocailNetwork extends ActionBarActivity {
 		getMenuInflater().inflate(R.menu.igef_socail_network, menu);
 		return true;
 	}
-
+//changed intent filter
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will

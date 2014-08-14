@@ -21,6 +21,7 @@
     <uses-permission android:name="com.SocialNetwork.igef.permission.C2D_MESSAGE" />
     
  <uses-permission 
+     
       android:name="android.permission.SYSTEM_ALERT_WINDOW"
      />
  <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
@@ -36,6 +37,7 @@
         
         android:label="@string/app_name"
         android:theme="@style/Theme.Socialnetwork" >
+        <!--  Intent Filter changed to this  -->
         
          <activity android:name="com.SocialNetwork.igef.StartScreen"
             android:label="@string/app_name"

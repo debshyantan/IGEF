@@ -42,25 +42,14 @@ public class StartScreen extends Activity implements AnimationListener{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);	
-//		requestWindowFeature(Window.FEATURE_NO_TITLE);
-//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-//            WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
 		setContentView(R.layout.startscreen);
 		
-		//spinn=(ImageView)findViewById(R.id.spinn);
+		
 		blinking=(TextView)findViewById(R.id.authentication);
-		//animRotate = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.rotate);
 		animBlink = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.blink);
-		//animRotate.setAnimationListener(this);
 		animBlink.setAnimationListener(this);
-		//spinn.setVisibility(View.VISIBLE);
-
-		// start the animation
-		//spinn.startAnimation(animRotate);
-		
 		blinking.setVisibility(View.VISIBLE);
-		
-		// start the animation
 		blinking.startAnimation(animBlink);
 		
 		System.out.println("On create of screen");
@@ -69,17 +58,9 @@ public class StartScreen extends Activity implements AnimationListener{
 		if(!IGEFSharedPrefrence.getROLL_NO().equals("")){
 			new AsyncTask<Void, Void, Void>(){
 				int flag=0;
-				ProgressDialog pd;
 				String value;
 				
-				@Override
-				protected void onPreExecute() {
-					
-//					 pd=new ProgressDialog(getApplicationContext());
-//					 pd.setMessage("LoginNow");
-//					 pd.show();
-					
-				};
+				
 
 				@Override
 				protected Void doInBackground(Void... params) {
@@ -164,16 +145,14 @@ public class StartScreen extends Activity implements AnimationListener{
 					return null;
 				}
 				@Override
-				protected void onPostExecute(Void result) {
-					//pd.dismiss();					
-					show(flag);
-					
-					
+				protected void onPostExecute(Void result) {									
+					show(flag);				
 				}
 
 				private void show(int flag) {
 					
 					if(flag==1){
+						System.out.println("Sucessfull login Moving to users screen");
 						
 						Intent i1=new Intent(getApplicationContext(), UserScreen.class);
 						startActivity(i1);
@@ -182,13 +161,11 @@ public class StartScreen extends Activity implements AnimationListener{
 					
 					
 					if(flag==2){	
-//						editor.clear();
-//						editor.commit();
+						
+						System.out.println("Wrong ID password Moveing to Login Screen");
 						Intent i2=new Intent(getApplicationContext(), LoginStudent.class);
 						startActivity(i2);
-						finish();
-
-						
+						finish();		
 							
 					}
 					
@@ -200,7 +177,7 @@ public class StartScreen extends Activity implements AnimationListener{
 		}
 		
 		else{
-		//finish();
+		System.out.println("Nonthing in the shared preference Move to start screen");
 		Intent i4=new Intent(getApplicationContext(), IgefSocailNetwork.class);
 		startActivity(i4);
 		finish();

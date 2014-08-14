@@ -16,7 +16,7 @@ public class GettingStarted extends ActionBarActivity implements
 	static ActionBar act;
 	static FragmentManager fm;
 	
-	
+	//view pager addeed
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
