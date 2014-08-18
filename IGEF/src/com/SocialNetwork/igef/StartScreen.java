@@ -215,19 +215,25 @@ public class StartScreen extends Activity implements AnimationListener{
 //		notificationManager.notify(0, notify.build());
 //		System.out.println("notification shown");
 		
-		AlertDialog.Builder adialog=new AlertDialog.Builder(getApplicationContext());
+		AlertDialog.Builder adialog=new AlertDialog.Builder(this);
 		adialog.setTitle("No Internet Connection!");
 		adialog.setMessage("No Avaible Internet Connection.Try Again Later!");
 		adialog.setIcon(R.drawable.ic_launcher);
+		adialog.setCancelable(false);
 		adialog.setNegativeButton("Exit Now!", new OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				// TODO Auto-generated method stub
-				finish();
+				StartScreen.this.finish();
 
 			}
 		});
+		
+		AlertDialog alertDialog = adialog.create();
+		 
+		// show it
+		alertDialog.show();
     }	
 		
 		
