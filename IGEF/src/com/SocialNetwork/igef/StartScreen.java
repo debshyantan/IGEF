@@ -18,12 +18,16 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import Tool.ConnectionDetector;
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences.Editor;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
@@ -38,6 +42,8 @@ public class StartScreen extends Activity implements AnimationListener{
 	TextView blinking;
 	Animation animRotate,animBlink;
 	Editor editor;
+	Boolean isInternetPresent = false;
+	ConnectionDetector cd;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +58,15 @@ public class StartScreen extends Activity implements AnimationListener{
 		blinking.setVisibility(View.VISIBLE);
 		blinking.startAnimation(animBlink);
 		
+		//connection checking
+		cd = new ConnectionDetector(getApplicationContext());
+		isInternetPresent = cd.isConnectingToInternet();
+		System.out.println("Network states:" + isInternetPresent);
 		System.out.println("On create of screen");
+		
+		
+		
+		if (isInternetPresent) {
 		
 		
 		if(!IGEFSharedPrefrence.getROLL_NO().equals("")){
@@ -177,11 +191,27 @@ public class StartScreen extends Activity implements AnimationListener{
 		}
 		
 		else{
-		System.out.println("Nonthing in the shared preference Move to start screen");
+		System.out.println("Nonthing in the shared preference Move to initial screen screen");
 		Intent i4=new Intent(getApplicationContext(), IgefSocailNetwork.class);
 		startActivity(i4);
 		finish();
 		}
+		
+	} else {
+        
+		System.out.println("No Internet Connection");
+		final NotificationCompat.Builder notify=new NotificationCompat.Builder(this);
+		notify.setContentTitle("IGEF: NO INTERNET");
+		notify.setContentText("Sorry! No Internet Connection. Try Again Later!");
+		notify.setSmallIcon(R.drawable.ic_launcher);
+		//notify.setAutoCancel(false);
+		
+		NotificationManager notificationManager=(NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+
+		notificationManager.notify(0, notify.build());
+		System.out.println("notification shown");
+		//finish();
+    }	
 		
 		
 	}
