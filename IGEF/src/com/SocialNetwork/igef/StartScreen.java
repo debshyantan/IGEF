@@ -20,9 +20,12 @@ import org.json.JSONObject;
 
 import Tool.ConnectionDetector;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.SharedPreferences.Editor;
 import android.os.AsyncTask;
@@ -35,6 +38,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import com.Prefrence.IGEFSharedPrefrence;
+import com.google.android.gms.drive.internal.ad;
 import com.userscreen.UserScreen;
 
 public class StartScreen extends Activity implements AnimationListener{
@@ -200,17 +204,30 @@ public class StartScreen extends Activity implements AnimationListener{
 	} else {
         
 		System.out.println("No Internet Connection");
-		final NotificationCompat.Builder notify=new NotificationCompat.Builder(this);
-		notify.setContentTitle("IGEF: NO INTERNET");
-		notify.setContentText("Sorry! No Internet Connection. Try Again Later!");
-		notify.setSmallIcon(R.drawable.ic_launcher);
-		//notify.setAutoCancel(false);
+//		final NotificationCompat.Builder notify=new NotificationCompat.Builder(this);
+//		notify.setContentTitle("IGEF: NO INTERNET");
+//		notify.setContentText("Sorry! No Internet Connection. Try Again Later!");
+//		notify.setSmallIcon(R.drawable.ic_launcher);
+//		//notify.setAutoCancel(false);
+//		
+//		NotificationManager notificationManager=(NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+//
+//		notificationManager.notify(0, notify.build());
+//		System.out.println("notification shown");
 		
-		NotificationManager notificationManager=(NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+		AlertDialog.Builder adialog=new AlertDialog.Builder(getApplicationContext());
+		adialog.setTitle("No Internet Connection!");
+		adialog.setMessage("No Avaible Internet Connection.Try Again Later!");
+		adialog.setIcon(R.drawable.ic_launcher);
+		adialog.setNegativeButton("Exit Now!", new OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				finish();
 
-		notificationManager.notify(0, notify.build());
-		System.out.println("notification shown");
-		//finish();
+			}
+		});
     }	
 		
 		
