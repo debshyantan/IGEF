@@ -40,7 +40,8 @@ public class UserScreen extends ActionBarActivity implements ActionBar.TabListen
 	ActionBar actionBar;
 	private ViewPager viewPager;
 	 MyProfilePagerAdapter1 mAdapter;
-    private int[] tabs = { R.drawable.statusupdates, R.drawable.conversations,R.drawable.friendlist,R.drawable.ic_launcher};
+//    private int[] tabs = { R.drawable.statusupdates, R.drawable.conversations,R.drawable.friendlist,R.drawable.ic_launcher};
+    private int[] tabs = { R.drawable.statusupdates, R.drawable.friendlist,R.drawable.ic_launcher};
 
 @Override
 protected void onCreate(Bundle savedInstanceState) {
@@ -116,35 +117,7 @@ setContentView(R.layout.first);
     
 }
 
-//private void displayView(int i) {
-//	
-////        // update the main content by replacing fragments
-////        Fragment fragment = null;
-////        switch (position) {
-////        case 0:
-////            fragment = new HomeFragment();
-////            break;
-////        case 1:
-////            fragment = new FindPeopleFragment();
-////            break;
-////        case 2:
-////            fragment = new PhotosFragment();
-////            break;
-////        case 3:
-////            fragment = new CommunityFragment();
-////            break;
-////        case 4:
-////            fragment = new PagesFragment();
-////            break;
-////        case 5:
-////            fragment = new WhatsHotFragment();
-////            break;
-//// 
-////        default:
-////            break;
-//       
-//	
-//}
+
 
 
 
