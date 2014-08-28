@@ -39,7 +39,6 @@ import android.widget.TextView;
 
 import com.Prefrence.IGEFSharedPrefrence;
 import com.SocialNetwork.igef.R;
-import com.qb.gson.JsonObject;
 
 
 

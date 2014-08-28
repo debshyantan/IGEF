@@ -33,5 +33,34 @@
         <item>2013</item>
         <item>2014</item>
     </string-array>
+    
+    
+    <!-- Nav Drawer Menu Items -->
+    <string-array name="nav_drawer">
+        <item >Post Status</item>
+        <item >View Profile</item>
+        <item >View Timeline</item>
+        <item >College Updates</item>
+        <item >Assignments</item>
+       <!--  <item >Update Profile</item> --> 
+        <item >Logout</item>
+    </string-array>
+     
+    <!-- Nav Drawer List Item Icons -->
+    <!-- Keep them in order as the titles are in -->
+    <array name="nav_drawer_icons">
+        <item>@drawable/write_post</item>
+        <item>@drawable/view_profile</item>
+        <item>@drawable/timeline</item>
+        <item>@drawable/college_updates</item>
+        <item>@drawable/assignments</item>
+        <item>@drawable/logout</item>
+    </array> 
+     
+    <!-- Content Description -->
+    <string name="desc_list_item_icon">Item Icon</string>
+    
+    
+    
 
 </resources>

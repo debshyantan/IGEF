@@ -27,7 +27,7 @@ public class MyProfilePagerAdapter1 extends FragmentPagerAdapter {
         	
         case 3:
         	
-        	return new PostStatus();
+        	return new UserTask();
         	
     
    

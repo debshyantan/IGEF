@@ -36,7 +36,6 @@ import android.widget.TextView;
 
 import com.Prefrence.IGEFSharedPrefrence;
 import com.SocialNetwork.igef.R;
-import com.userscreen.Status.MyAdapter;
 
 
 public class FreindsList extends Fragment {

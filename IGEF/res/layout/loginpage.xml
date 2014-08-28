@@ -16,7 +16,7 @@
             android:layout_marginTop="15dp"
             android:src="@drawable/igef" />
 
-        <TextView
+        <com.SocialNetwork.CustomFonts.RegLoginFontclass
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -36,7 +36,7 @@
             android:inputType="number"
             android:maxLength="5" />
 
-        <TextView
+        <com.SocialNetwork.CustomFonts.RegLoginFontclass
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -56,7 +56,7 @@
             android:hint="Enter Password"
             android:inputType="textPassword" />
 
-        <TextView
+        <com.SocialNetwork.CustomFonts.RegLoginFontclass
             android:id="@+id/incorrectlogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

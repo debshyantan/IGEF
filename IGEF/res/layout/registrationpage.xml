@@ -16,7 +16,7 @@
             android:layout_marginTop="15dp"
             android:src="@drawable/igef" />
 
-        <TextView
+        <com.SocialNetwork.CustomFonts.RegLoginFontclass
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -34,7 +34,7 @@
             android:layout_marginTop="5dp"
             android:hint="Enter Full Name" />
 
-        <TextView
+        <com.SocialNetwork.CustomFonts.RegLoginFontclass
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -54,7 +54,7 @@
             android:inputType="number"
             android:maxLength="5" />
 
-        <TextView
+        <com.SocialNetwork.CustomFonts.RegLoginFontclass
             android:id="@+id/gender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -91,7 +91,7 @@
             </RadioGroup>
         </RelativeLayout>
 
-        <TextView
+        <com.SocialNetwork.CustomFonts.RegLoginFontclass
             android:id="@+id/departmentselector"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -110,7 +110,7 @@
             android:layout_marginTop="5dp"
             android:entries="@array/branch_array"
             android:prompt="@string/branch_prompt" />
-        <TextView
+        <com.SocialNetwork.CustomFonts.RegLoginFontclass
             
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -147,7 +147,7 @@
             </RadioGroup>
         </RelativeLayout>
 
-        <TextView
+        <com.SocialNetwork.CustomFonts.RegLoginFontclass
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -165,7 +165,7 @@
             android:entries="@array/admission_arrayy"
             android:prompt="@string/admission_year" />
 
-        <TextView
+        <com.SocialNetwork.CustomFonts.RegLoginFontclass
             android:id="@+id/contactno"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -186,7 +186,7 @@
             android:inputType="phone"
             android:maxLength="10" />
 
-        <TextView
+        <com.SocialNetwork.CustomFonts.RegLoginFontclass
             android:id="@+id/emailid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -206,7 +206,7 @@
             android:hint="Email Id"
             android:inputType="textEmailAddress" />
 
-        <TextView
+        <com.SocialNetwork.CustomFonts.RegLoginFontclass
             android:id="@+id/username1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

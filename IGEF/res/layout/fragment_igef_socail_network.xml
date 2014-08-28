@@ -26,15 +26,15 @@
             android:layout_marginTop="-50dp"
             android:src="@drawable/igef" />
 
-        <TextView
+        <com.SocialNetwork.CustomFonts.ProfileTaskFontClass
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
             android:gravity="center_horizontal"
             android:text="Welcome to IGEF Networks"
-            android:textSize="25sp" />
-
+            android:textSize="30sp"
+            android:textStyle="bold" />
         <ImageView
             android:id="@+id/imageView1"
             android:layout_width="match_parent"
@@ -71,11 +71,13 @@
             android:layout_gravity="center_horizontal"
             android:src="@drawable/signupbutton" />
 
-
-        <TextView
+        <com.SocialNetwork.CustomFonts.FrontPageFontclass
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="By creating your account your aggree to IGEF&apos;s Terms of Service , Privacy policy and cokkie use. Your profile will be public. Your can change this in Account Settings." />
+            android:layout_marginLeft="5dp"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:text="     By creating your account your aggree to IGEF&apos;s Terms of Service , Privacy policy and cokkie use. Your profile will be public. Your can change this in Account Settings." />
     </LinearLayout>
 
 </com.nirhart.parallaxscroll.views.ParallaxScrollView>

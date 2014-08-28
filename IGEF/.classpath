@@ -5,7 +5,7 @@
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/shyanTan/Downloads/quickblox-android-sdk-master/quickblox-android-sdk-master/jar/quickblox-android-1.2.4.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/shyanTan/Downloads/Compressed/Parse-1.5.1/Parse-1.5.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/shyantan/Android Libraries, jars and Samples/Libraries/quickblox-android-sdk-master/jar/quickblox-android-1.2.3.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/shyantan/Android Libraries, jars and Samples/jars/Parse-1.5.1.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

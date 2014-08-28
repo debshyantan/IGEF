@@ -1,25 +1,42 @@
 package com.userscreen;
 
 
+import java.util.ArrayList;
+
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.content.res.TypedArray;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.app.NavUtils;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBar.Tab;
 import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ListView;
 
 import com.SocialNetwork.igef.R;
 
-public class UserScreen extends ActionBarActivity implements ActionBar.TabListener{
 
+public class UserScreen extends ActionBarActivity implements ActionBar.TabListener{
+	
+	private DrawerLayout mDrawerLayout;
+    private ActionBarDrawerToggle mDrawerToggle;
+    private CharSequence mDrawerTitle;
+    private CharSequence mTitle;
+    private String[] mMenuTitles;
+    private ListView mDrawerList;
+    private TypedArray navMenuIcons;
+    
+    MyDrawerAdapter myDrawerAdapter;
+	
+    private ArrayList<NavDrawerItem> navDrawerItems;
+    
+	
 	ActionBar actionBar;
 	private ViewPager viewPager;
 	 MyProfilePagerAdapter1 mAdapter;
@@ -31,9 +48,12 @@ protected void onCreate(Bundle savedInstanceState) {
 super.onCreate(savedInstanceState);
 setContentView(R.layout.first);
 
+
+
+
  viewPager = (ViewPager) findViewById(R.id.viewPager);
     actionBar = getSupportActionBar();
-    actionBar.setDisplayHomeAsUpEnabled(true);
+
    
     mAdapter = new MyProfilePagerAdapter1(getSupportFragmentManager());
 
@@ -60,7 +80,16 @@ setContentView(R.layout.first);
         }
     });
 
-    actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);        
+
+
+    
+    
+    
+    actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);     
+    
+
+
+
 
    //  Adding Tabs
     for (int tab_name : tabs) {
@@ -83,50 +112,73 @@ setContentView(R.layout.first);
 //    
 //      }  
     
+  
     
 }
 
-@Override
-public boolean onOptionsItemSelected(MenuItem item) { 
-switch (item.getItemId()) {
-    case android.R.id.home:
-        // app icon in action bar clicked; go home
-    	this.finish();
-    	
-        return true;
-        
-        default:
-        return super.onOptionsItemSelected(item); 
-}
-}
-
-@Override
-public void onConfigurationChanged(Configuration newConfig) {
-	// TODO Auto-generated method stub
-	super.onConfigurationChanged(newConfig);
-	
-	if ((getResources().getConfiguration().screenLayout &      Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_LARGE) {     
-    	setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-
-
-	}
-	else if ((getResources().getConfiguration().screenLayout &      Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE) {     
-	 	setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-
-
-	} 
-	else if ((getResources().getConfiguration().screenLayout &      Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_NORMAL) {     
-    	setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+//private void displayView(int i) {
+//	
+////        // update the main content by replacing fragments
+////        Fragment fragment = null;
+////        switch (position) {
+////        case 0:
+////            fragment = new HomeFragment();
+////            break;
+////        case 1:
+////            fragment = new FindPeopleFragment();
+////            break;
+////        case 2:
+////            fragment = new PhotosFragment();
+////            break;
+////        case 3:
+////            fragment = new CommunityFragment();
+////            break;
+////        case 4:
+////            fragment = new PagesFragment();
+////            break;
+////        case 5:
+////            fragment = new WhatsHotFragment();
+////            break;
+//// 
+////        default:
+////            break;
+//       
+//	
+//}
 
 
-	} 
-	else if ((getResources().getConfiguration().screenLayout &      Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_SMALL) {     
-		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-	}
-	else {
-		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-	}
-}
+
+
+
+
+//@Override
+//public void onConfigurationChanged(Configuration newConfig) {
+//	// TODO Auto-generated method stub
+//	super.onConfigurationChanged(newConfig);
+//    mDrawerToggle.onConfigurationChanged(newConfig);
+//
+//	if ((getResources().getConfiguration().screenLayout &      Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_LARGE) {     
+//    	setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+//
+//
+//	}
+//	else if ((getResources().getConfiguration().screenLayout &      Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE) {     
+//	 	setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+//
+//
+//	} 
+//	else if ((getResources().getConfiguration().screenLayout &      Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_NORMAL) {     
+//    	setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+//
+//
+//	} 
+//	else if ((getResources().getConfiguration().screenLayout &      Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_SMALL) {     
+//		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+//	}
+//	else {
+//		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+//	}
+//}
 
 
 @Override
