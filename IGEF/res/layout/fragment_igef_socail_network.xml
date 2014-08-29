@@ -71,13 +71,13 @@
             android:layout_gravity="center_horizontal"
             android:src="@drawable/signupbutton" />
 
-        <com.SocialNetwork.CustomFonts.FrontPageFontclass
+        <com.SocialNetwork.CustomFonts.RegLoginFontclass
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:textSize="15sp"
+            android:textSize="20sp"
             android:textStyle="bold"
-            android:text="     By creating your account your aggree to IGEF&apos;s Terms of Service , Privacy policy and cokkie use. Your profile will be public. Your can change this in Account Settings." />
+            android:text="  By creating your account your agree to IGEF&apos;s Terms of Service , Privacy policy and cookie use. Your profile will be public. You can change this in Account Settings." />
     </LinearLayout>
 
 </com.nirhart.parallaxscroll.views.ParallaxScrollView>

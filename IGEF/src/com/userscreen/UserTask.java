@@ -3,6 +3,8 @@ package com.userscreen;
 
 import java.util.ArrayList;
 
+import org.simpleframework.xml.stream.Position;
+
 import com.SocialNetwork.igef.R;
 
 import android.content.Context;
@@ -13,6 +15,8 @@ import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -43,7 +47,27 @@ public class UserTask extends Fragment{
 		myadp=new MyprofileTaskAdapter(getActivity(),profileArraylist);
 		listView.setAdapter(myadp);
 		
+		listView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				
+				if(position==0){
+					getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new PostStatus()).addToBackStack(null).commit();
 		
+				}
+//				if(position==1){
+//					getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new PostStatus()).commit();
+//		
+//				}
+//				if(position==2){
+//					getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new PostStatus()).commit();
+//		
+//				}
+				
+			}
+		});
 	
 		
 		

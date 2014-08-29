@@ -10,6 +10,7 @@ import com.parse.Parse;
 import com.parse.PushService;
 import com.quickblox.module.chat.QBChatRoom;
 import com.quickblox.module.users.model.QBUser;
+import com.userscreen.Custom;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,7 +27,23 @@ public class App extends Application {
     private Map<Integer, List<ChatMessage>> allMessages = new HashMap<Integer, List<ChatMessage>>();
     private QBChatRoom currentRoom;
     private static App instance;
-//check
+    
+    public  ArrayList<Custom> statuslist;
+    public  ArrayList<Custom> FriendsArraylist;
+
+	public ArrayList<Custom> getStatuslist() {
+		return statuslist;
+	}
+	public void setStatuslist(ArrayList<Custom> statuslist) {
+		this.statuslist = statuslist;
+	}
+	public ArrayList<Custom> getFriendsArraylist() {
+		return FriendsArraylist;
+	}
+	public void setFriendsArraylist(ArrayList<Custom> friendsArraylist) {
+		FriendsArraylist = friendsArraylist;
+	}
+	//check
     public static App getInstance() {
         return instance;
     }

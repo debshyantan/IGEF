@@ -4,15 +4,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <ListView
+  
+    
+    <com.handmark.pulltorefresh.library.PullToRefreshListView xmlns:ptr="http://schemas.android.com/apk/res-auto"
         android:id="@+id/list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+         android:layout_height="match_parent"
+         android:layout_width="match_parent"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="5dp"
         android:divider="@null"
-        android:dividerHeight="8dp" >
-    </ListView>
+        android:dividerHeight="8dp"
+        
+        ptr:ptrMode="both" />
 
 </LinearLayout>

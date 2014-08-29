@@ -1,7 +1,5 @@
 package com.userscreen;
 
-
-
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -21,7 +19,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -34,137 +31,273 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.Chat.App;
 import com.Prefrence.IGEFSharedPrefrence;
 import com.SocialNetwork.igef.R;
-
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 public class FreindsList extends Fragment {
-ListView lv;
-ImageView profile_iv;
-TextView name, roll_no;
-ArrayList<Custom> list;
+	PullToRefreshListView listview;
 
-MyFriendAdapter adapter;
-public FreindsList() {
+	ListView lv;
+	ImageView profile_iv;
+	TextView name, roll_no;
 	
-}
+	    public  ArrayList<Custom> FriendsArraylist;
+
+	MyFriendAdapter adapter;
+
+	public FreindsList() {
+
+	}
+
 	@Override
-public View onCreateView(LayoutInflater inflater, ViewGroup container,
-		Bundle savedInstanceState) {
-	View rootView = inflater.inflate(R.layout.userscreen, container, false);
-	
-	lv=(ListView)rootView.findViewById(R.id.list);
-	new AsyncTask<Void, Void, Void>(){
-		ProgressDialog pd;
-		String Value_friend;
-		@Override
-		protected void onPreExecute() {
-			pd=new ProgressDialog(getActivity());
-			 pd.setMessage("LoginNow");
-			 pd.show();
-			 list=new ArrayList<Custom>();
-		};
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		View rootView = inflater.inflate(R.layout.userscreen, container, false);
 
-		@Override
-		protected Void doInBackground(Void... params) {
-			// TODO Auto-generated method stub
-			HttpClient httpclient = new DefaultHttpClient();
-		    HttpPost httppost = new HttpPost("http://shypal.com/IGEF/task_manager/getallfriends.php");
-	        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-	        nameValuePairs.add(new BasicNameValuePair("department", IGEFSharedPrefrence.getDEPARTMENT()));
-	        nameValuePairs.add(new BasicNameValuePair("year", IGEFSharedPrefrence.getYEAR()));
-	        try {
-				httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	        
-	        HttpResponse response = null;
-			try {
-				response = httpclient.execute(httppost);
-			} catch (ClientProtocolException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		listview=(PullToRefreshListView)rootView.findViewById(R.id.list);
+		lv=listview.getRefreshableView();
+		FriendsArraylist=((App)getActivity().getApplication()).getFriendsArraylist();
+		listview.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
+
 			
-			try {
-				Value_friend=EntityUtils.toString(response.getEntity());
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+
+			@Override
+			public void onPullDownToRefresh(
+					PullToRefreshBase<ListView> refreshView) {
+				
+				//onPllTorefresh Asynktask
+					new AsyncTask<Void, Void, Void>(){
+						String Value_friend;
+						
+						@Override
+						protected void onPreExecute() {
+							if(FriendsArraylist!=null){
+								FriendsArraylist.clear();
+							}
+						
+						}
+						
+						@Override
+						protected Void doInBackground(Void... params) {
+							// TODO Auto-generated method stub
+							HttpClient httpclient = new DefaultHttpClient();
+							HttpPost httppost = new HttpPost(
+									"http://shypal.com/IGEF/task_manager/getallfriends.php");
+							List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+							nameValuePairs.add(new BasicNameValuePair("department",
+									IGEFSharedPrefrence.getDEPARTMENT()));
+							nameValuePairs.add(new BasicNameValuePair("year",
+									IGEFSharedPrefrence.getYEAR()));
+							try {
+								httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+							} catch (UnsupportedEncodingException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+
+							HttpResponse response = null;
+							try {
+								response = httpclient.execute(httppost);
+							} catch (ClientProtocolException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+
+							try {
+								Value_friend = EntityUtils.toString(response.getEntity());
+							} catch (ParseException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+
+							System.out.println(Value_friend);
+							JSONArray result = null;
+							if (Value_friend != null) {
+								JSONObject jsonObj = null;
+								try {
+									jsonObj = new JSONObject(Value_friend);
+								} catch (JSONException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+
+								// Getting JSON Array node
+								try {
+									result = jsonObj.getJSONArray("result");
+								} catch (JSONException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+
+								// looping through All Contacts
+								for (int i = 0; i < result.length(); i++) {
+									JSONObject c;
+									try {
+										c = result.getJSONObject(i);
+
+										String id = c.getString("id");
+
+										String full_name = c.getString("full_name");
+
+										String roll_no = c.getString("roll_no");
+										Custom d = new Custom();
+										d.setFriendname(full_name);
+										d.setRoll_no(roll_no);
+										FriendsArraylist.add(d);
+									} catch (JSONException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									}
+
+								}
+							}
+							return null;
+						}
+						@Override
+						protected void onPostExecute(Void result) {
+							adapter = new MyFriendAdapter();
+							lv.setAdapter(adapter);
+							listview.onRefreshComplete();
+						};
+						
+					}.execute();
+				
+				
+				
 			}
-			
-			System.out.println(Value_friend);
-	        JSONArray result = null;
-	        if(Value_friend!=null){
-	        	JSONObject jsonObj = null;
+
+			@Override
+			public void onPullUpToRefresh(
+					PullToRefreshBase<ListView> refreshView) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		
+		
+		
+		
+		
+		new AsyncTask<Void, Void, Void>() {
+			String Value_friend;
+
+			@Override
+			protected void onPreExecute() {
+				
+				FriendsArraylist = new ArrayList<Custom>();
+			};
+
+			@Override
+			protected Void doInBackground(Void... params) {
+				// TODO Auto-generated method stub
+				HttpClient httpclient = new DefaultHttpClient();
+				HttpPost httppost = new HttpPost(
+						"http://shypal.com/IGEF/task_manager/getallfriends.php");
+				List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+				nameValuePairs.add(new BasicNameValuePair("department",
+						IGEFSharedPrefrence.getDEPARTMENT()));
+				nameValuePairs.add(new BasicNameValuePair("year",
+						IGEFSharedPrefrence.getYEAR()));
 				try {
-					jsonObj = new JSONObject(Value_friend);
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-                
-                // Getting JSON Array node
-                try {
-					result = jsonObj.getJSONArray("result");
-				} catch (JSONException e) {
+					httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+				} catch (UnsupportedEncodingException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 
-                // looping through All Contacts
-                for (int i = 0; i < result.length(); i++) {
-                    JSONObject c;
+				HttpResponse response = null;
+				try {
+					response = httpclient.execute(httppost);
+				} catch (ClientProtocolException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				try {
+					Value_friend = EntityUtils.toString(response.getEntity());
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				System.out.println(Value_friend);
+				JSONArray result = null;
+				if (Value_friend != null) {
+					JSONObject jsonObj = null;
 					try {
-						c = result.getJSONObject(i);
-					
-                    
-						String id=c.getString("id");
-					
-                    String full_name= c.getString("full_name");
-					
-                    String roll_no=c.getString("roll_no");
-                    Custom d=new Custom();
-                    d.setFriendname(full_name);
-                    d.setRoll_no(roll_no);
-                    list.add(d);
+						jsonObj = new JSONObject(Value_friend);
 					} catch (JSONException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-                    
-	        }}
-			return null;
-		}
-		@Override
-		protected void onPostExecute(Void result) {
-			pd.dismiss();
-			adapter=new MyFriendAdapter();
-			lv.setAdapter(adapter);
-		};
-		
-	}.execute();
-	
-	
-	return rootView;
-		
-}
-	
-	class MyFriendAdapter extends BaseAdapter
-	{
+
+					// Getting JSON Array node
+					try {
+						result = jsonObj.getJSONArray("result");
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+						
+					// looping through All Contacts
+					for (int i = 0; i < result.length(); i++) {
+						JSONObject c;
+						try {
+							c = result.getJSONObject(i);
+
+							String id = c.getString("id");
+
+							String full_name = c.getString("full_name");
+
+							String roll_no = c.getString("roll_no");
+							Custom d = new Custom();
+							d.setFriendname(full_name);
+							d.setRoll_no(roll_no);
+							FriendsArraylist.add(d);
+						} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+
+					}
+				}
+				return null;
+			}
+
+			@Override
+			protected void onPostExecute(Void result) {
+				adapter = new MyFriendAdapter();
+				lv.setAdapter(adapter);
+			};
+
+		}.execute();
+
+		return rootView;
+
+	}
+
+	class MyFriendAdapter extends BaseAdapter {
 
 		@Override
 		public int getCount() {
 			// TODO Auto-generated method stub
-			return list.size();
+			return FriendsArraylist.size();
 		}
 
 		@Override
@@ -182,19 +315,19 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			// TODO Auto-generated method stub
-			
-			LayoutInflater inflater=(LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			convertView=inflater.inflate(R.layout.friends, parent, false);
-			profile_iv=(ImageView)convertView.findViewById(R.id.img);
-			name=(TextView)convertView.findViewById(R.id.name);
-			roll_no=(TextView)convertView.findViewById(R.id.roll);
-			name.setText(list.get(position).friendname);
-			roll_no.setText(list.get(position).roll_no);
-			
+
+			LayoutInflater inflater = (LayoutInflater) getActivity()
+					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			convertView = inflater.inflate(R.layout.friends, parent, false);
+			profile_iv = (ImageView) convertView.findViewById(R.id.img);
+			name = (TextView) convertView.findViewById(R.id.name);
+			roll_no = (TextView) convertView.findViewById(R.id.roll);
+			name.setText(FriendsArraylist.get(position).friendname);
+			roll_no.setText(FriendsArraylist.get(position).roll_no);
+
 			return convertView;
 		}
 
-		}
-		
+	}
 
 }

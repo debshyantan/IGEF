@@ -26,6 +26,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.text.format.DateUtils;
 import android.util.Log;
@@ -37,37 +38,182 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.Chat.App;
 import com.Prefrence.IGEFSharedPrefrence;
+
 import com.SocialNetwork.igef.R;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
-
-
-public class Status extends Fragment{
+public class Status extends Fragment {
+	PullToRefreshListView listview;
 	ListView lv;
 	ImageView profile_iv, status_iv;
-	TextView name,status,timestamp;
+	TextView name, status, timestamp;
 	String d_status, d_name, d_roll, d_created;
-	
-	ArrayList<Custom> list;
 
-MyAdapter adapter;
+	public ArrayList<Custom> statuslist;
 	
 	
-@Override
+
+	MyAdapter adapter;
+
+	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.userscreen, container,false);
-		lv=(ListView)rootView.findViewById(R.id.list);
+		listview=(PullToRefreshListView)rootView.findViewById(R.id.list);
+		lv=listview.getRefreshableView();
+		statuslist=((App)getActivity().getApplication()).getStatuslist();
+	
+	
 		
+		
+		listview.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
+
+		
+
+			@Override
+			public void onPullDownToRefresh(
+					PullToRefreshBase<ListView> refreshView) {
+			
+								new AsyncTask<Void , Void, Void>(){
+									String value;
+									@Override
+									protected void onPreExecute() {
+										if(statuslist!=null){
+											statuslist.clear();
+										}
+										
+										
+									};
+									@Override
+								
+									protected Void doInBackground(
+											Void... params) {
+										
+										
+
+										// TODO Auto-generated method stub
+										HttpClient httpclient = new DefaultHttpClient();
+									    HttpPost httppost = new HttpPost("http://shypal.com/IGEF/task_manager/selectstatus.php");
+								        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+								        nameValuePairs.add(new BasicNameValuePair("department", IGEFSharedPrefrence.getDEPARTMENT()));
+								        nameValuePairs.add(new BasicNameValuePair("year", IGEFSharedPrefrence.getYEAR()));
+								        
+								        try {
+											httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+										} catch (UnsupportedEncodingException e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+										}
+								        
+								        HttpResponse response = null;
+								        try {
+											response = httpclient.execute(httppost);
+										} catch (ClientProtocolException e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+										} catch (IOException e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+										}
+								        try {
+											value=EntityUtils.toString(response.getEntity());
+										} catch (ParseException e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+										} catch (IOException e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+										}
+								        
+								        System.out.println(value);
+								        JSONArray result;
+								        if (value != null) {
+							                try {
+							                    JSONObject jsonObj = new JSONObject(value);
+							                     
+							                    // Getting JSON Array node
+							                    result = jsonObj.getJSONArray("result");
+							 
+							                    // looping through All Contacts
+							                    for (int i = 0; i < result.length(); i++) {
+							                        JSONObject c = result.getJSONObject(i);
+							                         
+							                        String status_id = c.getString("status_id");
+							                        String status = c.getString("status");
+							                        String full_name = c.getString("full_name");
+							                        String roll_no=c.getString("roll_no");
+							                        String department = c.getString("department");
+							                        String year = c.getString("year");
+							                        String section=c.getString("section");
+							                        String created_at=c.getString("created_at");
+							                        Custom d=new Custom();
+							                        
+							                        d.setStatus(status);
+							                        d.setName(full_name);
+							                        d.setTimestamp(created_at);
+							                        
+							                        statuslist.add(d);
+							 
+							                       
+							                    }
+							                } catch (JSONException e) {
+							                    e.printStackTrace();
+							                }
+							            } else {
+							                Log.e("ServiceHandler", "Couldn't get any data from the url");
+							            }
+								        
+								        
+								        
+								        
+								        
+								
+									
+										
+										return null;
+									}
+									@Override
+									protected void onPostExecute(Void result) {
+
+										adapter=new MyAdapter();
+										lv.setAdapter(adapter);
+										listview.onRefreshComplete();
+									};
+									
+								}.execute();
+							
+				
+//				new Handler().postDelayed(new Runnable() {
+//					
+//					@Override
+//					public void run() {
+//						listview.onRefreshComplete();
+//
+//						
+//					}
+//				}, 10000);
+				
+			}
+
+			@Override
+			public void onPullUpToRefresh(
+					PullToRefreshBase<ListView> refreshView) {
+				// TODO Auto-generated method stub
+			}
+			
+		});
 	    new AsyncTask<Void, Void, Void>() {
-	    	ProgressDialog pd;
+//	    	ProgressDialog pd;
 	    	String value;
 	    	@Override
 	    	protected void onPreExecute() {
-	    		pd=new ProgressDialog(getActivity());
-				 pd.setMessage("LoginNow");
-				 pd.show();
-				 list=new ArrayList<Custom>();
+//	    		pd=new ProgressDialog(getActivity());
+//				 pd.setMessage("LoginNow");
+//				 pd.show();
+	    		statuslist=new ArrayList<Custom>();
 	    	};
 
 			@Override
@@ -132,7 +278,7 @@ MyAdapter adapter;
 	                        d.setName(full_name);
 	                        d.setTimestamp(created_at);
 	                        
-	                        list.add(d);
+	                        statuslist.add(d);
 	 
 	                       
 	                    }
@@ -154,7 +300,7 @@ MyAdapter adapter;
 			@Override
 			
 			protected void onPostExecute(Void result) {
-				pd.dismiss();
+//				pd.dismiss();
 				
 				adapter=new MyAdapter();
 				lv.setAdapter(adapter);
@@ -177,71 +323,67 @@ MyAdapter adapter;
 		
 	}
 
+	class MyAdapter extends BaseAdapter {
 
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			// TODO Auto-generated method stub
+			LayoutInflater inflater = (LayoutInflater) getActivity()
+					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			convertView = inflater.inflate(R.layout.status, parent, false);
+			profile_iv = (ImageView) convertView.findViewById(R.id.profilePic);
+			name = (TextView) convertView.findViewById(R.id.name);
+			timestamp = (TextView) convertView.findViewById(R.id.timestamp);
+			status = (TextView) convertView.findViewById(R.id.txtStatusMsg);
 
-class MyAdapter extends BaseAdapter
-{
+			status_iv = (ImageView) convertView.findViewById(R.id.feedImage1);
+			profile_iv.setImageResource(R.drawable.ic_launcher);
+			status_iv.setImageResource(R.drawable.adminblock);
+			name.setText(statuslist.get(position).name);
+			timestamp.setText(parseDate(position));
+			status.setText(statuslist.get(position).status);
 
-	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
-		// TODO Auto-generated method stub
-		LayoutInflater inflater=(LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		convertView=inflater.inflate(R.layout.status, parent, false);
-		profile_iv=(ImageView)convertView.findViewById(R.id.profilePic);
-		name=(TextView)convertView.findViewById(R.id.name);
-		timestamp=(TextView)convertView.findViewById(R.id.timestamp);
-		status=(TextView)convertView.findViewById(R.id.txtStatusMsg);
-		
-		status_iv=(ImageView)convertView.findViewById(R.id.feedImage1);
-		profile_iv.setImageResource(R.drawable.ic_launcher);
-		status_iv.setImageResource(R.drawable.adminblock);
-		name.setText(list.get(position).name);
-		timestamp.setText(parseDate(position));
-		status.setText(list.get(position).status);
-		
-		
-		return convertView;
-	}
-	
-	public String parseDate(int position)
-		    throws ParseException
-		{
-		    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss",
-		                                                    Locale.getDefault()); 
-		    dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+			return convertView;
+		}
 
-		    long value = 0;
+		public String parseDate(int position) throws ParseException {
+			SimpleDateFormat dateFormat = new SimpleDateFormat(
+					"yyyy-MM-dd hh:mm:ss", Locale.getDefault());
+			dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+
+			long value = 0;
 			try {
-				value = dateFormat.parse(list.get(position).timestamp).getTime();
+				value = dateFormat.parse(statuslist.get(position).timestamp)
+						.getTime();
 			} catch (java.text.ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}  
+			}
 			CharSequence timeAgo = DateUtils.getRelativeTimeSpanString(
 					Long.parseLong(String.valueOf(value)),
 					System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS);
-			
-		    return timeAgo.toString();
+
+			return timeAgo.toString();
 		}
-	
-	@Override
-	public long getItemId(int position) {
-		// TODO Auto-generated method stub
-		return position;
+
+		@Override
+		public long getItemId(int position) {
+			// TODO Auto-generated method stub
+			return position;
+		}
+
+		@Override
+		public Object getItem(int position) {
+			// TODO Auto-generated method stub
+			return position;
+		}
+
+		@Override
+		public int getCount() {
+			// TODO Auto-generated method stub
+			return statuslist.size();
+		}
+
 	}
-	
-	@Override
-	public Object getItem(int position) {
-		// TODO Auto-generated method stub
-		return position;
-	}
-	
-	@Override
-	public int getCount() {
-		// TODO Auto-generated method stub
-		return list.size();
-	}
-	
-}
 
 }
