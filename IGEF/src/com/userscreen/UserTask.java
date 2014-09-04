@@ -53,6 +53,8 @@ public class UserTask extends Fragment{
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				
+				
+				
 				if(position==0){
 					getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new PostStatus()).addToBackStack(null).commit();
 		
@@ -65,6 +67,12 @@ public class UserTask extends Fragment{
 //					getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new PostStatus()).commit();
 //		
 //				}
+				
+				if(position==5){
+					
+					new clearLogouttask(getActivity()).execute();
+				
+				}
 				
 			}
 		});

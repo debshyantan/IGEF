@@ -97,6 +97,7 @@
         </activity>
         
         <activity android:name="com.Chat.MessagesActivity"></activity>
+        <activity android:name="com.SocialNetwork.igef.PhotoUpload"></activity>
         
      <meta-data android:name="com.google.android.gms.version" 
          android:value="@integer/google_play_services_version" /> 
@@ -129,6 +130,7 @@ android:permission="com.google.android.c2dm.permission.SEND">
     <category android:name="com.SocialNetwork.igef" />
   </intent-filter>
 </receiver>
+
         
     </application>
     

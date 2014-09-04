@@ -19,11 +19,14 @@ public class IGEFSharedPrefrence {
 	static String DEVICETOKEN = "devicetoken";
 	static String PASSWORD = "password";
 	static String API_KEY = "api_key";
+	static String PROFILEPICURL = "profilepicurl";
 	static String STATUS = "status";
 	static String CREATEDAT = "createdAt";
 	
 	
+	
 
+	
 	public IGEFSharedPrefrence(Context ctx) {
 		prefobj = ctx
 				.getSharedPreferences("IGEFSharedPrefrence", Context.MODE_PRIVATE);
@@ -124,6 +127,16 @@ public class IGEFSharedPrefrence {
 	public static void setAPI_KEY(String aPI_KEY) {
 		prefobj.edit().putString(API_KEY, aPI_KEY).commit();
 		}
+	
+	public static String getPROFILEPICURL() {
+		return prefobj.getString(PROFILEPICURL, "");
+	}
+
+	public static void setPROFILEPICURL(String pROFILEPICURL) {
+		prefobj.edit().putString(PROFILEPICURL, pROFILEPICURL).commit();
+		
+	}
+
 
 	public static String getSTATUS() {
 		return prefobj.getString(STATUS, "");

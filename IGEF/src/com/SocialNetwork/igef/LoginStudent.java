@@ -55,14 +55,7 @@ public class LoginStudent extends Fragment {
 	    private static final String AUTH_SECRET = "5XXkbUK9pBg8L9c";
 	    static GCMBroadcastReciever recieve;
 	    private static ProgressBar progressBar;
-	 ///////change in login
-	 //new login
-
-//rfkerf
-	 
-	 //new changes
-	 //ckjdsxckjb hellodf sd
-	 //sfvhdfiuvh
+	
  public LoginStudent() {
 	// TODO Auto-generated constructor stub
 }
@@ -88,7 +81,7 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			new AsyncTask<Void, Void, Void>(){
 
 				ProgressDialog pd;
-				String jsonStr,id11, full_name11,roll_no11, gender11, department11, year11, section11, contactno11, email11, devicetoken11, apiKey11, status11,createdAt11;
+				String jsonStr,id11, full_name11,roll_no11, gender11, department11, year11, section11, contactno11, email11, devicetoken11, apiKey11,profilepicurl11, status11,createdAt11;
 				String value;
 				
 				@Override
@@ -146,6 +139,8 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							try {
 								if(jsonObj.getString("error").equals("false"))
 								{
+									
+								System.out.println("LOgin sucessfull Json parsing stared");
 								
 								id11 = jsonObj.getString("id");
 								  full_name11 = jsonObj.getString("full_name");										
@@ -158,6 +153,7 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 								email11 = jsonObj.getString("email");
 								devicetoken11 = jsonObj.getString("devicetoken");
 								apiKey11 = jsonObj.getString("apiKey");
+								profilepicurl11=jsonObj.getString("profilepicurl");
 								status11 = jsonObj.getString("status");
 								createdAt11 = jsonObj.getString("createdAt");
 								
@@ -172,6 +168,7 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 		                        System.out.println(email11);
 		                        System.out.println(devicetoken11);
 		                        System.out.println(apiKey11);
+		                        System.out.println(profilepicurl11);
 		                        System.out.println(status11);
 		                        System.out.println(createdAt11);
 		                        
@@ -190,9 +187,12 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 		                        IGEFSharedPrefrence.setEMAIL(email11);
 		                        IGEFSharedPrefrence.setDEVICETOKEN(devicetoken11);
 		                        IGEFSharedPrefrence.setAPI_KEY(apiKey11);
+		                        IGEFSharedPrefrence.setAPI_KEY(profilepicurl11);
 		                        IGEFSharedPrefrence.setSTATUS(status11);
 		                        IGEFSharedPrefrence.setCREATEDAT(createdAt11);
 		                        IGEFSharedPrefrence.setPASSWORD(login_password);
+		                        
+ System.out.println("shared preference value" + IGEFSharedPrefrence.getFULL_NAME());
 		                        
 		                        flag=1;
 		                       
@@ -225,7 +225,6 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 								
 
 							} catch (JSONException e) {
-								// TODO Auto-generated catch block
 								e.printStackTrace();
 							}
 							
@@ -260,15 +259,28 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				private void show(int flag) {
 					
 					if(flag==1){
+						
+						if (IGEFSharedPrefrence.getPROFILEPICURL().equals("")){
+							
+							System.out.println("no image in profilepic url --> moving to photoupload activity");
+							
+							Intent intt=new Intent(getActivity(), PhotoUpload.class);
+								getActivity().startActivity(intt);
+								getActivity().finish();
+							
+						}
+						else{						
+						
 						Toast.makeText(getActivity(), "LoginNow Successfull", Toast.LENGTH_SHORT).show();
 						
 						  Intent intt=new Intent(getActivity(), UserScreen.class);
 						getActivity().startActivity(intt);
 						getActivity().finish();
+						}
 					}
 					
 					if(flag==2){
-						Toast.makeText(getActivity(), "LoginNow Failed", Toast.LENGTH_SHORT).show();
+						Toast.makeText(getActivity(), "Login Failed", Toast.LENGTH_SHORT).show();
 
 						
 						
@@ -281,13 +293,13 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 					}
 					
 					if(flag==3){
-						Toast.makeText(getActivity(), "LoginNow Failed", Toast.LENGTH_SHORT).show();
+						Toast.makeText(getActivity(), "Login Failed", Toast.LENGTH_SHORT).show();
 
 						
 						
 						
 		
-						incorrectloginnn.setText("LoginNow Failed, Required fields missing.!!");
+						incorrectloginnn.setText("Login Failed, Required fields missing.!!");
 						incorrectloginnn.setVisibility(View.VISIBLE);
 							
 							System.out.println("Missing credentials.!!");

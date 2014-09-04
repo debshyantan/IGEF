@@ -21,16 +21,12 @@ import org.json.JSONObject;
 import Tool.ConnectionDetector;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.SharedPreferences.Editor;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.NotificationCompat;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
@@ -38,7 +34,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import com.Prefrence.IGEFSharedPrefrence;
-import com.google.android.gms.drive.internal.ad;
 import com.userscreen.UserScreen;
 
 public class StartScreen extends Activity implements AnimationListener{
