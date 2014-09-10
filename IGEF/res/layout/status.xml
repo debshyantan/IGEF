@@ -38,11 +38,11 @@
                 android:orientation="vertical"
                 android:paddingLeft="@dimen/feed_item_profile_info_padd" >
  
-                <com.SocialNetwork.CustomFonts.ProfileTaskFontClass
+                <com.SocialNetwork.CustomFonts.MyProfileFont
                     android:id="@+id/name"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="25sp"
+                    android:textSize="20sp"
                     android:textStyle="bold"
                     android:text="Profile Name" />
  
@@ -56,7 +56,7 @@
             </LinearLayout>
         </LinearLayout>
  
-        <com.SocialNetwork.CustomFonts.FrontPageFontclass
+        <com.SocialNetwork.CustomFonts.NewsFeedFontclass
             android:id="@+id/txtStatusMsg"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -64,8 +64,7 @@
             android:paddingLeft="@dimen/feed_item_status_pad_left_right"
             android:paddingRight="@dimen/feed_item_status_pad_left_right"
             android:paddingTop="@dimen/feed_item_status_pad_top"
-            android:textSize="35sp"
-            android:textStyle="bold"
+            android:textSize="18sp"
             android:text="This is a sample status post.!!" />
  
 

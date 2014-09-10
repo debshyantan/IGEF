@@ -9,7 +9,7 @@ public class NewsFeedFontclass extends TextView{
 	Typeface tt;
 	private void init(Context context) {
 		// TODO Auto-generated method stub
-		tt=Typeface.createFromAsset(context.getAssets(),"newsfeedsfont.ttf");
+		tt=Typeface.createFromAsset(context.getAssets(),"TAHOMA.TTF");
 		setTypeface(tt);
 		
 	}

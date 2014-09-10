@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.SocialNetwork.CustomFonts.FriendsListFontclass;
 import com.SocialNetwork.igef.R;
 
 public class UserTask extends Fragment{
@@ -61,10 +62,10 @@ public class UserTask extends Fragment{
 					getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new ViewMyProfile()).addToBackStack(null).commit();
 		
 				}
-//				if(position==2){
-//					getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new PostStatus()).commit();
-//		
-//				}
+				if(position==3){
+					getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new FriendsList()).addToBackStack(null).commit();
+		
+				}
 				
 				if(position==5){
 					

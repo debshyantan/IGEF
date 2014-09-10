@@ -10,7 +10,7 @@ public class FriendsListFontclass extends TextView{
 	Typeface tt;
 	private void init(Context context) {
 		// TODO Auto-generated method stub
-		tt=Typeface.createFromAsset(context.getAssets(),"friendslistfont.ttf");
+		tt=Typeface.createFromAsset(context.getAssets(),"verdana.ttf");
 		setTypeface(tt);
 		
 	}

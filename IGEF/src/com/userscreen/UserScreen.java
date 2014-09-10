@@ -19,8 +19,11 @@ public class UserScreen extends ActionBarActivity implements ActionBar.TabListen
 	ActionBar actionBar;
 	private ViewPager viewPager;
 	 MyProfilePagerAdapter1 mAdapter;
-//    private int[] tabs = { R.drawable.statusupdates, R.drawable.conversations,R.drawable.friendlist,R.drawable.ic_launcher};
-    private int[] tabs = { R.drawable.statusupdates, R.drawable.friendlist,R.drawable.menutab};
+//    private int[] tabs = { R.drawable.statusupdates, R.drawable.conversations,R.drawable.friendlist,R.drawable.menutab};
+
+    private int[] tabs = { R.drawable.statusupdates, R.drawable.conversations,R.drawable.menutab};
+
+    //    private int[] tabs = { R.drawable.statusupdates, R.drawable.friendlist,R.drawable.menutab};
 
 @Override
 protected void onCreate(Bundle savedInstanceState) {

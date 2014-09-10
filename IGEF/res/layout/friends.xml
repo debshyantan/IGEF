@@ -15,14 +15,14 @@
             android:layout_height="50dp"
             android:src="@drawable/ic_launcher" />
 
-        <com.SocialNetwork.CustomFonts.FrontPageFontclass
+        <com.SocialNetwork.CustomFonts.FriendsListFontclass
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="15dp"
             android:text="Student Name"
-            android:textSize="20sp"
+            android:textSize="25sp"
             android:textStyle="bold" />
 
         <TextView

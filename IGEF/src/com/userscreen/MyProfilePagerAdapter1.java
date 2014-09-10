@@ -17,13 +17,13 @@ public class MyProfilePagerAdapter1 extends FragmentPagerAdapter {
         case 0:
             
             return new Status();
-//        case 1:
-//            
-//            return new Conversation();
-            
         case 1:
-        	
-        	return new FreindsList();
+            
+            return new Conversation();
+            
+//        case 1:
+//        	
+//        	return new FreindsList();
         	
         case 2:
         	
