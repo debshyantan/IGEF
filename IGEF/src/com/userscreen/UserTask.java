@@ -3,10 +3,6 @@ package com.userscreen;
 
 import java.util.ArrayList;
 
-import org.simpleframework.xml.stream.Position;
-
-import com.SocialNetwork.igef.R;
-
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Bundle;
@@ -21,6 +17,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.SocialNetwork.igef.R;
 
 public class UserTask extends Fragment{
 	ListView listView;
@@ -59,10 +57,10 @@ public class UserTask extends Fragment{
 					getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new PostStatus()).addToBackStack(null).commit();
 		
 				}
-//				if(position==1){
-//					getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new PostStatus()).commit();
-//		
-//				}
+				if(position==1){
+					getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new ViewMyProfile()).addToBackStack(null).commit();
+		
+				}
 //				if(position==2){
 //					getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new PostStatus()).commit();
 //		
