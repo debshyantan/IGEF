@@ -1,31 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    <LinearLayout 
+         android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
     <com.SocialNetwork.CustomFonts.RegLoginFontclass
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Enter Your Name :"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:text="Full Name :"
         android:textColor="@color/IGEF_RED"
-        android:textSize="20sp" />
+        android:textSize="20sp" 
+        android:layout_marginTop="10dp"/>
 
     <EditText
         android:id="@+id/newname"
         android:layout_width="match_parent"
-        android:layout_height="20dp" />
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="10dp" />
 
     <com.SocialNetwork.CustomFonts.RegLoginFontclass
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Enter Your Name :"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="10dp"
+        android:text="Email :"
         android:textColor="@color/IGEF_RED"
         android:textSize="20sp" />
 
     <EditText
         android:id="@+id/newemailid"
         android:layout_width="match_parent"
-        android:layout_height="20dp" />
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="10dp" />
 
-</LinearLayout>
+    <com.SocialNetwork.CustomFonts.RegLoginFontclass
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="10dp"
+        android:text="Contact No :"
+        android:textColor="@color/IGEF_RED"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/newcontactno"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="10dp"
+        android:inputType="number"
+        android:maxLength="10" />
+
+    <Button
+        android:id="@+id/updateprofile"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/green"
+        android:text="Update" />
+    </LinearLayout>
+
+</ScrollView>

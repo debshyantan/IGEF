@@ -7,18 +7,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical" >
-        
-        <ImageView android:id="@+id/updateprofile"
+
+        <ImageView
+            android:id="@+id/updateprofile"
             android:layout_width="150dp"
-            android:layout_height="50dp" 
-            android:src="@drawable/updateprofile"/>
+            android:layout_height="50dp"
+            android:src="@drawable/updateprofile" />
 
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
 
             <TableRow
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
 
                 <com.SocialNetwork.CustomFonts.MyProfileBoldFOnt
@@ -42,7 +43,7 @@
             </TableRow>
 
             <TableRow
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
 
                 <com.SocialNetwork.CustomFonts.MyProfileBoldFOnt
@@ -55,7 +56,6 @@
                     android:textColor="@color/IGEF_RED"
                     android:textSize="15sp"
                     android:textStyle="bold" />
-                
 
                 <com.SocialNetwork.CustomFonts.MyProfileFont
                     android:id="@+id/myrollno"
@@ -66,7 +66,7 @@
             </TableRow>
 
             <TableRow
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
 
                 <com.SocialNetwork.CustomFonts.MyProfileBoldFOnt
@@ -87,10 +87,9 @@
                     android:textColor="@color/IGEF_RED"
                     android:textSize="15sp" />
             </TableRow>
-            
-            
-              <TableRow
-                android:layout_width="wrap_content"
+
+            <TableRow
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
 
                 <com.SocialNetwork.CustomFonts.MyProfileBoldFOnt
@@ -100,20 +99,20 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:text="Department : "
+                    android:textColor="@color/IGEF_RED"
                     android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/IGEF_RED" />
+                    android:textStyle="bold" />
 
                 <com.SocialNetwork.CustomFonts.MyProfileFont
                     android:id="@+id/myDepartment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="15sp" 
-                    android:textColor="@color/IGEF_RED" />
+                    android:textColor="@color/IGEF_RED"
+                    android:textSize="15sp" />
             </TableRow>
-            
-               <TableRow
-                android:layout_width="wrap_content"
+
+            <TableRow
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
 
                 <com.SocialNetwork.CustomFonts.MyProfileBoldFOnt
@@ -123,21 +122,21 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:text="Section : "
+                    android:textColor="@color/IGEF_RED"
                     android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/IGEF_RED" />
+                    android:textStyle="bold" />
 
                 <com.SocialNetwork.CustomFonts.MyProfileFont
                     android:id="@+id/myScetion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="15sp" 
-                    android:textColor="@color/IGEF_RED" 
-                    android:textAllCaps="true"/>
+                    android:textAllCaps="true"
+                    android:textColor="@color/IGEF_RED"
+                    android:textSize="15sp" />
             </TableRow>
-            
-                <TableRow
-                android:layout_width="wrap_content"
+
+            <TableRow
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
 
                 <com.SocialNetwork.CustomFonts.MyProfileBoldFOnt
@@ -147,21 +146,40 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:text="Email ID : "
+                    android:textColor="@color/IGEF_RED"
                     android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/IGEF_RED" />
+                    android:textStyle="bold" />
 
                 <com.SocialNetwork.CustomFonts.MyProfileFont
                     android:id="@+id/myEmailID"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="15sp" 
-                    android:textColor="@color/IGEF_RED" />
+                    android:textColor="@color/IGEF_RED"
+                    android:textSize="15sp" />
             </TableRow>
-            
-                
-              
-              
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <com.SocialNetwork.CustomFonts.MyProfileBoldFOnt
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Contact No : "
+                    android:textColor="@color/IGEF_RED"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <com.SocialNetwork.CustomFonts.MyProfileFont
+                    android:id="@+id/myContactno"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/IGEF_RED"
+                    android:textSize="15sp" />
+            </TableRow>
         </TableLayout>
     </LinearLayout>
 

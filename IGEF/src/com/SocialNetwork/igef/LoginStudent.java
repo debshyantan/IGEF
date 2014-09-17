@@ -18,7 +18,6 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -26,8 +25,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -35,12 +34,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.Chat.GCMBroadcastReciever;
-import com.Chat.MainActivity;
 import com.Prefrence.IGEFSharedPrefrence;
-import com.quickblox.core.QBCallback;
-import com.quickblox.core.QBSettings;
-import com.quickblox.core.result.Result;
-import com.quickblox.module.auth.QBAuth;
 import com.userscreen.UserScreen;
 
 public class LoginStudent extends Fragment {
@@ -124,6 +118,9 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			        try {
 			        	
 						value=EntityUtils.toString(response.getEntity());
+						System.out.println(value);
+						
+						
 						
 						jsonStr=value;
 						
@@ -239,7 +236,7 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-			        System.out.println(value);
+			     
 					return null;
 				}
 				@Override

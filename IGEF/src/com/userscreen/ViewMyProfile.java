@@ -1,8 +1,6 @@
 package com.userscreen;
 
 
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -19,7 +17,7 @@ import com.SocialNetwork.igef.R;
 public class ViewMyProfile extends Fragment {
 	
 	MyProfileBoldFOnt myname;
-	MyProfileFont myrollno,myYear, myDepartment,myScetion, myEmailID;
+	MyProfileFont myrollno,myYear, myDepartment,myScetion, myEmailID, myContactno;
 	ImageView updateprofile;
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,6 +41,9 @@ public class ViewMyProfile extends Fragment {
 		
 		myEmailID=(MyProfileFont)rootView.findViewById(R.id.myEmailID);
 		myEmailID.setText(IGEFSharedPrefrence.getEMAIL());
+		
+		myContactno=(MyProfileFont)rootView.findViewById(R.id.myContactno);
+		myContactno.setText(IGEFSharedPrefrence.getCONTACTNO());
 		
 		
 		updateprofile=(ImageView)rootView.findViewById(R.id.updateprofile);

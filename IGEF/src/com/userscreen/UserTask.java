@@ -67,7 +67,7 @@ public class UserTask extends Fragment{
 		
 				}
 				
-				if(position==5){
+				if(position==6){
 					
 					new clearLogouttask(getActivity()).execute();
 				

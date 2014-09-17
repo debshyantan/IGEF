@@ -43,6 +43,7 @@ public class StartScreen extends Activity implements AnimationListener{
 	Editor editor;
 	Boolean isInternetPresent = false;
 	ConnectionDetector cd;
+	String jsonStr,id11, full_name11,roll_no11, gender11, department11, year11, section11, contactno11, email11, devicetoken11, apiKey11,profilepicurl11, status11,createdAt11;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -111,6 +112,9 @@ public class StartScreen extends Activity implements AnimationListener{
 						
 						String jsonStr = value;
 						System.out.println("JSON ARRIVED");
+						System.out.println(value);
+						
+						
 						 if (jsonStr != null) {
 							 JSONObject jsonObj = null;
 							try {
@@ -124,7 +128,61 @@ public class StartScreen extends Activity implements AnimationListener{
 								if(jsonObj.getString("error").equals("false"))
 								{
 		                        flag=1;
-		                        System.out.println("LOgin sucessfull");
+
+								
+								System.out.println("LOgin sucessfull Json parsing stared");
+								
+								id11 = jsonObj.getString("id");
+								full_name11 = jsonObj.getString("full_name");										
+								roll_no11=jsonObj.getString("roll_no");
+								gender11 = jsonObj.getString("gender");
+								department11 = jsonObj.getString("department");
+								year11 = jsonObj.getString("year");
+								section11 = jsonObj.getString("section");
+								contactno11 = jsonObj.getString("contactno");
+								email11 = jsonObj.getString("email");
+								devicetoken11 = jsonObj.getString("devicetoken");
+								apiKey11 = jsonObj.getString("apiKey");
+								profilepicurl11=jsonObj.getString("profilepicurl");
+								status11 = jsonObj.getString("status");
+								createdAt11 = jsonObj.getString("createdAt");
+								
+								System.out.println(id11);
+								System.out.println(full_name11);
+		                        System.out.println(roll_no11);
+		                        System.out.println(gender11);
+		                        System.out.println(department11);
+		                        System.out.println(year11);
+		                        System.out.println(section11);
+		                        System.out.println(contactno11);
+		                        System.out.println(email11);
+		                        System.out.println(devicetoken11);
+		                        System.out.println(apiKey11);
+		                        System.out.println(profilepicurl11);
+		                        System.out.println(status11);
+		                        System.out.println(createdAt11);
+		                        	
+		                        // storing in shared preffrence
+		                        
+		                        final IGEFSharedPrefrence obj = new IGEFSharedPrefrence(StartScreen.this);
+		                        
+		                        
+		                        IGEFSharedPrefrence.setID(id11);
+		                        IGEFSharedPrefrence.setFULL_NAME(full_name11);				                       
+		                        IGEFSharedPrefrence.setGENDER(gender11);
+		                        IGEFSharedPrefrence.setDEPARTMENT(department11);
+		                        IGEFSharedPrefrence.setYEAR(year11);
+		                        IGEFSharedPrefrence.setSECTION(section11);
+		                        IGEFSharedPrefrence.setCONTACTNO(contactno11);
+		                        IGEFSharedPrefrence.setEMAIL(email11);
+		                        IGEFSharedPrefrence.setDEVICETOKEN(devicetoken11);
+		                        IGEFSharedPrefrence.setAPI_KEY(apiKey11);
+		                        IGEFSharedPrefrence.setAPI_KEY(profilepicurl11);
+		                        IGEFSharedPrefrence.setSTATUS(status11);
+		                        IGEFSharedPrefrence.setCREATEDAT(createdAt11);
+		                        
+		                        
+		                        System.out.println("Login sucessfull");
 		                       }											
 								else 
 								{

@@ -75,6 +75,10 @@ public class IgefSocailNetwork extends ActionBarActivity {
 				public void onClick(View v) {
 					Intent intent = new Intent(getActivity(), GettingStarted.class);
 					getActivity().startActivity(intent);
+					getActivity().finish();
+					
+					
+					
 				}
 
 			});
