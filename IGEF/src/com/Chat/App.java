@@ -1,5 +1,12 @@
 package com.Chat;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import android.app.Application;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -11,13 +18,6 @@ import com.parse.PushService;
 import com.quickblox.module.chat.QBChatRoom;
 import com.quickblox.module.users.model.QBUser;
 import com.userscreen.Custom;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class App extends Application {
 

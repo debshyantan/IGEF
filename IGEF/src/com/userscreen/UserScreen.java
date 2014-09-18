@@ -102,20 +102,34 @@ setContentView(R.layout.first);
 }
 //private boolean doubleBackToExitPressedOnce = false;
 
-//@Override
-//public void onBackPressed() {
-//	
-////	super.onBackPressed();
-////	 final boolean doubleBackToExitPressedOnce;
-//
-//	if (doubleBackToExitPressedOnce) {
-//        
-//		System.out.println("2");
-//        Toast.makeText(this, "Press again to exit", Toast.LENGTH_LONG).show();
-//        
-//    	super.onBackPressed();
-//    	
-//    } else {
+@Override
+public void onBackPressed() {
+	
+//	super.onBackPressed();
+//	 final boolean doubleBackToExitPressedOnce;
+
+	if (viewPager.getCurrentItem()>0) {
+		
+		
+		if(getSupportFragmentManager().getBackStackEntryCount()>0){
+			super.onBackPressed();
+			
+		}
+		else {
+			
+			viewPager.setCurrentItem(0);
+//			status.o
+		}
+        
+		
+        
+    	
+    	
+    } else if (viewPager.getCurrentItem()==0) {
+    	super.onBackPressed();
+    }
+		
+//	} {
 //    	System.out.println("You have Pressed back,  Status screen will open");
 //        System.out.println("1");
 //    	
@@ -132,22 +146,9 @@ setContentView(R.layout.first);
 //            	doubleBackToExitPressedOnce = false;
 //            }
 //        }, 2000);
-//    }
-//
-//
-//	
-//	    	 
-//	      
-//	}
-	        
-	        
-	      
-	   
-	
-
-
-
-
+    
+   
+	}
 
 @Override
 public void onTabReselected(Tab arg0, FragmentTransaction arg1) {

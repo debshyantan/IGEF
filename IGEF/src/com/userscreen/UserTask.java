@@ -1,6 +1,5 @@
 package com.userscreen;
 
-
 import java.util.ArrayList;
 
 import android.content.Context;
@@ -18,7 +17,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.SocialNetwork.CustomFonts.FriendsListFontclass;
 import com.SocialNetwork.igef.R;
 
 public class UserTask extends Fragment{
@@ -60,6 +58,10 @@ public class UserTask extends Fragment{
 				}
 				if(position==1){
 					getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new ViewMyProfile()).addToBackStack(null).commit();
+		
+				}
+				if(position==2){
+					getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new MyTimeLine()).addToBackStack(null).commit();
 		
 				}
 				if(position==3){
@@ -115,17 +117,29 @@ public class UserTask extends Fragment{
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-
-			LayoutInflater inflator=(LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			convertView=inflator.inflate(R.layout.drawer_list_item, parent, false);
-			TextView tv = (TextView) convertView.findViewById(R.id.drawer_text);
-			ImageView iv = (ImageView) convertView.findViewById(R.id.drawer_icon);
+			viewholder holder;
 			
-			tv.setText(profileArraylist.get(position).getmMenuTitles());
-			iv.setImageResource(profileArraylist.get(position).getIcon());
+			if (convertView==null) {
+				holder=new viewholder();
+				LayoutInflater inflator=(LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+				convertView=inflator.inflate(R.layout.drawer_list_item, parent, false);
+				holder.tv = (TextView) convertView.findViewById(R.id.drawer_text);
+				holder.iv = (ImageView) convertView.findViewById(R.id.drawer_icon);
+				
+				
+				convertView.setTag(holder);
+			}else {
+				holder=(viewholder)convertView.getTag();
+			}
+			holder.tv.setText(profileArraylist.get(position).getmMenuTitles());
+			holder.iv.setImageResource(profileArraylist.get(position).getIcon());
 			
-			
+						
 			return convertView;
+		}
+		class viewholder{
+			TextView tv;
+			ImageView iv;
 		}
 		
 	}

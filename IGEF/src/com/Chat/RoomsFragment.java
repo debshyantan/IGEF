@@ -1,5 +1,10 @@
 package com.Chat;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -21,11 +26,6 @@ import com.SocialNetwork.igef.R;
 import com.quickblox.module.chat.QBChatRoom;
 import com.quickblox.module.chat.QBChatService;
 import com.quickblox.module.chat.listeners.RoomReceivingListener;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class RoomsFragment extends Fragment implements RoomReceivingListener {
 

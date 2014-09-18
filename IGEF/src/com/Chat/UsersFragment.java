@@ -1,5 +1,10 @@
 package com.Chat;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -19,11 +24,6 @@ import com.quickblox.internal.core.request.QBPagedRequestBuilder;
 import com.quickblox.module.users.QBUsers;
 import com.quickblox.module.users.model.QBUser;
 import com.quickblox.module.users.result.QBUserPagedResult;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class UsersFragment extends Fragment implements QBCallback {
 

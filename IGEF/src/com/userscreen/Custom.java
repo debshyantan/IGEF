@@ -3,6 +3,39 @@ package com.userscreen;
 public class Custom {
 
 	String name,status,timestamp, friendname, roll_no;
+	String myname,mystatus,mytimestamp,mystatus_id;
+
+	public String getMyname() {
+		return myname;
+	}
+
+	public void setMyname(String myname) {
+		this.myname = myname;
+	}
+
+	public String getMystatus() {
+		return mystatus;
+	}
+
+	public void setMystatus(String mystatus) {
+		this.mystatus = mystatus;
+	}
+
+	public String getMytimestamp() {
+		return mytimestamp;
+	}
+
+	public void setMytimestamp(String mytimestamp) {
+		this.mytimestamp = mytimestamp;
+	}
+
+	public String getMystatus_id() {
+		return mystatus_id;
+	}
+
+	public void setMystatus_id(String mystatus_id) {
+		this.mystatus_id = mystatus_id;
+	}
 
 	public String getTimestamp() {
 		return timestamp;

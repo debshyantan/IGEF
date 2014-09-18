@@ -15,14 +15,17 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
-
-import com.Prefrence.IGEFSharedPrefrence;
-import com.SocialNetwork.igef.IgefSocailNetwork;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.support.v4.app.FragmentActivity;
 
+import com.Prefrence.IGEFSharedPrefrence;
+import com.SocialNetwork.igef.R;
+import com.userscreen.UserTask;
+	
 public class UpdateProfileAsyncTask extends AsyncTask<Void, Void, Void> {
 	ProgressDialog pd;
 	String newnam;
@@ -31,6 +34,7 @@ public class UpdateProfileAsyncTask extends AsyncTask<Void, Void, Void> {
 	String value;
 	String contactno;
 	FragmentActivity activity;
+	Status obj;
 	
 	public UpdateProfileAsyncTask(String newnam, String newemail
 			, String contactno, FragmentActivity activity) {
@@ -54,6 +58,7 @@ public class UpdateProfileAsyncTask extends AsyncTask<Void, Void, Void> {
 		pd.setMessage("Updating Your Profile...");
 		pd.setCancelable(false);
 		pd.show();
+	
 
 	}
 
@@ -83,9 +88,6 @@ public class UpdateProfileAsyncTask extends AsyncTask<Void, Void, Void> {
         // Execute HTTP Post Request
         HttpResponse response = null;
 		try {
-			
-			System.out.println("http post executed");
-		
 			response = httpclient.execute(httppost);
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
@@ -98,12 +100,32 @@ public class UpdateProfileAsyncTask extends AsyncTask<Void, Void, Void> {
         try {
         	
 			value=EntityUtils.toString(response.getEntity());
-		
-        
-        } catch (ParseException e) {
+			
+			if (value!=null) {
+				JSONObject jsonobj=new JSONObject(value);
+				if (jsonobj.getString("error").equals("false")) {
+					
+					
+					System.out.println("Updated the profile sucessfully");
+					
+					IGEFSharedPrefrence obj=new IGEFSharedPrefrence(activity);
+					
+					IGEFSharedPrefrence.setFULL_NAME(newnam);
+					IGEFSharedPrefrence.setEMAIL(newemail);
+					IGEFSharedPrefrence.setCONTACTNO(contactno);
+					
+					
+					
+				}
+				
+			}
+		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -117,9 +139,25 @@ public class UpdateProfileAsyncTask extends AsyncTask<Void, Void, Void> {
 		// TODO Auto-generated method stub
 		super.onPostExecute(result);
 		pd.dismiss();
+	
 		
+				activity.runOnUiThread(new Runnable() {
+					
+					@Override
+					public void run() {
+						
+						com.userscreen.Status.showstatus();
+						
+					}
+				});
+					
+					
+		
+		activity.getSupportFragmentManager().beginTransaction().replace(R.id.container, new UserTask()).commit();
 	
 
+		
+		
 	}
 
 }

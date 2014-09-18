@@ -1,5 +1,10 @@
 package com.Chat;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.jivesoftware.smack.ConnectionListener;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,11 +21,6 @@ import android.widget.Toast;
 import com.SocialNetwork.igef.R;
 import com.quickblox.module.chat.QBChatService;
 import com.quickblox.module.users.model.QBUser;
-
-import org.jivesoftware.smack.ConnectionListener;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends ActionBarActivity implements ActionBar.TabListener {
 

@@ -1,14 +1,5 @@
 package com.Chat;
 
-import com.SocialNetwork.igef.R;
-import com.quickblox.core.QBCallback;
-import com.quickblox.core.result.Result;
-import com.quickblox.internal.core.helper.StringifyArrayList;
-import com.quickblox.module.messages.QBMessages;
-import com.quickblox.module.messages.model.QBEnvironment;
-import com.quickblox.module.messages.model.QBEvent;
-import com.quickblox.module.messages.model.QBNotificationType;
-
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -17,6 +8,15 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+
+import com.SocialNetwork.igef.R;
+import com.quickblox.core.QBCallback;
+import com.quickblox.core.result.Result;
+import com.quickblox.internal.core.helper.StringifyArrayList;
+import com.quickblox.module.messages.QBMessages;
+import com.quickblox.module.messages.model.QBEnvironment;
+import com.quickblox.module.messages.model.QBEvent;
+import com.quickblox.module.messages.model.QBNotificationType;
 
 public class MessagesActivity extends Activity {
 

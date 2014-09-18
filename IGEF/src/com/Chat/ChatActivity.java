@@ -1,5 +1,11 @@
 package com.Chat;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
+import org.jivesoftware.smack.XMPPException;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -13,16 +19,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-
-
-
-import org.jivesoftware.smack.XMPPException;
-
 import com.SocialNetwork.igef.R;
-
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
 
 public class ChatActivity extends Activity {
 

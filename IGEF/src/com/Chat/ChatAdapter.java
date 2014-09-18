@@ -1,5 +1,8 @@
 package com.Chat;
 
+import java.util.Date;
+import java.util.List;
+
 import android.content.Context;
 import android.text.format.DateFormat;
 import android.view.Gravity;
@@ -10,12 +13,6 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-
-
-
-import java.util.Date;
-import java.util.List;
 
 import com.SocialNetwork.igef.R;
 

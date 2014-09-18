@@ -1,14 +1,13 @@
 package com.Chat;
 
-import com.quickblox.module.chat.QBChatService;
-import com.quickblox.module.chat.listeners.ChatMessageListener;
-import com.quickblox.module.chat.xmpp.QBPrivateChat;
-
+import java.util.Calendar;
 
 import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.packet.Message;
 
-import java.util.Calendar;
+import com.quickblox.module.chat.QBChatService;
+import com.quickblox.module.chat.listeners.ChatMessageListener;
+import com.quickblox.module.chat.xmpp.QBPrivateChat;
 
 public class SingleChat implements Chat, ChatMessageListener {
 

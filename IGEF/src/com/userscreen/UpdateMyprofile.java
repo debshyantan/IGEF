@@ -1,8 +1,5 @@
 package com.userscreen;
 
-import com.Prefrence.IGEFSharedPrefrence;
-import com.SocialNetwork.igef.R;
-import com.SocialNewtwork.AsyncTask.UpdateProfileAsyncTask;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,6 +10,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.Prefrence.IGEFSharedPrefrence;
+import com.SocialNetwork.igef.R;
+import com.SocialNewtwork.AsyncTask.UpdateProfileAsyncTask;
 
 public class UpdateMyprofile extends Fragment {
 
@@ -47,8 +48,8 @@ public class UpdateMyprofile extends Fragment {
 
 				if (!newname.equals("") && !newemailid.equals("") &&  !newcontact.equals("") ) {
 					new UpdateProfileAsyncTask(newnam, newemail, newcontact, getActivity()).execute();
+					
 
-				
 				}
 
 				else {
