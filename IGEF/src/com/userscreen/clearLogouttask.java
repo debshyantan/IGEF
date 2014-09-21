@@ -2,6 +2,7 @@ package com.userscreen;
 
 import java.io.File;
 
+import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
@@ -20,6 +21,8 @@ public class clearLogouttask extends  AsyncTask<Void, Void, Void>{
 		// TODO Auto-generated constructor stub
 		this.activity=activity2;
 	}
+
+
 
 
 

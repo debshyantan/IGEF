@@ -14,8 +14,10 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -47,6 +49,7 @@ public class PhotoUpload extends Activity {
 	private static final int ROTATE_NINETY_DEGREES = 90;
 	Bitmap croppedImage;
 
+	ProgressDialog pd;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -122,6 +125,7 @@ public class PhotoUpload extends Activity {
 			@Override
 			public void onClick(View v) {
 				
+				
 				croppedImage = cropImageView.getCroppedImage();
 
 				croppedImageView.setImageBitmap(croppedImage);
@@ -146,8 +150,12 @@ public class PhotoUpload extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				
-				
+//				
+//				pd=new ProgressDialog(PhotoUpload.this);
+//				pd.setTitle("Uploading Photo");
+//				pd.setMessage("Wait While we Upload Your Photo...");
+//				pd.show();
+			
 
 	            BitmapDrawable drawable = (BitmapDrawable) croppedImageView.getDrawable();
 	            Bitmap bitmap = drawable.getBitmap();
@@ -155,7 +163,6 @@ public class PhotoUpload extends Activity {
 	            
 	            
 	            
-//	            Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.id.iconsss);  
 	            ByteArrayOutputStream stream = new ByteArrayOutputStream();
 	            bitmap.compress(Bitmap.CompressFormat.PNG, 90, stream);
 	            //compress to which format you want.
@@ -174,6 +181,7 @@ public class PhotoUpload extends Activity {
 	                         HttpPost httppost = new HttpPost("http://shypal.com/IGEF/task_manager/uploadedimages/imageupload.php");
 	                         httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 	                         HttpResponse response = httpclient.execute(httppost);
+	                         
 	                         final String the_string_response = convertResponseToString(response);
 	                         runOnUiThread(new Runnable() {
 	                                 
@@ -181,7 +189,12 @@ public class PhotoUpload extends Activity {
 	                                public void run() {
 	                                	Toast.makeText(PhotoUpload.this, "Response " + the_string_response, Toast.LENGTH_LONG).show();                          
 	                                    
-	                              
+	                                	Intent i = new Intent(PhotoUpload.this, UserScreen.class);
+	                    				startActivity(i);
+	                    				finish();
+	                                	
+	                                	
+	                                	
 	                                }
 	                            });
 	                          
@@ -203,16 +216,6 @@ public class PhotoUpload extends Activity {
 				
 				
 					
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
 				
 				
 				
@@ -304,7 +307,10 @@ public class PhotoUpload extends Activity {
                   Toast.makeText(PhotoUpload.this, "Result : " + buffer.toString()  , Toast.LENGTH_LONG).show();
                }
            });
-               //System.out.println("Response => " +  EntityUtils.toString(response.getEntity()));
+               
+               System.out.println("Response => " +  EntityUtils.toString(response.getEntity()));
+               
+//               pd.dismiss();
         }
         return res;
    }

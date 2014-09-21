@@ -35,6 +35,7 @@ import android.widget.TextView;
 
 import com.Prefrence.IGEFSharedPrefrence;
 import com.userscreen.UserScreen;
+import com.userscreen.clearLogouttask;
 
 public class StartScreen extends Activity implements AnimationListener{
 	//ImageView spinn;
@@ -232,6 +233,19 @@ public class StartScreen extends Activity implements AnimationListener{
 					
 					
 					if(flag==2){	
+						
+						IGEFSharedPrefrence.setROLL_NO("");
+						IGEFSharedPrefrence.setPASSWORD("");
+						IGEFSharedPrefrence.setFULL_NAME("");
+						IGEFSharedPrefrence.setEMAIL("");
+						IGEFSharedPrefrence.setPROFILEPICURL("");;
+						IGEFSharedPrefrence.setID("");
+						IGEFSharedPrefrence.setCREATEDAT("");
+						IGEFSharedPrefrence.setDEPARTMENT("");
+						IGEFSharedPrefrence.setDEVICETOKEN("");
+						IGEFSharedPrefrence.setGENDER("");
+						IGEFSharedPrefrence.setAPI_KEY("");
+						IGEFSharedPrefrence.setSTATUS("");
 						
 						System.out.println("Wrong ID password Moveing to Login Screen");
 						Intent i2=new Intent(getApplicationContext(), LoginStudent.class);
