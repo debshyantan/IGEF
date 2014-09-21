@@ -1798,7 +1798,7 @@ containing a value of this type.
         public static final int write_post=0x7f0200be;
     }
     public static final class id {
-        public static final int CropImageView=0x7f050097;
+        public static final int CropImageView=0x7f050098;
         public static final int CropOverlayView=0x7f05006f;
         public static final int ImageView_image=0x7f05006e;
         public static final int action_add=0x7f0500cc;
@@ -1827,7 +1827,7 @@ containing a value of this type.
         public static final int buyButton=0x7f05002e;
         public static final int buy_now=0x7f050033;
         public static final int buy_with_google=0x7f050032;
-        public static final int camera=0x7f05009a;
+        public static final int camera=0x7f05009c;
         public static final int chat=0x7f050076;
         public static final int chatSendButton=0x7f05005f;
         public static final int checkbox=0x7f05004e;
@@ -1838,9 +1838,8 @@ containing a value of this type.
         public static final int container=0x7f05005d;
         public static final int content=0x7f050080;
         public static final int contentWithBackground=0x7f050082;
-        public static final int crop=0x7f05009c;
-        public static final int cropedphoto=0x7f0500a0;
-        public static final int croppedrow=0x7f05009f;
+        public static final int crop=0x7f05009e;
+        public static final int cropedphoto=0x7f050099;
         public static final int default_activity_button=0x7f050049;
         public static final int delete=0x7f050090;
         public static final int departmentselector=0x7f0500af;
@@ -1852,7 +1851,7 @@ containing a value of this type.
         public static final int dropdown=0x7f05000f;
         public static final int econtactno=0x7f0500b6;
         public static final int edit_query=0x7f050051;
-        public static final int editorrow=0x7f05009b;
+        public static final int editorrow=0x7f05009d;
         public static final int eemailid=0x7f0500b8;
         public static final int emailid=0x7f0500b7;
         public static final int end=0x7f050013;
@@ -1864,10 +1863,11 @@ containing a value of this type.
         public static final int feedImage1=0x7f050094;
         public static final int fl_inner=0x7f0500a4;
         public static final int flip=0x7f050022;
-        public static final int gallery=0x7f050099;
+        public static final int gallery=0x7f05009b;
         public static final int gender=0x7f0500ab;
         public static final int grayscale=0x7f050036;
         public static final int gridview=0x7f050023;
+        public static final int hideit=0x7f050097;
         public static final int holo_dark=0x7f050029;
         public static final int holo_light=0x7f05002a;
         public static final int home=0x7f050014;
@@ -1921,7 +1921,7 @@ containing a value of this type.
         public static final int onTouch=0x7f050039;
         public static final int pager=0x7f050067;
         public static final int passwordEdit=0x7f050065;
-        public static final int photochooserrow=0x7f050098;
+        public static final int photochooserrow=0x7f05009a;
         public static final int post=0x7f0500a2;
         public static final int production=0x7f05002b;
         public static final int profilePic=0x7f050091;
@@ -1991,8 +1991,8 @@ containing a value of this type.
         public static final int txtStatusMsg=0x7f050093;
         public static final int up=0x7f050042;
         public static final int updateprofile=0x7f0500c0;
-        public static final int uploadphoto=0x7f05009e;
-        public static final int uploadrow=0x7f05009d;
+        public static final int uploadphoto=0x7f0500a0;
+        public static final int uploadrow=0x7f05009f;
         public static final int useLogo=0x7f050003;
         public static final int userLogin=0x7f050085;
         public static final int username1=0x7f0500b9;

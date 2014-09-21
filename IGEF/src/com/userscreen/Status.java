@@ -393,6 +393,10 @@ public class Status extends Fragment {
 
 
 	public static void showstatus() {
+		
+		System.out.println("------refreshing status started------");
+		
+		
 		   new AsyncTask<Void, Void, Void>() {
 //		    	ProgressDialog pd;
 		    	String value;

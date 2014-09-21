@@ -51,6 +51,9 @@ public class ViewMyProfile extends Fragment {
 			
 			@Override
 			public void onClick(View arg0) {
+				
+//				getActivity().getSupportFragmentManager().popBackStack();
+				
 				getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new UpdateMyprofile()).commit();
 				
 			}

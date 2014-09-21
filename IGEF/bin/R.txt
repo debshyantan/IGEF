@@ -477,7 +477,7 @@ int drawable updateprofile 0x7f0200bb
 int drawable uploadicon 0x7f0200bc
 int drawable view_profile 0x7f0200bd
 int drawable write_post 0x7f0200be
-int id CropImageView 0x7f050097
+int id CropImageView 0x7f050098
 int id CropOverlayView 0x7f05006f
 int id ImageView_image 0x7f05006e
 int id action_add 0x7f0500cc
@@ -506,7 +506,7 @@ int id btn 0x7f050079
 int id buyButton 0x7f05002e
 int id buy_now 0x7f050033
 int id buy_with_google 0x7f050032
-int id camera 0x7f05009a
+int id camera 0x7f05009c
 int id chat 0x7f050076
 int id chatSendButton 0x7f05005f
 int id checkbox 0x7f05004e
@@ -517,9 +517,8 @@ int id contactno 0x7f0500b5
 int id container 0x7f05005d
 int id content 0x7f050080
 int id contentWithBackground 0x7f050082
-int id crop 0x7f05009c
-int id cropedphoto 0x7f0500a0
-int id croppedrow 0x7f05009f
+int id crop 0x7f05009e
+int id cropedphoto 0x7f050099
 int id default_activity_button 0x7f050049
 int id delete 0x7f050090
 int id departmentselector 0x7f0500af
@@ -531,7 +530,7 @@ int id drawer_text 0x7f050072
 int id dropdown 0x7f05000f
 int id econtactno 0x7f0500b6
 int id edit_query 0x7f050051
-int id editorrow 0x7f05009b
+int id editorrow 0x7f05009d
 int id eemailid 0x7f0500b8
 int id emailid 0x7f0500b7
 int id end 0x7f050013
@@ -543,10 +542,11 @@ int id expanded_menu 0x7f05004d
 int id feedImage1 0x7f050094
 int id fl_inner 0x7f0500a4
 int id flip 0x7f050022
-int id gallery 0x7f050099
+int id gallery 0x7f05009b
 int id gender 0x7f0500ab
 int id grayscale 0x7f050036
 int id gridview 0x7f050023
+int id hideit 0x7f050097
 int id holo_dark 0x7f050029
 int id holo_light 0x7f05002a
 int id home 0x7f050014
@@ -600,7 +600,7 @@ int id on 0x7f050038
 int id onTouch 0x7f050039
 int id pager 0x7f050067
 int id passwordEdit 0x7f050065
-int id photochooserrow 0x7f050098
+int id photochooserrow 0x7f05009a
 int id post 0x7f0500a2
 int id production 0x7f05002b
 int id profilePic 0x7f050091
@@ -670,8 +670,8 @@ int id txtMessage 0x7f050083
 int id txtStatusMsg 0x7f050093
 int id up 0x7f050042
 int id updateprofile 0x7f0500c0
-int id uploadphoto 0x7f05009e
-int id uploadrow 0x7f05009d
+int id uploadphoto 0x7f0500a0
+int id uploadrow 0x7f05009f
 int id useLogo 0x7f050003
 int id userLogin 0x7f050085
 int id username1 0x7f0500b9

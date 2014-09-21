@@ -23,8 +23,6 @@ import android.os.AsyncTask;
 import android.support.v4.app.FragmentActivity;
 
 import com.Prefrence.IGEFSharedPrefrence;
-import com.SocialNetwork.igef.R;
-import com.userscreen.UserTask;
 	
 public class UpdateProfileAsyncTask extends AsyncTask<Void, Void, Void> {
 	ProgressDialog pd;
@@ -147,13 +145,13 @@ public class UpdateProfileAsyncTask extends AsyncTask<Void, Void, Void> {
 					public void run() {
 						
 						com.userscreen.Status.showstatus();
-						
+						activity.getSupportFragmentManager().popBackStack();
 					}
 				});
 					
 					
 		
-		activity.getSupportFragmentManager().beginTransaction().replace(R.id.container, new UserTask()).commit();
+//		activity.getSupportFragmentManager().beginTransaction().replace(R.id.container, new UserTask()).commit();
 	
 
 		

@@ -162,7 +162,9 @@ public class PostStatus extends Fragment {
 					@Override
 					protected void onPostExecute(Void result) {
 						pd.dismiss();
+						getActivity().getSupportFragmentManager().popBackStack();
 						
+						com.userscreen.Status.showstatus();
 						
 						
 					};
