@@ -65,8 +65,11 @@ public class UserTask extends Fragment{
 		
 				}
 				if(position==3){
-					getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new FriendsList()).addToBackStack(null).commit();
+//					getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new FriendsList()).addToBackStack(null).commit();
 		
+					new Conversation();
+					
+					
 				}
 				
 				if(position==6){

@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 import java.util.TimeZone;
 
 import org.apache.http.HttpResponse;
@@ -23,6 +24,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -328,13 +330,15 @@ public class Status extends Fragment {
 
 
 	class MyAdapter extends BaseAdapter {
-
+		private TypedArray statusphoto ;
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			// TODO Auto-generated method stub
 			LayoutInflater inflater = (LayoutInflater) getActivity()
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			convertView = inflater.inflate(R.layout.status, parent, false);
+			statusphoto = getResources().obtainTypedArray(R.array.status_photos);
+
 			profile_iv = (ImageView) convertView.findViewById(R.id.profilePic);
 			name = (TextView) convertView.findViewById(R.id.name);
 			timestamp = (TextView) convertView.findViewById(R.id.timestamp);
@@ -342,7 +346,10 @@ public class Status extends Fragment {
 
 			status_iv = (ImageView) convertView.findViewById(R.id.feedImage1);
 			profile_iv.setImageResource(R.drawable.ic_launcher);
-			status_iv.setImageResource(R.drawable.adminblock);
+			
+			Random r= new Random();
+			status_iv.setImageResource(statusphoto.getResourceId(r.nextInt(8), 1));
+//			status_iv.setImageResource(R.drawable.adminblock);
 			name.setText(statuslist.get(position).name);
 			timestamp.setText(parseDate(position));
 			status.setText(statuslist.get(position).status);

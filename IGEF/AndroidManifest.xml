@@ -98,6 +98,7 @@
         
         <activity android:name="com.Chat.MessagesActivity"></activity>
         <activity android:name="com.SocialNetwork.igef.PhotoUpload"></activity>
+        <activity android:name="com.userscreen.Conversation"></activity>
         
      <meta-data android:name="com.google.android.gms.version" 
          android:value="@integer/google_play_services_version" /> 

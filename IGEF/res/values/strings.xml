@@ -40,10 +40,11 @@
         <item >Post Status</item>
         <item >View Profile</item>
         <item >View Timeline</item>
-         <item >My Classmates</item>
+       <!--    <item >My Classmates</item>--> 
+        <item >Conversation</item>
         <item >College Updates</item>
         <item >Assignments</item>
-       <!--  <item >Update Profile</item> --> 
+        <item >Update Profile</item> --> 
         <item >Logout</item>
     </string-array>
      
@@ -53,7 +54,7 @@
         <item>@drawable/write_post</item>
         <item>@drawable/view_profile</item>
         <item>@drawable/timeline</item>
-        <item>@drawable/friendlist</item>
+        <item>@drawable/conversations</item>
         <item>@drawable/college_updates</item>
         <item>@drawable/assignments</item>
         <item>@drawable/logout</item>
@@ -61,6 +62,18 @@
      
     <!-- Content Description -->
     <string name="desc_list_item_icon">Item Icon</string>
+    
+    
+    <array name="status_photos">
+        <item>@drawable/clga</item>
+        <item>@drawable/clgb</item>
+        <item>@drawable/clgc</item>
+        <item>@drawable/clgd</item>
+        <item>@drawable/clge</item>
+        <item>@drawable/clgf</item>
+        <item>@drawable/clgg</item>
+        <item>@drawable/clgh</item>
+    </array> 
     
     
     
