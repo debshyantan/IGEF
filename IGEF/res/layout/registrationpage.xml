@@ -223,7 +223,7 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginTop="5dp"
-            android:hint="Enter Password"
+            android:hint="Enter Password (min. length 8)"
             android:inputType="textPassword" />
 
         <Button

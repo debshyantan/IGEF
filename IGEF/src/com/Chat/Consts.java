@@ -2,7 +2,7 @@ package com.Chat;
 
 public class Consts {
 
-	 public static final int APP_ID = 13032;
+	 public static final String APP_ID = "13032";
 	    public static final String AUTH_KEY = "rQHh7DVeAbrOPmn";
 	    public static final String AUTH_SECRET = "5XXkbUK9pBg8L9c";
 	    public static final String USER_LOGIN = "IGEF_networks";

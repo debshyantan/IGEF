@@ -22,16 +22,25 @@ public class IGEFSharedPrefrence {
 	static String PROFILEPICURL = "profilepicurl";
 	static String STATUS = "status";
 	static String CREATEDAT = "createdAt";
+	static String USERNAME = "username";
 	
 	
 	
 
 	
+
+
 	public IGEFSharedPrefrence(Context ctx) {
 		prefobj = ctx
 				.getSharedPreferences("IGEFSharedPrefrence", Context.MODE_PRIVATE);
 
 	}
+	public static String getUSERNAME() {
+		return prefobj.getString(USERNAME, "");
+	}
+
+	public static void setUSERNAME(String uSERNAME) {
+		prefobj.edit().putString(USERNAME, uSERNAME).commit();	}
 
 	public static String getID() {
 		return prefobj.getString(ID, "");

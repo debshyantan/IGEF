@@ -16,6 +16,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -30,6 +31,14 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 
+import com.quickblox.core.QBCallback;
+import com.quickblox.core.result.Result;
+import com.quickblox.module.chat.QBChatService;
+import com.quickblox.module.chat.listeners.SessionCallback;
+import com.quickblox.module.chat.smack.SmackAndroid;
+import com.quickblox.module.users.QBUsers;
+import com.quickblox.module.users.model.QBUser;
+
 public class Register extends Fragment {
 	static EditText name, roll, contact, email, password;
 	static RadioGroup rdg_g;
@@ -37,7 +46,8 @@ public class Register extends Fragment {
 	static RadioButton rb1, rb2;
 	static Spinner branchSpinner, year;
 	static Button submit;
-
+	private QBUser user;
+    private SmackAndroid smackAndroid;
 	static String d_name, d_roll, d_dept, d_year, d_contact, d_gender, d_email,
 			d_password, d_section;
 
@@ -68,7 +78,7 @@ public class Register extends Fragment {
 			password = (EditText) rootView.findViewById(R.id.epassword);
 
 			// new commit
-
+			smackAndroid = SmackAndroid.init(getActivity());
 			submit.setOnClickListener(new OnClickListener() {
 
 				@Override
@@ -166,7 +176,7 @@ public class Register extends Fragment {
 						protected void onPostExecute(Void result) {
 							pd.dismiss();
 
-							
+							user = new QBUser(d_roll, d_password);
 							name.setText(null);
 							roll.setText(null);
 							contact.setText(null);
@@ -174,7 +184,45 @@ public class Register extends Fragment {
 							password.setText(null);
 							System.out.println("" + value);
 							
-							GettingStarted.replace(getActivity(),1);
+							QBUsers.signUpSignInTask(user, new QBCallback() {
+								
+								@Override
+								public void onComplete(Result arg0, Object arg1) {
+									// TODO Auto-generated method stub
+									
+								}
+								@Override
+								public void onComplete(Result result) {
+									// TODO Auto-generated method stub
+									 if (result.isSuccess()) {
+								            ((com.Chat.App) getActivity().getApplication()).setQbUser(user);
+								       
+								            QBChatService.getInstance().loginWithUser(user, new SessionCallback() {
+								                @Override
+								                public void onLoginSuccess() {
+								                    if (pd != null) {
+								                        pd.dismiss();
+														getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new LoginStudent()).commit();
+
+								                    }
+								                
+								                }
+												@Override
+												public void onLoginError(String error) {
+													// TODO Auto-generated method stub
+													
+												}
+												  
+								                });
+								            }
+									 else {
+								                AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
+								                dialog.setMessage("Error(s) occurred... " +"\n"+
+								                        "Errors: " + result.getErrors()).create().show();
+								            }
+									
+								}
+							});
 							
 							
 							
@@ -188,5 +236,11 @@ public class Register extends Fragment {
 	
 
 		return rootView;
+	}
+	@Override
+	public void onDestroy() {
+		// TODO Auto-generated method stub
+		smackAndroid.onDestroy();
+		super.onDestroy();
 	}
 }

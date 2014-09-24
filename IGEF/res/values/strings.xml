@@ -41,10 +41,10 @@
         <item >View Profile</item>
         <item >View Timeline</item>
        <!--    <item >My Classmates</item>--> 
-        <item >Conversation</item>
-        <item >College Updates</item>
-        <item >Assignments</item>
-        <item >Update Profile</item> --> 
+        <item >Start Conversation</item>
+         <item >College Updates</item>
+        ,<item >Assignments</item>
+   <!--      <item >Update Profile</item> --> 
         <item >Logout</item>
     </string-array>
      

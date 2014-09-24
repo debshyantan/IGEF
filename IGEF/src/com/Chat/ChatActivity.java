@@ -69,11 +69,7 @@ public class ChatActivity extends Activity {
         Intent intent = getIntent();
         mode = (Mode) intent.getSerializableExtra(EXTRA_MODE);
         switch (mode) {
-            case GROUP:
-                chat = new RoomChat(this);
-                container.removeView(meLabel);
-                container.removeView(companionLabel);
-                break;
+           
             case SINGLE:
                 chat = new SingleChat(this);
                 int userId = intent.getIntExtra(SingleChat.EXTRA_USER_ID, 0);
@@ -134,5 +130,5 @@ public class ChatActivity extends Activity {
         messagesContainer.setSelection(messagesContainer.getCount() - 1);
     }
 
-    public static enum Mode {SINGLE, GROUP}
+    public static enum Mode {SINGLE}
 }

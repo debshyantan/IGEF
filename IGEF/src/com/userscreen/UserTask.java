@@ -3,6 +3,7 @@ package com.userscreen;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -17,7 +18,9 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.Chat.contactlist;
 import com.SocialNetwork.igef.R;
+
 
 public class UserTask extends Fragment{
 	ListView listView;
@@ -62,13 +65,12 @@ public class UserTask extends Fragment{
 				}
 				if(position==2){
 					getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new MyTimeLine()).addToBackStack(null).commit();
-		
+	
 				}
 				if(position==3){
-//					getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new FriendsList()).addToBackStack(null).commit();
-		
-					new Conversation();
-					
+
+					Intent intent=new Intent(getActivity(),contactlist.class);
+				       getActivity().startActivity(intent);
 					
 				}
 				
