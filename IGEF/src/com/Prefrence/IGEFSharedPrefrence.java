@@ -20,6 +20,7 @@ public class IGEFSharedPrefrence {
 	static String PASSWORD = "password";
 	static String API_KEY = "api_key";
 	static String PROFILEPICURL = "profilepicurl";
+	static String COVERPHOTO = "coverphoto";
 	static String STATUS = "status";
 	static String CREATEDAT = "createdAt";
 	static String USERNAME = "username";
@@ -144,6 +145,13 @@ public class IGEFSharedPrefrence {
 	public static void setPROFILEPICURL(String pROFILEPICURL) {
 		prefobj.edit().putString(PROFILEPICURL, pROFILEPICURL).commit();
 		
+	}
+	
+	public static String getCOVERPHOTO() {
+		return prefobj.getString(COVERPHOTO, "");
+	}
+	public static void setCOVERPHOTO(String cOVERPHOTO) {
+		prefobj.edit().putString(COVERPHOTO, cOVERPHOTO).commit();
 	}
 
 

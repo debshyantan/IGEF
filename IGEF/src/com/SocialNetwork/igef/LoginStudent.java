@@ -15,11 +15,9 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
-import org.jivesoftware.smack.ConnectionListener;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -36,13 +34,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.Prefrence.IGEFSharedPrefrence;
-import com.quickblox.core.QBCallback;
-import com.quickblox.core.result.Result;
-import com.quickblox.module.chat.QBChatService;
-import com.quickblox.module.chat.listeners.SessionCallback;
-import com.quickblox.module.chat.smack.SmackAndroid;
-import com.quickblox.module.users.QBUsers;
-import com.quickblox.module.users.model.QBUser;
 import com.userscreen.UserScreen;
 
 public class LoginStudent extends Fragment {
@@ -51,12 +42,10 @@ public class LoginStudent extends Fragment {
 	 String login_password,login_roll_no;
 	 TextView incorrectloginnn;
 	 int flag=0;
-	 private QBUser user;
-	    private SmackAndroid smackAndroid;
+
 	 private static final String APP_ID = "13032";
 	    private static final String AUTH_KEY = "rQHh7DVeAbrOPmn";
 	    private static final String AUTH_SECRET = "5XXkbUK9pBg8L9c";
-	    
 	    private static ProgressBar progressBar;
 	
  public LoginStudent() {
@@ -74,6 +63,7 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 		password1=(EditText)rootView.findViewById(R.id.loginpassword);
 		login=(Button)rootView.findViewById(R.id.login);
 		
+		
 		login.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -81,12 +71,10 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				
 			login_roll_no=	rollno1.getText().toString();
 			 login_password= password1.getText().toString();
-			 smackAndroid = SmackAndroid.init(getActivity());
-			 user = new QBUser(login_roll_no, login_password);
 			new AsyncTask<Void, Void, Void>(){
 
 				ProgressDialog pd;
-				String jsonStr,id11, full_name11,roll_no11, gender11, department11, year11, section11, contactno11, email11, devicetoken11, apiKey11,profilepicurl11, status11,createdAt11;
+				String jsonStr,id11, full_name11,roll_no11, gender11, department11, year11, section11, contactno11, email11, devicetoken11, apiKey11,profilepicurl11, coverphoto11, status11,createdAt11;
 				String value;
 				
 				@Override
@@ -162,6 +150,7 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 								devicetoken11 = jsonObj.getString("devicetoken");
 								apiKey11 = jsonObj.getString("apiKey");
 								profilepicurl11=jsonObj.getString("profilepicurl");
+								coverphoto11=jsonObj.getString("coverphoto");
 								status11 = jsonObj.getString("status");
 								createdAt11 = jsonObj.getString("createdAt");
 								
@@ -195,13 +184,13 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 		                        IGEFSharedPrefrence.setEMAIL(email11);
 		                        IGEFSharedPrefrence.setDEVICETOKEN(devicetoken11);
 		                        IGEFSharedPrefrence.setAPI_KEY(apiKey11);
-		                        IGEFSharedPrefrence.setAPI_KEY(profilepicurl11);
+		                        IGEFSharedPrefrence.setPROFILEPICURL(profilepicurl11);
+		                        IGEFSharedPrefrence.setCOVERPHOTO(coverphoto11);
 		                        IGEFSharedPrefrence.setSTATUS(status11);
 		                        IGEFSharedPrefrence.setCREATEDAT(createdAt11);
 		                        IGEFSharedPrefrence.setPASSWORD(login_password);
 		                        
- System.out.println("shared preference value" + IGEFSharedPrefrence.getFULL_NAME());
-		                        
+ 
 		                        flag=1;
 		                       
 										
@@ -254,74 +243,7 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				protected void onPostExecute(Void result) {
 					pd.dismiss();
 					
-					QBUsers.signIn(user, new QBCallback() {
-						
-						@Override
-						public void onComplete(Result arg0, Object arg1) {
-							// TODO Auto-generated method stub
-							
-						}
-						@Override
-						public void onComplete(Result result) {
-							// TODO Auto-generated method stub
-							  if (result.isSuccess()) {
-//								 sharedPrefernces();
-						            ((com.Chat.App)getActivity().getApplication()).setQbUser(user);
-						            QBChatService.getInstance().loginWithUser(user, new SessionCallback() {
-						                private ChatConnectionListener connectionListener;
-
-										@Override
-						                public void onLoginSuccess() {
-						                    if (pd != null) {
-						                        pd.dismiss();
-						                        connectionListener = new ChatConnectionListener();
-						                        QBChatService.getInstance().addConnectionListener(connectionListener);
-						                        
-						                    }  
-						                }
-
-						                @Override
-						                public void onLoginError(String error) {
-						                    
-						                }
-
-						            });
-						        } else {
-						            AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
-						            dialog.setMessage("Error(s) occurred.... " +"\n"+
-						                    "Errors: " + result.getErrors()).create().show();
-						        }
-							
-						}
-						
-					    class ChatConnectionListener implements ConnectionListener {
-
-					        @Override
-					        public void connectionClosed() {
-					            
-					        }
-
-					        @Override
-					        public void connectionClosedOnError(Exception e) {
-					           
-					        }
-
-					        @Override
-					        public void reconnectingIn(int i) {
-
-					        }
-
-					        @Override
-					        public void reconnectionSuccessful() {
-
-					        }
-
-					        @Override
-					        public void reconnectionFailed(Exception e) {
-
-					        }
-					    }
-					});
+					
 					
 					rollno1.setText(null);
 					password1.setText(null);
@@ -344,6 +266,16 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 								getActivity().finish();
 							
 						}
+						
+						else if (IGEFSharedPrefrence.getCOVERPHOTO().equals("")) {
+								System.out.println("no COver Photo Set --> moving to CoverPhotoChooser activity");
+							
+							Intent intt=new Intent(getActivity(), CoverPhotoChooser.class);
+								getActivity().startActivity(intt);
+								getActivity().finish();
+							
+						}
+						
 						else{						
 						
 						Toast.makeText(getActivity(), "LoginNow Successfull", Toast.LENGTH_SHORT).show();
@@ -393,10 +325,26 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	return rootView;
 }
 
-@Override
-public void onDestroy() {
-	// TODO Auto-generated method stub
-	smackAndroid.onDestroy();
-	super.onDestroy();
-}
+//@Override
+//public void onComplete(Result result) {
+//	// TODO Auto-generated method stub
+//	 progressBar.setVisibility(View.GONE);
+//
+//     if (result.isSuccess()) {
+//         Intent intent = new Intent(getActivity(), UserScreen.class);
+//         startActivity(intent);
+//         getActivity().finish();
+//     } else {
+//         AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
+//         dialog.setMessage("Error(s) occurred. Look into DDMS log for details, " +
+//                 "please. Errors: " + result.getErrors()).create().show();
+//     }
+//	
+//}
+//
+//@Override
+//public void onComplete(Result result, Object context) {
+//	// TODO Auto-generated method stub
+//	
+//}
 }

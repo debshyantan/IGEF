@@ -34,6 +34,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.Prefrence.IGEFSharedPrefrence;
 import com.SocialNetwork.Photo.Base64;
 import com.edmodo.cropper.CropImageView;
 import com.userscreen.UserScreen;
@@ -48,6 +49,7 @@ public class PhotoUpload extends Activity {
 	TableRow photochooserrow, editorrow, uploadrow;
 	private static final int ROTATE_NINETY_DEGREES = 90;
 	Bitmap croppedImage;
+	BitmapFactory.Options options;
 
 	ProgressDialog pd;
 	@Override
@@ -63,9 +65,23 @@ public class PhotoUpload extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				Intent i = new Intent(PhotoUpload.this, UserScreen.class);
-				startActivity(i);
-				finish();
+				
+				if (IGEFSharedPrefrence.getCOVERPHOTO().equals("")) {
+					System.out.println("no COver Photo Set --> moving to CoverPhotoChooser activity");
+				
+				Intent intt=new Intent(PhotoUpload.this, CoverPhotoChooser.class);
+					startActivity(intt);
+					finish();
+				
+			}
+				
+				else{
+					Intent i = new Intent(PhotoUpload.this, UserScreen.class);
+					startActivity(i);
+					finish();
+				}
+				
+				
 			
 			}
 		});
@@ -124,6 +140,8 @@ public class PhotoUpload extends Activity {
 
 			@Override
 			public void onClick(View v) {
+				options=new BitmapFactory.Options();
+				options.inSampleSize=8;
 				
 				
 				croppedImage = cropImageView.getCroppedImage();
@@ -150,33 +168,52 @@ public class PhotoUpload extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-//				
-//				pd=new ProgressDialog(PhotoUpload.this);
-//				pd.setTitle("Uploading Photo");
-//				pd.setMessage("Wait While we Upload Your Photo...");
-//				pd.show();
-			
+				
+				  pd=new ProgressDialog(PhotoUpload.this);
+            		pd.setTitle("Uploading Photo");
+            		pd.setMessage("Wait While we Upload Your Photo...");
+//            		pd.setCancelable(false);
+            		pd.show();
 
 	            BitmapDrawable drawable = (BitmapDrawable) croppedImageView.getDrawable();
-	            Bitmap bitmap = drawable.getBitmap();
+	            Bitmap bitmap1 = drawable.getBitmap();
 	            
+	           int oldwidth= bitmap1.getWidth();
+	           int oldheight=bitmap1.getHeight();
+	           
+	           System.out.println("oldwidth"+oldwidth +"old height" + oldheight);
+	            
+	            Bitmap bitmap=getResizedBitmap( bitmap1, 50	 , 50);
+	                    
+
+	            int newwidth = bitmap.getWidth();
+		           int newheight =bitmap.getHeight();
+		           
+		           System.out.println("oldwidth"+newwidth +"old height" + newheight);
 	            
 	            
 	            
 	            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-	            bitmap.compress(Bitmap.CompressFormat.PNG, 90, stream);
+	            bitmap.compress(Bitmap.CompressFormat.PNG, 10, stream);
 	            //compress to which format you want.
 	            byte [] byte_arr = stream.toByteArray();
 	            String image_str = Base64.encodeBytes(byte_arr);
+//	            new PhotouploadAsynktask(image_str,PhotoUpload.this).execute();
+	            
+	            
+	            
+	            
 	            final ArrayList<NameValuePair> nameValuePairs = new  ArrayList<NameValuePair>();
 	 
 	            nameValuePairs.add(new BasicNameValuePair("image",image_str));
-	 
+	            nameValuePairs.add(new BasicNameValuePair("roll_no",IGEFSharedPrefrence.getROLL_NO()));
 	             Thread t = new Thread(new Runnable() {
 	             
 	            @Override
 	            public void run() {
 	                  try{
+	                	
+	                	  
 	                         HttpClient httpclient = new DefaultHttpClient();
 	                         HttpPost httppost = new HttpPost("http://shypal.com/IGEF/task_manager/uploadedimages/imageupload.php");
 	                         httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
@@ -188,7 +225,8 @@ public class PhotoUpload extends Activity {
 	                                @Override
 	                                public void run() {
 	                                	Toast.makeText(PhotoUpload.this, "Response " + the_string_response, Toast.LENGTH_LONG).show();                          
-	                                    
+	                                	pd.dismiss();
+
 	                                	Intent i = new Intent(PhotoUpload.this, UserScreen.class);
 	                    				startActivity(i);
 	                    				finish();
@@ -203,6 +241,7 @@ public class PhotoUpload extends Activity {
 	                             
 	                            @Override
 	                            public void run() {
+	                            	pd.dismiss();
 	                                Toast.makeText(PhotoUpload.this, "ERROR " + e.getMessage(), Toast.LENGTH_LONG).show();                              
 	                            }
 	                        });
@@ -220,6 +259,11 @@ public class PhotoUpload extends Activity {
 				
 				
 
+			}
+
+			private Bitmap getResizedBitmap(Bitmap bitmap1, int i, int j) {
+				// TODO Auto-generated method stub
+				 return Bitmap.createScaledBitmap(bitmap1 , i, j, true);
 			}
 		});
 

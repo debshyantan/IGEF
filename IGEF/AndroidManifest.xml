@@ -39,7 +39,7 @@
         android:theme="@style/Theme.Socialnetwork" >
         <!--  Intent Filter changed to this  -->
         
-         <activity android:name="com.SocialNetwork.igef.StartScreen"
+         <activity android:name="com.SocialNetwork.igef.StartScreenone"
             android:label="@string/app_name"
     android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
             
@@ -49,6 +49,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
+         <activity android:name="com.SocialNetwork.igef.StartScreen"
+             android:label="@string/app_name"
+    android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
         
         <activity
             android:name="com.SocialNetwork.igef.IgefSocailNetwork"
@@ -95,6 +99,7 @@
 
         <activity android:name="com.SocialNetwork.igef.PhotoUpload"></activity>
         <activity android:name="com.Chat.contactlist"></activity>
+          <activity android:name="com.SocialNetwork.igef.CoverPhotoChooser"></activity>
         
      <meta-data android:name="com.google.android.gms.version" 
          android:value="@integer/google_play_services_version" /> 

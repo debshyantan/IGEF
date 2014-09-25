@@ -25,14 +25,18 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.support.v4.app.Fragment;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
@@ -42,13 +46,14 @@ import android.widget.TextView;
 import com.Chat.App;
 import com.Prefrence.IGEFSharedPrefrence;
 import com.SocialNetwork.igef.R;
+import com.SocialNewtwork.AsyncTask.DeleteMyStatusAsncTask;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 public class MyTimeLine extends Fragment{
 	
 	PullToRefreshListView listview;
-	ListView lv;
-	ImageView profile_iv, status_iv;
+	static ListView lv;
+	ImageView profile_iv, status_iv, delete_iv;
 	TextView name, status, timestamp;
 	String d_status, d_name, d_roll, d_created;
 
@@ -332,7 +337,7 @@ public class MyTimeLine extends Fragment{
 	}
 	
 	
-	public  class MyTimelineAdapter extends BaseAdapter {
+	public   class MyTimelineAdapter extends BaseAdapter {
 //		FragmentActivity activity;
 //		ArrayList<Custom> statuslist;
 //
@@ -345,7 +350,7 @@ public class MyTimeLine extends Fragment{
 		
 
 		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
+		public View getView(final int position, View convertView, ViewGroup parent) {
 			// TODO Auto-generated method stub
 			LayoutInflater inflater = (LayoutInflater) getActivity()
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -354,9 +359,56 @@ public class MyTimeLine extends Fragment{
 			name = (TextView) convertView.findViewById(R.id.name);
 			timestamp = (TextView) convertView.findViewById(R.id.timestamp);
 			status = (TextView) convertView.findViewById(R.id.txtStatusMsg);
+			
 
 			status_iv = (ImageView) convertView.findViewById(R.id.feedImage1);
 			profile_iv.setImageResource(R.drawable.ic_launcher);
+			delete_iv=(ImageView)convertView.findViewById(R.id.delete);
+			
+			delete_iv.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View arg0) {
+					
+					 Vibrator v = (Vibrator)getActivity().getSystemService(Context.VIBRATOR_SERVICE);
+					 // Vibrate for 500 milliseconds
+					 v.vibrate(250);
+
+					 
+					 
+					 
+					 AlertDialog.Builder adialog=new AlertDialog.Builder(getActivity());
+						adialog.setTitle("Delete Status");
+						adialog.setMessage("Are You Sure to Delete the Status?");
+						adialog.setIcon(R.drawable.ic_launcher);
+						
+						adialog.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,int id) {
+								
+						new DeleteMyStatusAsncTask(getActivity(),  statuslist.get(position).mystatus_id , statuslist, position, lv, adapter).execute();
+									
+								
+							}
+						  })
+						.setNegativeButton("No",new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,int id) {
+								
+								dialog.cancel();
+							}
+						});
+						
+						AlertDialog alertDialog = adialog.create();
+						 
+						// show it
+						alertDialog.show();
+						
+					
+					
+					
+				}
+			});
+			
+			
 			status_iv.setImageResource(R.drawable.adminblock);
 			name.setText(IGEFSharedPrefrence.getFULL_NAME());
 			timestamp.setText(parseDate(position));
@@ -403,6 +455,9 @@ public class MyTimeLine extends Fragment{
 			return statuslist.size();
 		}
 
+	
+
 	}
+	
 
 }

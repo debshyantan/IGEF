@@ -30,6 +30,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.quickblox.core.QBCallback;
 import com.quickblox.core.result.Result;
@@ -52,10 +53,10 @@ public class Register extends Fragment {
 			d_password, d_section;
 
 	 public Register() {
-		// TODO Auto-generated constructor stub
-	}
-//hi
-	@Override
+
+	 }
+
+	 @Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.registrationpage,
@@ -93,8 +94,30 @@ public class Register extends Fragment {
 					d_dept = String.valueOf(branchSpinner.getSelectedItem());
 					d_year = String.valueOf(year.getSelectedItem());
 					d_section = rb2.getText().toString();
+					
 					System.out.println(d_name + d_roll + d_dept + d_section
 							+ d_year + d_contact + d_email + d_gender + d_password);
+					if(d_name.equals("") || d_roll.equals("") || d_contact.equals("") || d_email.equals("") || d_password.equals("") ){
+						
+						Toast.makeText(getActivity(), "Required Fields Missing", Toast.LENGTH_LONG).show();
+
+					}
+					else{
+						
+					
+					
+					if (d_password.length()<8) {
+						Toast.makeText(getActivity(), "Min. Length of Password is 8", Toast.LENGTH_LONG).show();
+						password.setText("");
+						password.requestFocus(); 
+						
+						System.out.println("password length" + d_password.length());
+						
+					}
+					
+					else{
+						
+					
 
 					new AsyncTask<Void, Void, Void>() {
 
@@ -228,7 +251,9 @@ public class Register extends Fragment {
 							
 						};
 
-					}.execute();
+							}.execute();
+						}
+					}
 				}
 			});
 
