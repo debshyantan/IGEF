@@ -26,6 +26,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
@@ -57,26 +58,27 @@ public class MyTimeLine extends Fragment{
 	TextView name, status, timestamp;
 	String d_status, d_name, d_roll, d_created;
 
-	public ArrayList<Custom> statuslist;
+	public static ArrayList<Custom> statuslist;
 	
-	MyTimelineAdapter adapter;
+	static MyTimelineAdapter adapter;
 	
+	GetMyStatus getstatus;
+	static ProgressDialog pd;
 
-
-
-	
 
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View rootView=inflater.inflate(R.layout.userscreen, container, false);
+		View rootView=inflater.inflate(R.layout.mystatuslistview, container, false);
 		listview=(PullToRefreshListView)rootView.findViewById(R.id.list);
 		lv=listview.getRefreshableView();
 		statuslist=((App)getActivity().getApplication()).getStatuslist();
-	
-	
-		
+			
+
+		getstatus=new GetMyStatus();
+		getstatus.execute();
+		pd=new ProgressDialog(getActivity());
 		
 //		listview.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
 //			
@@ -212,118 +214,7 @@ public class MyTimeLine extends Fragment{
 //			
 //		});
 		
-		
-        new AsyncTask<Void, Void, Void>(){
-//        	ProgressDialog pd;
-        	String value;
-//        	FragmentActivity activity;
-//        	ArrayList<Custom> statuslist;
-//        	MyTimelineAdapter adapter;
-//        	ListView lv;
-
-        	
-
-        	@Override
-        	protected void onPreExecute() {
-//        		pd=new ProgressDialog(getActivity());
-//        		 pd.setMessage("LoginNow");
-//        		 pd.show();
-        		statuslist=new ArrayList<Custom>();
-        	};
-
-        	@Override
-        	protected Void doInBackground(Void... params) {
-        		// TODO Auto-generated method stub
-        		HttpClient httpclient = new DefaultHttpClient();
-        	    HttpPost httppost = new HttpPost("http://shypal.com/IGEF/task_manager/mystatusupdates.php");
-                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-                nameValuePairs.add(new BasicNameValuePair("roll_no", IGEFSharedPrefrence.getROLL_NO()));
-                try {
-        			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-        		} catch (UnsupportedEncodingException e) {
-        			// TODO Auto-generated catch block
-        			e.printStackTrace();
-        		}
-                
-                HttpResponse response = null;
-                try {
-        			response = httpclient.execute(httppost);
-        		} catch (ClientProtocolException e) {
-        			// TODO Auto-generated catch block
-        			e.printStackTrace();
-        		} catch (IOException e) {
-        			// TODO Auto-generated catch block
-        			e.printStackTrace();
-        		}
-                try {
-        			value=EntityUtils.toString(response.getEntity());
-        		} catch (ParseException e) {
-        			// TODO Auto-generated catch block
-        			e.printStackTrace();
-        		} catch (IOException e) {
-        			// TODO Auto-generated catch block
-        			e.printStackTrace();
-        		}
-                
-                System.out.println(value);
-                JSONArray result;
-                if (value != null) {
-                    try {
-                        JSONObject jsonObj = new JSONObject(value);
-                         
-                        // Getting JSON Array node
-                        result = jsonObj.getJSONArray("result");
-
-                        // looping through All Contacts
-                        for (int i = 0; i < result.length(); i++) {
-                            JSONObject c = result.getJSONObject(i);
-                             
-                            String my_status_id = c.getString("status_id");
-                            String my_status = c.getString("status");
-                            String my_full_name = c.getString("full_name");
-                            String my_roll_no=c.getString("roll_no");
-                            String my_department = c.getString("department");
-                            String my_year = c.getString("year");
-                            String my_section=c.getString("section");
-                            String my_created_at=c.getString("created_at");
-                            Custom d=new Custom();
-                            
-                            
-                            d.setMystatus(my_status);
-                            d.setMyname(my_full_name);
-                            d.setMytimestamp(my_created_at);
-                            d.setMystatus_id(my_status_id);
-                            
-                            statuslist.add(d);
-                           
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                } else {
-                    Log.e("ServiceHandler", "Couldn't get any data from the url");
-                }
-                
-                
-                
-                
-                
-                
-                
-        		return null;
-        	}
-        	@Override
-        	
-        	protected void onPostExecute(Void result) {
-//        		pd.dismiss();
-        		
-
-        				adapter=new MyTimelineAdapter();
-        				lv.setAdapter(adapter);
-
-        	};
-        	
-}.execute();
+	
         
         
         
@@ -372,7 +263,7 @@ public class MyTimeLine extends Fragment{
 					
 					 Vibrator v = (Vibrator)getActivity().getSystemService(Context.VIBRATOR_SERVICE);
 					 // Vibrate for 500 milliseconds
-					 v.vibrate(250);
+					 v.vibrate(150);
 
 					 
 					 
@@ -385,8 +276,9 @@ public class MyTimeLine extends Fragment{
 						adialog.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog,int id) {
 								
-						new DeleteMyStatusAsncTask(getActivity(),  statuslist.get(position).mystatus_id , statuslist, position, lv, adapter).execute();
-									
+						DeleteMyStatusAsncTask deletetask=new DeleteMyStatusAsncTask(getActivity(),  statuslist.get(position).mystatus_id , statuslist, position, lv);
+								deletetask.execute();
+								
 								
 							}
 						  })
@@ -407,6 +299,7 @@ public class MyTimeLine extends Fragment{
 					
 				}
 			});
+			
 			
 			
 			status_iv.setImageResource(R.drawable.adminblock);
@@ -460,4 +353,242 @@ public class MyTimeLine extends Fragment{
 	}
 	
 
+	public class GetMyStatus extends AsyncTask<Void, Void, Void>{
+		
+
+    	String value;
+//    	FragmentActivity activity;
+//    	ArrayList<Custom> statuslist;
+//    	MyTimelineAdapter adapter;
+//    	ListView lv;
+
+    	ProgressDialog pdd;
+
+    	@Override
+    	protected void onPreExecute() {
+    		pdd=new ProgressDialog(getActivity());
+    		 pdd.setMessage(" Retrieving Your Status ");
+    		 pdd.show();
+    		statuslist=new ArrayList<Custom>();
+    	};
+
+    	@Override
+    	protected Void doInBackground(Void... params) {
+    		// TODO Auto-generated method stub
+    		HttpClient httpclient = new DefaultHttpClient();
+    	    HttpPost httppost = new HttpPost("http://shypal.com/IGEF/task_manager/mystatusupdates.php");
+            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+            nameValuePairs.add(new BasicNameValuePair("roll_no", IGEFSharedPrefrence.getROLL_NO()));
+            try {
+    			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+    		} catch (UnsupportedEncodingException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		}
+            
+            HttpResponse response = null;
+            try {
+    			response = httpclient.execute(httppost);
+    		} catch (ClientProtocolException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		} catch (IOException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		}
+            try {
+    			value=EntityUtils.toString(response.getEntity());
+    		} catch (ParseException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		} catch (IOException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		}
+            
+            System.out.println(value);
+            JSONArray result;
+            if (value != null) {
+                try {
+                    JSONObject jsonObj = new JSONObject(value);
+                     
+                    // Getting JSON Array node
+                    result = jsonObj.getJSONArray("result");
+
+                    // looping through All Contacts
+                    for (int i = 0; i < result.length(); i++) {
+                        JSONObject c = result.getJSONObject(i);
+                         
+                        String my_status_id = c.getString("status_id");
+                        String my_status = c.getString("status");
+                        String my_full_name = c.getString("full_name");
+                        String my_roll_no=c.getString("roll_no");
+                        String my_department = c.getString("department");
+                        String my_year = c.getString("year");
+                        String my_section=c.getString("section");
+                        String my_created_at=c.getString("created_at");
+                        Custom d=new Custom();
+                        
+                        
+                        d.setMystatus(my_status);
+                        d.setMyname(my_full_name);
+                        d.setMytimestamp(my_created_at);
+                        d.setMystatus_id(my_status_id);
+                        
+                        statuslist.add(d);
+                       
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                Log.e("ServiceHandler", "Couldn't get any data from the url");
+            }
+            
+            
+            
+            
+            
+            
+            
+    		return null;
+    	}
+    	@Override
+    	
+    	protected void onPostExecute(Void result) {
+    		pdd.dismiss();
+    		
+
+    				adapter=new MyTimelineAdapter();
+    				lv.setAdapter(adapter);
+
+    	};
+    	
+
+		
+	}
+
+
+	public static void refreshMyStatus() {
+
+		new AsyncTask<Void, Void, Void>(){
+
+			
+
+	    	
+	    	String value;
+//	    	FragmentActivity activity;
+//	    	ArrayList<Custom> statuslist;
+//	    	MyTimelineAdapter adapter;
+//	    	ListView lv;
+
+	    	
+
+	    	@Override
+	    	protected void onPreExecute() {
+	    		
+	    		 pd.setMessage("Refreshing Your Status");
+	    		 pd.show();
+	    		statuslist=new ArrayList<Custom>();
+	    	};
+
+	    	@Override
+	    	protected Void doInBackground(Void... params) {
+	    		// TODO Auto-generated method stub
+	    		HttpClient httpclient = new DefaultHttpClient();
+	    	    HttpPost httppost = new HttpPost("http://shypal.com/IGEF/task_manager/mystatusupdates.php");
+	            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+	            nameValuePairs.add(new BasicNameValuePair("roll_no", IGEFSharedPrefrence.getROLL_NO()));
+	            try {
+	    			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+	    		} catch (UnsupportedEncodingException e) {
+	    			// TODO Auto-generated catch block
+	    			e.printStackTrace();
+	    		}
+	            
+	            HttpResponse response = null;
+	            try {
+	    			response = httpclient.execute(httppost);
+	    		} catch (ClientProtocolException e) {
+	    			// TODO Auto-generated catch block
+	    			e.printStackTrace();
+	    		} catch (IOException e) {
+	    			// TODO Auto-generated catch block
+	    			e.printStackTrace();
+	    		}
+	            try {
+	    			value=EntityUtils.toString(response.getEntity());
+	    		} catch (ParseException e) {
+	    			// TODO Auto-generated catch block
+	    			e.printStackTrace();
+	    		} catch (IOException e) {
+	    			// TODO Auto-generated catch block
+	    			e.printStackTrace();
+	    		}
+	            
+	            System.out.println(value);
+	            JSONArray result;
+	            if (value != null) {
+	            	statuslist.clear();
+	                try {
+	                    JSONObject jsonObj = new JSONObject(value);
+	                     
+	                    // Getting JSON Array node
+	                    result = jsonObj.getJSONArray("result");
+
+	                    // looping through All Contacts
+	                    for (int i = 0; i < result.length(); i++) {
+	                        JSONObject c = result.getJSONObject(i);
+	                         
+	                        String my_status_id = c.getString("status_id");
+	                        String my_status = c.getString("status");
+	                        String my_full_name = c.getString("full_name");
+	                        String my_roll_no=c.getString("roll_no");
+	                        String my_department = c.getString("department");
+	                        String my_year = c.getString("year");
+	                        String my_section=c.getString("section");
+	                        String my_created_at=c.getString("created_at");
+	                        Custom d=new Custom();
+	                        
+	                        
+	                        d.setMystatus(my_status);
+	                        d.setMyname(my_full_name);
+	                        d.setMytimestamp(my_created_at);
+	                        d.setMystatus_id(my_status_id);
+	                        
+	                        statuslist.add(d);
+	                       
+	                    }
+	                } catch (JSONException e) {
+	                    e.printStackTrace();
+	                }
+	            } else {
+	                Log.e("ServiceHandler", "Couldn't get any data from the url");
+	            }
+	            
+	            
+	            
+	            
+	            
+	            
+	            
+	    		return null;
+	    	}
+	    	@Override
+	    	
+	    	protected void onPostExecute(Void result) {
+	    		pd.dismiss();
+	    		
+
+	    				lv.setAdapter(adapter);
+
+	    	};
+	    	
+
+			
+		
+		}.execute();
+		
+		
+	}
 }

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <TextView
+   <!-- <TextView
         android:id="@+id/skip"
         android:layout_width="match_parent"
         android:layout_height="20dp"
@@ -17,14 +17,15 @@
         android:background="@color/green"
         android:gravity="center_horizontal"
         android:text="Skip Now!"
-        android:textColor="@color/white" />
+        android:textColor="@color/white" /> -->
 
     <ImageView
         android:id="@+id/noimage"
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:layout_gravity="center_horizontal"
-        android:src="@drawable/noimage" />
+        android:src="@drawable/noimage"
+        android:layout_marginTop="7dp" />
 
     <LinearLayout
         android:id="@+id/hideit"

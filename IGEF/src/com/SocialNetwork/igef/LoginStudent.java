@@ -23,6 +23,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -166,6 +167,7 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 		                        System.out.println(devicetoken11);
 		                        System.out.println(apiKey11);
 		                        System.out.println(profilepicurl11);
+		                        System.out.println("Cover Photo"+coverphoto11);
 		                        System.out.println(status11);
 		                        System.out.println(createdAt11);
 		                        
@@ -257,7 +259,7 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 					
 					if(flag==1){
 						
-						if (IGEFSharedPrefrence.getPROFILEPICURL().equals("")){
+						if (IGEFSharedPrefrence.getPROFILEPICURL().equals("null")){
 							
 							System.out.println("no image in profilepic url --> moving to photoupload activity");
 							
@@ -267,7 +269,7 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							
 						}
 						
-						else if (IGEFSharedPrefrence.getCOVERPHOTO().equals("")) {
+						else if (IGEFSharedPrefrence.getCOVERPHOTO().equals("null")) {
 								System.out.println("no COver Photo Set --> moving to CoverPhotoChooser activity");
 							
 							Intent intt=new Intent(getActivity(), CoverPhotoChooser.class);
@@ -278,7 +280,7 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 						
 						else{						
 						
-						Toast.makeText(getActivity(), "LoginNow Successfull", Toast.LENGTH_SHORT).show();
+						Toast.makeText(getActivity(), "Login Successfull", Toast.LENGTH_SHORT).show();
 						
 						  Intent intt=new Intent(getActivity(), UserScreen.class);
 						getActivity().startActivity(intt);

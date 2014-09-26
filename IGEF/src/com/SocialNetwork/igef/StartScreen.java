@@ -44,7 +44,7 @@ public class StartScreen extends Activity implements AnimationListener{
 	Editor editor;
 	Boolean isInternetPresent = false;
 	ConnectionDetector cd;
-	String jsonStr,id11, full_name11,roll_no11, gender11, department11, year11, section11, contactno11, email11, devicetoken11, apiKey11,profilepicurl11, status11,createdAt11;
+	String jsonStr,id11, full_name11,roll_no11, gender11, department11, year11, section11, contactno11, email11, devicetoken11, apiKey11,profilepicurl11, coverphoto11, status11,createdAt11;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -134,7 +134,7 @@ public class StartScreen extends Activity implements AnimationListener{
 								System.out.println("LOgin sucessfull Json parsing stared");
 								
 								id11 = jsonObj.getString("id");
-								full_name11 = jsonObj.getString("full_name");										
+								  full_name11 = jsonObj.getString("full_name");										
 								roll_no11=jsonObj.getString("roll_no");
 								gender11 = jsonObj.getString("gender");
 								department11 = jsonObj.getString("department");
@@ -145,6 +145,7 @@ public class StartScreen extends Activity implements AnimationListener{
 								devicetoken11 = jsonObj.getString("devicetoken");
 								apiKey11 = jsonObj.getString("apiKey");
 								profilepicurl11=jsonObj.getString("profilepicurl");
+								coverphoto11=jsonObj.getString("coverphoto");
 								status11 = jsonObj.getString("status");
 								createdAt11 = jsonObj.getString("createdAt");
 								
@@ -160,6 +161,7 @@ public class StartScreen extends Activity implements AnimationListener{
 		                        System.out.println(devicetoken11);
 		                        System.out.println(apiKey11);
 		                        System.out.println(profilepicurl11);
+		                        System.out.println("cover Photo" +coverphoto11);
 		                        System.out.println(status11);
 		                        System.out.println(createdAt11);
 		                        	
@@ -178,7 +180,8 @@ public class StartScreen extends Activity implements AnimationListener{
 		                        IGEFSharedPrefrence.setEMAIL(email11);
 		                        IGEFSharedPrefrence.setDEVICETOKEN(devicetoken11);
 		                        IGEFSharedPrefrence.setAPI_KEY(apiKey11);
-		                        IGEFSharedPrefrence.setAPI_KEY(profilepicurl11);
+		                        IGEFSharedPrefrence.setPROFILEPICURL(profilepicurl11);
+		                        IGEFSharedPrefrence.setCOVERPHOTO(coverphoto11);
 		                        IGEFSharedPrefrence.setSTATUS(status11);
 		                        IGEFSharedPrefrence.setCREATEDAT(createdAt11);
 		                        

@@ -1,7 +1,5 @@
 package com.SocialNetwork.igef;
 
-
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,7 +14,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
@@ -26,12 +23,16 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableRow;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.Prefrence.IGEFSharedPrefrence;
@@ -39,52 +40,44 @@ import com.SocialNetwork.Photo.Base64;
 import com.edmodo.cropper.CropImageView;
 import com.userscreen.UserScreen;
 
-public class PhotoUpload extends Activity {
+public class PhotoUpload extends ActionBarActivity {
+	
 	ImageView gallery, camera, rotate, crop, uploadphoto, croppedImageView,
 			noimage;
 	  InputStream inputStream;
-	TextView skip;
+//	TextView skip;
 	static Cursor c;
 	CropImageView cropImageView;
 	TableRow photochooserrow, editorrow, uploadrow;
 	private static final int ROTATE_NINETY_DEGREES = 90;
 	Bitmap croppedImage;
 	BitmapFactory.Options options;
-
+	ActionBar act;
 	ProgressDialog pd;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.photoupload);
+		act=getSupportActionBar();
+		act.setTitle("Upload Profile Photo");
+		
+		
 		cropImageView = (CropImageView) findViewById(R.id.CropImageView);
 
-		// Skip Textview
-		skip = (TextView) findViewById(R.id.skip);
-		skip.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				
-				if (IGEFSharedPrefrence.getCOVERPHOTO().equals("")) {
-					System.out.println("no COver Photo Set --> moving to CoverPhotoChooser activity");
-				
-				Intent intt=new Intent(PhotoUpload.this, CoverPhotoChooser.class);
-					startActivity(intt);
-					finish();
-				
-			}
-				
-				else{
-					Intent i = new Intent(PhotoUpload.this, UserScreen.class);
-					startActivity(i);
-					finish();
-				}
-				
-				
-			
-			}
-		});
+//		// Skip Textview
+//		skip = (TextView) findViewById(R.id.skip);
+//		skip.setOnClickListener(new OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+//				
+//				
+//				
+//				
+//			
+//			}
+//		});
 
 		// photoupload button
 		noimage = (ImageView) findViewById(R.id.noimage);
@@ -227,11 +220,23 @@ public class PhotoUpload extends Activity {
 	                                	Toast.makeText(PhotoUpload.this, "Response " + the_string_response, Toast.LENGTH_LONG).show();                          
 	                                	pd.dismiss();
 
-	                                	Intent i = new Intent(PhotoUpload.this, UserScreen.class);
-	                    				startActivity(i);
-	                    				finish();
 	                                	
 	                                	
+	                                			if (IGEFSharedPrefrence.getCOVERPHOTO().equals("")) {
+	                                					System.out.println("no COver Photo Set --> moving to CoverPhotoChooser activity");
+	                      				
+	                                					Intent intt=new Intent(PhotoUpload.this , CoverPhotoChooser.class);
+	                                					startActivity(intt);
+	                                					finish();	                      				
+	                                				}
+	                                			else{
+	                      	        	  
+	                      	          
+	                                					Intent i = new Intent(PhotoUpload.this, UserScreen.class);
+	                                					startActivity(i);
+	                                					finish();
+	                                	
+	                                				}
 	                                	
 	                                }
 	                            });
@@ -253,8 +258,7 @@ public class PhotoUpload extends Activity {
 	        });
 	         t.start();
 				
-				
-					
+			
 				
 				
 				
@@ -268,7 +272,48 @@ public class PhotoUpload extends Activity {
 		});
 
 	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+
+		MenuInflater inflater = getMenuInflater();
+	    inflater.inflate(R.menu.actionbarmenu, menu);
+
+	       return true;	
 	
+	
+	}
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	// Take appropriate action for each action item click
+	switch (item.getItemId()) {
+	case R.id.skipp:
+		
+		if (IGEFSharedPrefrence.getCOVERPHOTO().equals("null")) {
+			System.out.println("no COver Photo Set --> moving to CoverPhotoChooser activity");
+		
+		Intent intt=new Intent(PhotoUpload.this, CoverPhotoChooser.class);
+			startActivity(intt);
+			finish();
+		
+	}
+		
+		else{
+			Intent i = new Intent(PhotoUpload.this, UserScreen.class);
+			startActivity(i);
+			finish();
+		}
+		
+	break;
+	
+	default:
+		return super.onOptionsItemSelected(item);
+	}
+	
+	return false;
+	
+	
+	}
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {

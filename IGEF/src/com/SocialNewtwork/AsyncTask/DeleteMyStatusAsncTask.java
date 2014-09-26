@@ -17,16 +17,20 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.R;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Vibrator;
 import android.support.v4.app.FragmentActivity;
+import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.Prefrence.IGEFSharedPrefrence;
 import com.userscreen.Custom;
+import com.userscreen.MyTimeLine;
+import com.userscreen.MyTimeLine.GetMyStatus;
 import com.userscreen.MyTimeLine.MyTimelineAdapter;
 
 public class DeleteMyStatusAsncTask extends AsyncTask<Void, Void, Void> {
@@ -39,18 +43,21 @@ public class DeleteMyStatusAsncTask extends AsyncTask<Void, Void, Void> {
 	ArrayList<Custom> statuslist;
 	int position;
 	ListView listview;
-	MyTimelineAdapter timelineadapter;
+	ViewGroup container;
 	int flag;
 	
-	public DeleteMyStatusAsncTask(FragmentActivity activity, String mystatus_id, ArrayList<Custom> statuslist, int position, ListView lv, MyTimelineAdapter adapter) {
+	public DeleteMyStatusAsncTask(FragmentActivity activity, String mystatus_id, ArrayList<Custom> statuslist, int position, ListView lv) {
 	this.activity=activity;
 	this.mystatus_id=mystatus_id;
 	this.statuslist=statuslist;
 	this.position=position;
 	this.listview=lv;
-	this.timelineadapter=timelineadapter;
+
+	
 	
 	}
+
+	
 	@Override
 	protected void onPreExecute() {
 		// TODO Auto-generated method stub
@@ -61,7 +68,7 @@ public class DeleteMyStatusAsncTask extends AsyncTask<Void, Void, Void> {
 		pd.setMessage("Wait While the staus is Deleting");
 		pd.show();
 		
-		
+	
 		
 		
 	}
@@ -110,6 +117,9 @@ public class DeleteMyStatusAsncTask extends AsyncTask<Void, Void, Void> {
 	}
 	else{
 		Toast.makeText(activity, "Try Again Later", Toast.LENGTH_LONG).show();
+		
+		
+		
 	}
 		
 		
@@ -128,25 +138,26 @@ public class DeleteMyStatusAsncTask extends AsyncTask<Void, Void, Void> {
 		 Vibrator v = (Vibrator) activity.getSystemService(Context.VIBRATOR_SERVICE);
 		 // Vibrate for 500 milliseconds
 		 v.vibrate(200);
-		pd.dismiss();
+		
 		
 		if(flag==1){
-			activity.runOnUiThread(new Runnable() {
-				
-				@Override
-				public void run() {
-					System.out.println("Earlier count" +statuslist.size());
-					
-					statuslist.remove(position);
-//					timelineadapter.notifyDataSetChanged();
-					System.out.println( "Later count" + statuslist.size());
-//					MyTimeLine.MyTimelineAdapter.refreshmytimelist();
-//					listview.invalidateViews();					
-				}
-			});
 			
-		}
+				
+		activity.runOnUiThread(new Runnable() {
+			
+			@Override
+			public void run() {
+				
+				MyTimeLine.refreshMyStatus();
+				Toast.makeText(activity, "Status Deleted", Toast.LENGTH_LONG).show();
+			
+			
+			
+			}
+		});
 		
+		}
+		pd.dismiss();
 		
 	}
 	
