@@ -14,6 +14,8 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import com.Prefrence.IGEFSharedPrefrence;
 import com.SocialNetwork.igef.CoverPhotoChooser;
@@ -22,12 +24,14 @@ import com.userscreen.UserScreen;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.widget.Toast;
 
 public class savecoverphotoAsyncTask extends AsyncTask<Void,Void, Void>{
 	CoverPhotoChooser coverPhotoChooser;
 	int coverphotopostion;
 	ProgressDialog pd;
 	String value;
+	String error;
 	
 	public savecoverphotoAsyncTask(CoverPhotoChooser coverPhotoChooser,
 			int coverphotopostion) {
@@ -82,6 +86,37 @@ public class savecoverphotoAsyncTask extends AsyncTask<Void,Void, Void>{
 			e.printStackTrace();
 		}
 		
+		JSONObject jsonobject;
+		try {
+			jsonobject = new JSONObject(value);
+			
+			error=jsonobject.getString("error");
+			if (error.equals("false")) {
+				
+				IGEFSharedPrefrence.setCOVERPHOTO(""+coverphotopostion);
+				
+				
+				
+			}
+			
+			else{
+				coverPhotoChooser.runOnUiThread(new Runnable() {
+					
+					@Override
+					public void run() {
+
+						
+						Toast.makeText(coverPhotoChooser, "Try Again Later", Toast.LENGTH_LONG).show();
+						
+						
+					}
+				});
+			}
+			
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		
 		
