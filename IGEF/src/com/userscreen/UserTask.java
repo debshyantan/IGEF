@@ -60,7 +60,7 @@ public class UserTask extends Fragment{
 		
 				}
 				if(position==1){
-					getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new ViewMyProfile()).addToBackStack(null).commit();
+					getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new UpdateMyprofile()).addToBackStack(null).commit();
 		
 				}
 				if(position==2){

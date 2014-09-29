@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 import java.util.TimeZone;
 
 import org.apache.http.HttpResponse;
@@ -29,6 +30,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.TypedArray;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Vibrator;
@@ -64,7 +66,19 @@ public class MyTimeLine extends Fragment{
 	
 	GetMyStatus getstatus;
 	static ProgressDialog pd;
-
+	
+	 private Integer[] mImageIds = {
+	            R.drawable.clga,
+	            R.drawable.clgb,
+	            R.drawable.clgc,
+	            R.drawable.clgd,
+	            R.drawable.clge,
+	            R.drawable.clgf,
+	            R.drawable.clgg,
+	            R.drawable.clgh
+	    };
+ImageView coverphoto;
+	 
 
 
 	@Override
@@ -79,6 +93,40 @@ public class MyTimeLine extends Fragment{
 		getstatus=new GetMyStatus();
 		getstatus.execute();
 		pd=new ProgressDialog(getActivity());
+		
+		
+
+		
+		View myheader = View.inflate(getActivity(), R.layout.mytimelineheader, null);
+		
+		//setting the image of cover photo
+		coverphoto=(ImageView)myheader.findViewById(R.id.coverphoto);
+		int pos=Integer.parseInt(IGEFSharedPrefrence.getCOVERPHOTO());
+		
+		coverphoto.setImageResource(mImageIds[pos]);
+		
+		//setting the name of student
+		TextView myname=(TextView)myheader.findViewById(R.id.myname);
+		TextView myrollno=(TextView)myheader.findViewById(R.id.myroolno);
+		TextView myEmailid=(TextView)myheader.findViewById(R.id.myEmaillid);
+		TextView MyContactno=(TextView)myheader.findViewById(R.id.myContno);
+		
+		myname.setText(IGEFSharedPrefrence.getFULL_NAME());
+		myrollno.setText("Roll No : " + IGEFSharedPrefrence.getROLL_NO());
+		MyContactno.setText(IGEFSharedPrefrence.getCONTACTNO());
+		myEmailid.setText( IGEFSharedPrefrence.getEMAIL());
+		
+		
+		
+		listview.getRefreshableView().addHeaderView(myheader);
+		
+		
+		
+		
+		
+		
+		
+		
 		
 //		listview.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
 //			
@@ -228,6 +276,9 @@ public class MyTimeLine extends Fragment{
 	}
 	
 	
+
+
+
 	public   class MyTimelineAdapter extends BaseAdapter {
 //		FragmentActivity activity;
 //		ArrayList<Custom> statuslist;
@@ -238,7 +289,8 @@ public class MyTimeLine extends Fragment{
 //				this.statuslist=statuslist;
 //		}
 
-		
+		private TypedArray statusphoto ;
+
 
 		@Override
 		public View getView(final int position, View convertView, ViewGroup parent) {
@@ -246,6 +298,11 @@ public class MyTimeLine extends Fragment{
 			LayoutInflater inflater = (LayoutInflater) getActivity()
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			convertView = inflater.inflate(R.layout.mytimeline, parent, false);
+			
+			statusphoto = getResources().obtainTypedArray(R.array.status_photos);
+
+			
+			
 			profile_iv = (ImageView) convertView.findViewById(R.id.profilePic);
 			name = (TextView) convertView.findViewById(R.id.name);
 			timestamp = (TextView) convertView.findViewById(R.id.timestamp);
@@ -300,9 +357,10 @@ public class MyTimeLine extends Fragment{
 				}
 			});
 			
+			Random r= new Random();
+			status_iv.setImageResource(statusphoto.getResourceId(r.nextInt(8), 1));
 			
-			
-			status_iv.setImageResource(R.drawable.adminblock);
+//			status_iv.setImageResource(R.drawable.adminblock);
 			name.setText(IGEFSharedPrefrence.getFULL_NAME());
 			timestamp.setText(parseDate(position));
 			status.setText(statuslist.get(position).mystatus);
