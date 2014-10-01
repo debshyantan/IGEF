@@ -73,6 +73,14 @@ public class UserTask extends Fragment{
 				       getActivity().startActivity(intent);
 					
 				}
+				if(position==4){
+					getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new CollegeUpdates()).addToBackStack(null).commit();
+	
+				}
+				if(position==5){
+					getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new Assignments()).addToBackStack(null).commit();
+	
+				}
 				
 				if(position==6){
 					

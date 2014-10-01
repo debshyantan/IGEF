@@ -2,7 +2,40 @@ package com.userscreen;
 
 public class Custom {
 
-	String name,status,timestamp, friendname, roll_no;
+	String name,status,timestamp, friendname, roll_no, title;
+	String cname,ctime,cnews;
+	public String getCname() {
+		return cname;
+	}
+
+	public void setCname(String cname) {
+		this.cname = cname;
+	}
+
+	public String getCtime() {
+		return ctime;
+	}
+
+	public void setCtime(String ctime) {
+		this.ctime = ctime;
+	}
+
+	public String getCnews() {
+		return cnews;
+	}
+
+	public void setCnews(String cnews) {
+		this.cnews = cnews;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
 	String myname,mystatus,mytimestamp,mystatus_id;
 
 	public String getMyname() {

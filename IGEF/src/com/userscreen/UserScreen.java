@@ -7,6 +7,9 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBar.Tab;
 import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.SocialNetwork.igef.R;
 
@@ -100,7 +103,38 @@ setContentView(R.layout.first);
   
     
 }
-//private boolean doubleBackToExitPressedOnce = false;
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.userscreenmenu, menu);
+
+       return true;	
+
+
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Take appropriate action for each action item click
+		switch (item.getItemId()) {
+		case R.id.writepost:
+			
+			viewPager.setCurrentItem(2);
+			
+			getSupportFragmentManager().beginTransaction().replace(R.id.container, new PostStatus()).addToBackStack(null).commit();
+			
+	
+			break;
+
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+
+		return false;
+
+
+		}
 
 @Override
 public void onBackPressed() {
