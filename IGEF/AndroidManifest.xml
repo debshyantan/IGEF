@@ -43,16 +43,18 @@
             android:label="@string/app_name"
     android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
             
-             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            
         </activity>
         
          <activity android:name="com.SocialNetwork.igef.StartScreen"
              android:label="@string/app_name"
-    android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
+    android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+              <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+         </activity>
         
         <activity
             android:name="com.SocialNetwork.igef.IgefSocailNetwork"

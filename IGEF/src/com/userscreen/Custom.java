@@ -4,12 +4,53 @@ public class Custom {
 
 	String name,status,timestamp, friendname, roll_no, title;
 	String cname,ctime,cnews;
+	String tname,atime, ldate, section,adetails;
 	public String getCname() {
 		return cname;
 	}
 
 	public void setCname(String cname) {
 		this.cname = cname;
+	}
+
+	public String getTname() {
+		return tname;
+	}
+
+	public void setTname(String tname) {
+		this.tname = tname;
+	}
+
+	public String getAtime() {
+		return atime;
+	}
+
+	public void setAtime(String atime) {
+		this.atime = atime;
+	}
+
+	public String getLdate() {
+		return ldate;
+	}
+
+	public void setLdate(String ldate) {
+		this.ldate = ldate;
+	}
+
+	public String getSection() {
+		return section;
+	}
+
+	public void setSection(String section) {
+		this.section = section;
+	}
+
+	public String getAdetails() {
+		return adetails;
+	}
+
+	public void setAdetails(String adetails) {
+		this.adetails = adetails;
 	}
 
 	public String getCtime() {

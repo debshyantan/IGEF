@@ -67,22 +67,22 @@ public class UserTask extends Fragment{
 					getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new MyTimeLine()).addToBackStack(null).commit();
 	
 				}
+//				if(position==3){
+//
+//					Intent intent=new Intent(getActivity(),contactlist.class);
+//				       getActivity().startActivity(intent);
+//					
+//				}
 				if(position==3){
-
-					Intent intent=new Intent(getActivity(),contactlist.class);
-				       getActivity().startActivity(intent);
-					
-				}
-				if(position==4){
 					getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new CollegeUpdates()).addToBackStack(null).commit();
 	
 				}
-				if(position==5){
+				if(position==4){
 					getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new Assignments()).addToBackStack(null).commit();
 	
 				}
 				
-				if(position==6){
+				if(position==5){
 					
 					new clearLogouttask(getActivity()).execute();
 				

@@ -41,7 +41,7 @@
         <item >Update Profile</item>
         <item >View Timeline</item>
        <!--    <item >My Classmates</item>--> 
-        <item >Start Conversation</item>
+      <!--   <item >Start Conversation</item> -->
          <item >College Updates</item>
         ,<item >Assignments</item>
    <!--      <item >Update Profile</item> --> 
@@ -54,7 +54,7 @@
         <item>@drawable/write_post</item>
         <item>@drawable/view_profile</item>
         <item>@drawable/timeline</item>
-        <item>@drawable/conversations</item>
+      <!--    <item>@drawable/conversations</item>   -->
         <item>@drawable/college_updates</item>
         <item>@drawable/assignments</item>
         <item>@drawable/logout</item>

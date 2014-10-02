@@ -260,8 +260,8 @@ public final class R {
 		public static final int abc_textfield_searchview_right_holo_light = 0x7f02005c;
 	}
 	public static final class id {
-		public static final int CropOverlayView = 0x7f050077;
-		public static final int ImageView_image = 0x7f050076;
+		public static final int CropOverlayView = 0x7f05007d;
+		public static final int ImageView_image = 0x7f05007c;
 		public static final int action_bar = 0x7f05003d;
 		public static final int action_bar_activity_content = 0x7f050021;
 		public static final int action_bar_container = 0x7f05003c;
@@ -354,8 +354,8 @@ public final class R {
 		public static final int abc_search_dropdown_item_icons_2line = 0x7f030015;
 		public static final int abc_search_view = 0x7f030016;
 		public static final int abc_simple_decor = 0x7f030017;
-		public static final int crop_image_view = 0x7f030021;
-		public static final int support_simple_spinner_dropdown_item = 0x7f03003b;
+		public static final int crop_image_view = 0x7f030022;
+		public static final int support_simple_spinner_dropdown_item = 0x7f03003c;
 	}
 	public static final class string {
 		public static final int abc_action_bar_home_description = 0x7f070007;

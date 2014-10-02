@@ -31,7 +31,14 @@ public class App extends Application {
     public  ArrayList<Custom> statuslist;
     public  ArrayList<Custom> FriendsArraylist;
     public ArrayList<Custom> clglist;
+    public ArrayList<Custom> asgnlist;
 
+	public ArrayList<Custom> getAsgnlist() {
+		return asgnlist;
+	}
+	public void setAsgnlist(ArrayList<Custom> asgnlist) {
+		this.asgnlist = asgnlist;
+	}
 	public ArrayList<Custom> getClglist() {
 		return clglist;
 	}
