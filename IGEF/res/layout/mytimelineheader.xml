@@ -10,13 +10,12 @@
         android:layout_height="150dp"
         android:scaleType="fitXY" />
 
-    <ImageView
+    <com.SocialNetwork.CustomFonts.RoundImageView
         android:id="@+id/profilephoto"
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="-37dp"
-        android:background="@drawable/img" />
+        android:layout_marginTop="-37dp" />
 
     <com.SocialNetwork.CustomFonts.ProfileTaskFontClass
         android:id="@+id/myname"

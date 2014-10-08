@@ -3,6 +3,7 @@ package com.userscreen;
 
 
 
+import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
@@ -31,8 +32,11 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.TypedArray;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Vibrator;
 import android.support.v4.app.Fragment;
 import android.text.format.DateUtils;
@@ -45,6 +49,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.Chat.App;
 import com.Prefrence.IGEFSharedPrefrence;
@@ -61,6 +66,7 @@ public class MyTimeLine extends Fragment{
 	String d_status, d_name, d_roll, d_created;
 
 	public static ArrayList<Custom> statuslist;
+	 Bitmap b;
 	
 	static MyTimelineAdapter adapter;
 	
@@ -78,7 +84,6 @@ public class MyTimeLine extends Fragment{
 	            R.drawable.clgh
 	    };
 ImageView coverphoto;
-	 
 
 
 	@Override
@@ -101,15 +106,32 @@ ImageView coverphoto;
 		
 		//setting the image of cover photo
 		coverphoto=(ImageView)myheader.findViewById(R.id.coverphoto);
-		int pos=Integer.parseInt(IGEFSharedPrefrence.getCOVERPHOTO());
 		
-		coverphoto.setImageResource(mImageIds[pos]);
+		if(IGEFSharedPrefrence.getCOVERPHOTO().equals("null")){
+			coverphoto.setImageResource(R.drawable.indogloablclg);
+		}
+		else{
+			int pos=Integer.parseInt(IGEFSharedPrefrence.getCOVERPHOTO());
+			
+			coverphoto.setImageResource(mImageIds[pos]);
+		}
+		
 		
 		//setting the name of student
 		TextView myname=(TextView)myheader.findViewById(R.id.myname);
 		TextView myrollno=(TextView)myheader.findViewById(R.id.myroolno);
 		TextView myEmailid=(TextView)myheader.findViewById(R.id.myEmaillid);
 		TextView MyContactno=(TextView)myheader.findViewById(R.id.myContno);
+		
+		// setting the image in image view from SDcard
+		  final ImageView iv = (ImageView)myheader.findViewById(R.id.profilephoto);
+		  
+	      File root = android.os.Environment.getExternalStorageDirectory();
+	      b=BitmapFactory.decodeFile(root.getAbsolutePath() + "/ProfilePhoto/MyprofilePhoto.jpg");
+
+//		   b = BitmapFactory.decodeFile(root.getAbsolutePath() + "/ProfilePhoto/MyprofilePhoto.jpg", options);
+		  iv.setImageBitmap(b);
+		  iv.setBackgroundResource(R.drawable.img);
 		
 		myname.setText(IGEFSharedPrefrence.getFULL_NAME());
 		myrollno.setText("Roll No : " + IGEFSharedPrefrence.getROLL_NO());
@@ -289,6 +311,7 @@ ImageView coverphoto;
 //				this.statuslist=statuslist;
 //		}
 
+		Bitmap  bb;
 		private TypedArray statusphoto ;
 
 
@@ -301,17 +324,25 @@ ImageView coverphoto;
 			
 			statusphoto = getResources().obtainTypedArray(R.array.status_photos);
 
+//			File root = android.os.Environment.getExternalStorageDirectory();
+//		      bb=BitmapFactory.decodeFile(root.getAbsolutePath() + "/ProfilePhoto/MyprofilePhoto.jpg");
+
+			
+			profile_iv = (ImageView) convertView.findViewById(R.id.myyprofilePic);
+			profile_iv.setImageBitmap(b);
+			 
+			
+			name = (TextView) convertView.findViewById(R.id.myyname);
+			timestamp = (TextView) convertView.findViewById(R.id.myytimestamp);
+			status = (TextView) convertView.findViewById(R.id.myytxtStatusMsg);
 			
 			
-			profile_iv = (ImageView) convertView.findViewById(R.id.profilePic);
-			name = (TextView) convertView.findViewById(R.id.name);
-			timestamp = (TextView) convertView.findViewById(R.id.timestamp);
-			status = (TextView) convertView.findViewById(R.id.txtStatusMsg);
 			
 
 			status_iv = (ImageView) convertView.findViewById(R.id.feedImage1);
-			profile_iv.setImageResource(R.drawable.ic_launcher);
 			delete_iv=(ImageView)convertView.findViewById(R.id.delete);
+			
+			
 			
 			delete_iv.setOnClickListener(new OnClickListener() {
 				
@@ -426,6 +457,7 @@ ImageView coverphoto;
     	protected void onPreExecute() {
     		pdd=new ProgressDialog(getActivity());
     		 pdd.setMessage(" Retrieving Your Status ");
+    		 pdd.setCancelable(false);
     		 pdd.show();
     		statuslist=new ArrayList<Custom>();
     	};

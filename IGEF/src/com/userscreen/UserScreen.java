@@ -12,6 +12,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.SocialNetwork.igef.R;
+import com.SocialNewtwork.AsyncTask.ProfilePhotoAsyncTask;
 
 
 public class UserScreen extends ActionBarActivity implements ActionBar.TabListener{
@@ -102,6 +103,10 @@ setContentView(R.layout.first);
     
   
     
+    
+  //Asynk Task to download Profile Photo of User
+	new ProfilePhotoAsyncTask(UserScreen.this).execute();
+
 }
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

@@ -4,7 +4,8 @@
     <LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical" >
+        android:orientation="vertical" 
+        android:background="@color/feed_bg">
 
         <com.handmark.pulltorefresh.library.PullToRefreshListView
             xmlns:ptr="http://schemas.android.com/apk/res-auto"
@@ -16,5 +17,6 @@
             android:layout_marginTop="5dp"
             android:divider="@null"
             android:dividerHeight="8dp"
+            android:background="@color/feed_bg"
             ptr:ptrMode="both" />
     </LinearLayout>

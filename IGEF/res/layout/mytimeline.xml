@@ -32,13 +32,13 @@
             android:paddingLeft="@dimen/feed_item_padding_left_right"
             android:paddingRight="@dimen/feed_item_padding_left_right" >
 
-            <ImageView
-                android:id="@+id/profilePic"
+            <com.SocialNetwork.CustomFonts.RoundImageView
+                android:id="@+id/myyprofilePic"
                 android:layout_width="@dimen/feed_item_profile_pic"
                 android:layout_height="@dimen/feed_item_profile_pic"
                 android:scaleType="fitCenter"
-                android:src="@drawable/ic_launcher" >
-            </ImageView>
+                android:src="@drawable/ic_launcher" />
+          
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -47,7 +47,7 @@
                 android:paddingLeft="@dimen/feed_item_profile_info_padd" >
 
                 <com.SocialNetwork.CustomFonts.MyProfileFont
-                    android:id="@+id/name"
+                    android:id="@+id/myyname"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:text="Profile Name"
@@ -55,7 +55,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/timestamp"
+                    android:id="@+id/myytimestamp"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:text="Date and Time"
@@ -65,7 +65,7 @@
         </LinearLayout>
 
         <com.SocialNetwork.CustomFonts.NewsFeedFontclass
-            android:id="@+id/txtStatusMsg"
+            android:id="@+id/myytxtStatusMsg"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="5dp"

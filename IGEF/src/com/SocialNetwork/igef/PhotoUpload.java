@@ -37,6 +37,7 @@ import android.widget.Toast;
 
 import com.Prefrence.IGEFSharedPrefrence;
 import com.SocialNetwork.Photo.Base64;
+import com.SocialNewtwork.AsyncTask.ProfilePhotoAsyncTask;
 import com.edmodo.cropper.CropImageView;
 import com.userscreen.UserScreen;
 
@@ -87,6 +88,7 @@ public class PhotoUpload extends ActionBarActivity {
 		crop = (ImageView) findViewById(R.id.crop);
 		uploadphoto = (ImageView) findViewById(R.id.uploadphoto);
 		croppedImageView = (ImageView) findViewById(R.id.cropedphoto);
+		
 		// table rows
 		photochooserrow = (TableRow) findViewById(R.id.photochooserrow);
 		editorrow = (TableRow) findViewById(R.id.editorrow);
@@ -224,13 +226,18 @@ public class PhotoUpload extends ActionBarActivity {
 	                                	
 	                                			if (IGEFSharedPrefrence.getCOVERPHOTO().equals("")) {
 	                                					System.out.println("no COver Photo Set --> moving to CoverPhotoChooser activity");
-	                      				
-	                                					Intent intt=new Intent(PhotoUpload.this , CoverPhotoChooser.class);
+	                                					
+//	                                					//Asynk Task to download Profile Photo of User
+//	                									new ProfilePhotoAsyncTask(PhotoUpload.this).execute();
+	                                					
+	                									Intent intt=new Intent(PhotoUpload.this , CoverPhotoChooser.class);
 	                                					startActivity(intt);
 	                                					finish();	                      				
 	                                				}
 	                                			else{
 	                      	        	  
+//	                                				//Asynk Task to download Profile Photo of User
+//                									new ProfilePhotoAsyncTask(PhotoUpload.this).execute();
 	                      	          
 	                                					Intent i = new Intent(PhotoUpload.this, UserScreen.class);
 	                                					startActivity(i);
