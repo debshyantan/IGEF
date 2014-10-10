@@ -53,10 +53,6 @@ public class LoginStudent extends Fragment {
 	Boolean isInternetPresent = false;
 	ConnectionDetector cd;
 
-	private static final String APP_ID = "13032";
-	private static final String AUTH_KEY = "rQHh7DVeAbrOPmn";
-	private static final String AUTH_SECRET = "5XXkbUK9pBg8L9c";
-	private static ProgressBar progressBar;
 	
 	
 
@@ -251,13 +247,6 @@ public class LoginStudent extends Fragment {
 											
 											flag = 1;
 
-											progressBar = (ProgressBar) rootView
-													.findViewById(R.id.progressBar);
-											// QBSettings.getInstance().fastConfigInit(APP_ID,
-											// AUTH_KEY, AUTH_SECRET);
-											// QBAuth.createSession(LoginStudent.this);
-											//
-
 										}
 
 										else {
@@ -334,11 +323,9 @@ public class LoginStudent extends Fragment {
 											"Login Successfull",
 											Toast.LENGTH_SHORT).show();
 									
-//									rr = new MyReciever();
-//									IntentFilter iff = new IntentFilter();
-//									iff.addAction("filecreation");
-//									iff.addCategory(Intent.CATEGORY_DEFAULT);
-//									getActivity().registerReceiver(rr, iff);
+									Intent in=new Intent(getActivity(),UserScreen.class);
+									getActivity().startActivity(in);
+									getActivity().finish();
 
 								}
 							}
@@ -409,26 +396,5 @@ public class LoginStudent extends Fragment {
 
 	}
 
-	// @Override
-	// public void onComplete(Result result) {
-	// // TODO Auto-generated method stub
-	// progressBar.setVisibility(View.GONE);
-	//
-	// if (result.isSuccess()) {
-	// Intent intent = new Intent(getActivity(), UserScreen.class);
-	// startActivity(intent);
-	// getActivity().finish();
-	// } else {
-	// AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
-	// dialog.setMessage("Error(s) occurred. Look into DDMS log for details, " +
-	// "please. Errors: " + result.getErrors()).create().show();
-	// }
-	//
-	// }
-	//
-	// @Override
-	// public void onComplete(Result result, Object context) {
-	// // TODO Auto-generated method stub
-	//
-	// }
+	
 }

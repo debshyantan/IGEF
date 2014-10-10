@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F2F992"
+    android:background="@color/feed_bg"
     app:inner_parallax_factor="1.9"
     app:parallax_factor="1.9"
     app:parallax_views_num="9"
@@ -26,7 +26,7 @@
             android:layout_marginTop="-50dp"
             android:src="@drawable/igef" />
 
-        <com.SocialNetwork.CustomFonts.ProfileTaskFontClass
+        <com.SocialNetwork.CustomFonts.MyProfileFont
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -35,49 +35,40 @@
             android:text="Welcome to IGEF Networks"
             android:textSize="30sp"
             android:textStyle="bold" />
-        <ImageView
-            android:id="@+id/imageView1"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/adminblock" />
+        
+     <com.SocialNetwork.CustomFonts.NewsFeedFontclass
+         	android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="8dp"
+            android:textSize="20sp"
+            android:text="Indo Global Colleges is Punjab's leading Education Group with 4 Institutions, 4000 + Alumni, 3000+ Students and 250+ Faculty drawn from distinguished and highly accomplished backgrounds.'IGEF Networks' is the new platform launched by this esteemed educational institution with the following features :" />
 
         <ImageView
             android:id="@+id/newsfeeds"
             android:layout_width="match_parent"
-            android:layout_height="130dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:background="@drawable/collegenewsfeed" />
-
-        <ImageView
-            android:id="@+id/chat"
-            android:layout_width="match_parent"
-            android:layout_height="130dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/chat" />
-
-        <ImageView
-            android:id="@+id/assignment"
-            android:layout_width="match_parent"
-            android:layout_height="130dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/professorassignment" />
+            android:background="@drawable/features2" />
 
         <ImageView
             android:id="@+id/signupbutton"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:layout_centerInParent="true"
+            android:layout_marginTop="15dp"
             android:layout_gravity="center_horizontal"
             android:src="@drawable/signupbutton" />
 
-        <com.SocialNetwork.CustomFonts.RegLoginFontclass
+        <com.SocialNetwork.CustomFonts.ProfileTaskFontClass
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:text="  By creating your account your agree to IGEF&apos;s Terms of Service , Privacy policy and cookie use. Your profile will be public. You can change this in Account Settings." />
+            android:text="By creating your account your agree to IGEF&apos;s Terms of Service , Privacy policy and cookie use. Your profile will be public. You can change this in Account Settings." />
     </LinearLayout>
 
 </com.nirhart.parallaxscroll.views.ParallaxScrollView>

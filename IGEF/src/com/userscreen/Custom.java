@@ -5,6 +5,31 @@ public class Custom {
 	String name,status,timestamp, friendname, roll_no, title;
 	String cname,ctime,cnews;
 	String tname,atime, ldate, section,adetails;
+	String g_roll, g_msg, g_time;
+	public String getG_roll() {
+		return g_roll;
+	}
+
+	public void setG_roll(String g_roll) {
+		this.g_roll = g_roll;
+	}
+
+	public String getG_msg() {
+		return g_msg;
+	}
+
+	public void setG_msg(String g_msg) {
+		this.g_msg = g_msg;
+	}
+
+	public String getG_time() {
+		return g_time;
+	}
+
+	public void setG_time(String g_time) {
+		this.g_time = g_time;
+	}
+
 	public String getCname() {
 		return cname;
 	}

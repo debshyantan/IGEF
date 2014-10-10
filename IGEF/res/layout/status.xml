@@ -76,7 +76,7 @@
             android:background="@color/white"
             android:scaleType="fitXY"
             android:visibility="visible"
-            android:src="@drawable/adminblock" />
+            android:src="@drawable/clgd" />
     </LinearLayout>
  
 </LinearLayout>

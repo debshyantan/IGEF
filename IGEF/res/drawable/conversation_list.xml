@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+     <com.handmark.pulltorefresh.library.PullToRefreshListView
+         xmlns:ptr="http://schemas.android.com/apk/res-auto"
+         android:id="@+id/c_list"
+         android:layout_width="match_parent"
+         android:layout_height="350dp"
+         android:layout_marginLeft="5dp"
+         android:layout_marginRight="5dp"
+         android:layout_marginTop="5dp"
+         android:divider="@null"
+         android:dividerHeight="8dp"
+         ptr:ptrMode="both" />
+        
+    <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+     >
+    
+         <EditText
+             android:id="@+id/text_msg"
+             android:layout_width="match_parent"
+             android:layout_height="100dp"
+             android:layout_toLeftOf="@+id/snd"
+             android:inputType="textMultiLine" />
+
+         <ImageView
+             android:id="@+id/snd"
+             android:layout_width="50dp"
+             android:layout_height="50dp"
+             android:layout_alignParentRight="true"
+             android:layout_centerVertical="true"
+             android:src="@drawable/send" />
+   
+    </RelativeLayout>
+    
+
+</LinearLayout>

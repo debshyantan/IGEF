@@ -81,7 +81,7 @@
             android:layout_height="200dp"
             android:background="@color/white"
             android:scaleType="fitXY"
-            android:src="@drawable/adminblock"
+			android:src="@drawable/clgd"        
             android:visibility="visible" />
     </LinearLayout>
 

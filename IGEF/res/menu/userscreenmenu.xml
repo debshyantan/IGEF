@@ -8,6 +8,12 @@
         android:icon="@drawable/ic_action_edit"
         android:title="Post Status"
         yourapp:showAsAction="ifRoom"/>
+    
+    <item
+        android:id="@+id/groupmsg"
+        android:icon="@drawable/ic_action_new_email"
+        android:title="Start Conversation"
+        yourapp:showAsAction="ifRoom"/>
    
     
 </menu>

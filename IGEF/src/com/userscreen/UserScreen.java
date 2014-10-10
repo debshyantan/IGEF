@@ -87,20 +87,7 @@ setContentView(R.layout.first);
                 .setTabListener(this));
     }
 
-//   for (int tab_name : tabs) {
-////    	  actionBar.addTab(actionBar.newTab().setCustomView(R.layout.tab_item)
-////                  .setTabListener(this));
-//	   LinearLayout view = (LinearLayout) getLayoutInflater().inflate(R.layout.tab_item, null);
-//	 
-//       Tab newtab=actionBar.newTab();
-//       newtab.setCustomView(view);
-//       ImageView icon = (ImageView) newtab.getCustomView().findViewById(R.id.image_tab);
-//       icon.setImageResource(tab_name);
-//       newtab.setTabListener(this);
-//       actionBar.addTab(newtab);
-//    
-//      }  
-    
+
   
     
     
@@ -131,6 +118,15 @@ setContentView(R.layout.first);
 			
 	
 			break;
+			
+		case R.id.groupmsg:
+			
+			viewPager.setCurrentItem(2);
+			
+			getSupportFragmentManager().beginTransaction().replace(R.id.container, new GroupMsg()).addToBackStack(null).commit();
+			
+	
+			break;	
 
 		default:
 			return super.onOptionsItemSelected(item);
