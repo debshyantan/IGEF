@@ -19,6 +19,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import Tool.ConnectionDetector;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -30,20 +31,26 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.Chat.App;
 import com.Prefrence.IGEFSharedPrefrence;
 import com.SocialNetwork.igef.R;
 
+import com.google.android.gms.internal.el;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.squareup.picasso.Picasso;
+import com.userscreen.MyTimeLine.GetMyStatus;
 
 public class FriendsList extends Fragment {
 	PullToRefreshListView listview;
 
 	ListView lv;
-	ImageView profile_iv;
-	TextView name, roll_no;
+
+	
+	Boolean isInternetPresent = false;
+	ConnectionDetector cd;
 	
 	    public  ArrayList<Custom> FriendsArraylist;
 
@@ -57,6 +64,15 @@ public class FriendsList extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.userscreen, container, false);
+		
+		//connection checking
+			cd = new ConnectionDetector(getActivity().getApplicationContext());
+			isInternetPresent = cd.isConnectingToInternet();
+			System.out.println("Network states:" + isInternetPresent);
+			
+			
+			
+			
 
 		listview=(PullToRefreshListView)rootView.findViewById(R.id.list);
 		lv=listview.getRefreshableView();
@@ -69,7 +85,13 @@ public class FriendsList extends Fragment {
 			public void onPullDownToRefresh(
 					PullToRefreshBase<ListView> refreshView) {
 				
+				if (isInternetPresent) {
+				
 				//onPllTorefresh Asynktask
+					
+					try {
+						
+					
 					new AsyncTask<Void, Void, Void>(){
 						String Value_friend;
 						
@@ -83,15 +105,23 @@ public class FriendsList extends Fragment {
 						
 						@Override
 						protected Void doInBackground(Void... params) {
+							
+							HttpClient httpclient = null;
+							HttpPost httppost = null;
+							List<NameValuePair> nameValuePairs = null;
 							// TODO Auto-generated method stub
-							HttpClient httpclient = new DefaultHttpClient();
-							HttpPost httppost = new HttpPost(
+							try {
+								
+							
+							 httpclient = new DefaultHttpClient();
+							 httppost = new HttpPost(
 									"http://shypal.com/IGEF/task_manager/getallfriends.php");
-							List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+							nameValuePairs = new ArrayList<NameValuePair>();
 							nameValuePairs.add(new BasicNameValuePair("department",
 									IGEFSharedPrefrence.getDEPARTMENT()));
 							nameValuePairs.add(new BasicNameValuePair("year",
 									IGEFSharedPrefrence.getYEAR()));
+							
 							try {
 								httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 							} catch (UnsupportedEncodingException e) {
@@ -150,9 +180,13 @@ public class FriendsList extends Fragment {
 										String full_name = c.getString("full_name");
 
 										String roll_no = c.getString("roll_no");
+										String profilepicurls = c.getString("profilepicurl");
+										System.out.println(profilepicurls);
+										
 										Custom d = new Custom();
 										d.setFriendname(full_name);
 										d.setRoll_no(roll_no);
+										d.setProfilepicurls(profilepicurls);
 										FriendsArraylist.add(d);
 									} catch (JSONException e) {
 										// TODO Auto-generated catch block
@@ -161,6 +195,11 @@ public class FriendsList extends Fragment {
 
 								}
 							}
+							
+							} catch (Exception e) {
+								// TODO: handle exception
+							}
+							
 							return null;
 						}
 						@Override
@@ -171,7 +210,17 @@ public class FriendsList extends Fragment {
 						};
 						
 					}.execute();
+					
+					} catch (Exception e) {
+						// TODO: handle exception
+					}
 				
+				}
+				
+				else {
+
+							Toast.makeText(getActivity(), "No Internet Connection", Toast.LENGTH_LONG).show();
+						}
 				
 				
 			}
@@ -187,7 +236,7 @@ public class FriendsList extends Fragment {
 		
 		
 		
-		
+		if (isInternetPresent) {
 		
 		new AsyncTask<Void, Void, Void>() {
 			String Value_friend;
@@ -267,9 +316,13 @@ public class FriendsList extends Fragment {
 							String full_name = c.getString("full_name");
 
 							String roll_no = c.getString("roll_no");
+							String profilepicurls = c.getString("profilepicurl");
+							System.out.println(profilepicurls);
+							
 							Custom d = new Custom();
 							d.setFriendname(full_name);
 							d.setRoll_no(roll_no);
+							d.setProfilepicurls(profilepicurls);
 							FriendsArraylist.add(d);
 						} catch (JSONException e) {
 							// TODO Auto-generated catch block
@@ -289,6 +342,13 @@ public class FriendsList extends Fragment {
 
 		}.execute();
 
+}
+		
+		else {
+
+					Toast.makeText(getActivity(), "No Internet Connection", Toast.LENGTH_LONG).show();
+				}
+		
 		return rootView;
 
 	}
@@ -317,16 +377,61 @@ public class FriendsList extends Fragment {
 		public View getView(int position, View convertView, ViewGroup parent) {
 			// TODO Auto-generated method stub
 
+			viewholder holder;
+			if (convertView==null) {
+				holder=new viewholder();
+			
 			LayoutInflater inflater = (LayoutInflater) getActivity()
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			convertView = inflater.inflate(R.layout.friends, parent, false);
-			profile_iv = (ImageView) convertView.findViewById(R.id.img);
-			name = (TextView) convertView.findViewById(R.id.name);
-			roll_no = (TextView) convertView.findViewById(R.id.roll);
-			name.setText(FriendsArraylist.get(position).friendname);
-			roll_no.setText(FriendsArraylist.get(position).roll_no);
+			
+			
+			
+			
+			holder.profile_iv = (ImageView) convertView.findViewById(R.id.img);
+			
+			
+			
+			holder.name = (TextView) convertView.findViewById(R.id.name);
+			holder.roll_no = (TextView) convertView.findViewById(R.id.roll);
+			
+			}
+			else {
+				holder=(viewholder)convertView.getTag();
+				}
+			try{
+			String friendspicurl=Custom.getImageurl() + FriendsArraylist.get(position).getProfilepicurls();
+			System.out.println(friendspicurl);
+			if (friendspicurl.equals("http://shypal.com/IGEF/task_manager/uploadedimages/null")) {
+				holder.profile_iv.setImageResource(R.drawable.ic_launcher);
+				
+				System.out.println("No Image of " +FriendsArraylist.get(position).friendname);
+			}
+			else {
+				
+				System.out.println("Loading the image of " +FriendsArraylist.get(position).friendname );
+				
+				Picasso.with(getActivity())
+		        .load(friendspicurl)
+		        .placeholder(R.drawable.ic_launcher)
+		        .resize(100	, 100)
+		        .centerCrop()
+		        .into(holder.profile_iv);
+			}
+			
+			holder.name.setText(FriendsArraylist.get(position).friendname);
+			holder.roll_no.setText(FriendsArraylist.get(position).roll_no);
+			}
+			catch(Exception e){
+				System.out.println(e);
+			}
 
 			return convertView;
+		}
+		
+		class viewholder{
+			TextView roll_no,name;
+			ImageView profile_iv;
 		}
 
 	}

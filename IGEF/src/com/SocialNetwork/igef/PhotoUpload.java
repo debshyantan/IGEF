@@ -14,6 +14,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
+import Tool.ConnectionDetector;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
@@ -55,6 +56,8 @@ public class PhotoUpload extends ActionBarActivity {
 	BitmapFactory.Options options;
 	ActionBar act;
 	ProgressDialog pd;
+	Boolean isInternetPresent = false;
+	ConnectionDetector cd;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -62,6 +65,12 @@ public class PhotoUpload extends ActionBarActivity {
 		setContentView(R.layout.photoupload);
 		act=getSupportActionBar();
 		act.setTitle("Upload Profile Photo");
+		
+		
+		//connection checking
+		cd = new ConnectionDetector(getApplicationContext());
+		isInternetPresent = cd.isConnectingToInternet();
+		System.out.println("Network states:" + isInternetPresent);
 		
 		
 		cropImageView = (CropImageView) findViewById(R.id.CropImageView);
@@ -163,6 +172,8 @@ public class PhotoUpload extends ActionBarActivity {
 			
 			@Override
 			public void onClick(View v) {
+				
+				if (isInternetPresent) {
 				
 				  pd=new ProgressDialog(PhotoUpload.this);
             		pd.setTitle("Uploading Photo");
@@ -268,7 +279,11 @@ public class PhotoUpload extends ActionBarActivity {
 			
 				
 				
-				
+			}
+				else {
+
+					Toast.makeText(PhotoUpload.this, "No Internet Connection", Toast.LENGTH_LONG).show();
+				}
 
 			}
 

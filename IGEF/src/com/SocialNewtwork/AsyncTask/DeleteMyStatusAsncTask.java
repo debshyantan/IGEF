@@ -17,6 +17,7 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import Tool.ConnectionDetector;
 import android.R;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -46,6 +47,9 @@ public class DeleteMyStatusAsncTask extends AsyncTask<Void, Void, Void> {
 	ViewGroup container;
 	int flag;
 	
+	Boolean isInternetPresent = false;
+	ConnectionDetector cd;
+	
 	public DeleteMyStatusAsncTask(FragmentActivity activity, String mystatus_id, ArrayList<Custom> statuslist, int position, ListView lv) {
 	this.activity=activity;
 	this.mystatus_id=mystatus_id;
@@ -68,7 +72,12 @@ public class DeleteMyStatusAsncTask extends AsyncTask<Void, Void, Void> {
 		pd.setMessage("Wait While the staus is Deleting");
 		pd.show();
 		
-	
+		
+		//connection checking
+			cd = new ConnectionDetector(activity.getApplicationContext());
+			isInternetPresent = cd.isConnectingToInternet();
+			System.out.println("Network states:" + isInternetPresent);
+			
 		
 		
 	}
@@ -147,8 +156,16 @@ public class DeleteMyStatusAsncTask extends AsyncTask<Void, Void, Void> {
 			
 			@Override
 			public void run() {
+				Toast.makeText(activity, "Status Deleted", Toast.LENGTH_LONG).show();
 				
+				if (isInternetPresent) {
 				MyTimeLine.refreshMyStatus();
+				}
+				
+				else {
+
+							Toast.makeText(activity, "No Internet Connection", Toast.LENGTH_LONG).show();
+						}
 				Toast.makeText(activity, "Status Deleted", Toast.LENGTH_LONG).show();
 			
 			

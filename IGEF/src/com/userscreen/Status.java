@@ -23,6 +23,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import Tool.ConnectionDetector;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.AsyncTask;
@@ -37,22 +38,27 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.Chat.App;
 import com.Prefrence.IGEFSharedPrefrence;
 import com.SocialNetwork.igef.R;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.squareup.picasso.Picasso;
 
 public class Status extends Fragment {
 	PullToRefreshListView listview;
 	static ListView lv;
-	ImageView profile_iv, status_iv;
-	TextView name, status, timestamp;
+//	ImageView profile_iv, status_iv;
+//	TextView name, status, timestamp;
 	String d_status, d_name, d_roll, d_created;
 
 	public static ArrayList<Custom> statuslist;
     static MyAdapter adapter;
+    
+    Boolean isInternetPresent = false;
+	ConnectionDetector cd;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,7 +68,11 @@ public class Status extends Fragment {
 		lv=listview.getRefreshableView();
 		statuslist=((App)getActivity().getApplication()).getStatuslist();
 	
-	
+		//connection checking
+		cd = new ConnectionDetector(getActivity().getApplicationContext());
+		isInternetPresent = cd.isConnectingToInternet();
+		System.out.println("Network states:" + isInternetPresent);
+		
 		
 		
 		listview.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
@@ -72,13 +82,21 @@ public class Status extends Fragment {
 			@Override
 			public void onPullDownToRefresh(
 					PullToRefreshBase<ListView> refreshView) {
+				
+				
+				if (isInternetPresent) {
+					try {
+						
+					
 			
 								new AsyncTask<Void , Void, Void>(){
 									String value;
 									@Override
 									protected void onPreExecute() {
+										if (isInternetPresent) {
 										if(statuslist!=null){
 											statuslist.clear();
+										}
 										}
 										
 										
@@ -87,6 +105,9 @@ public class Status extends Fragment {
 								
 									protected Void doInBackground(
 											Void... params) {
+										
+										try {
+											
 										
 										
 
@@ -139,18 +160,22 @@ public class Status extends Fragment {
 							                         
 							                        String status_id = c.getString("status_id");
 							                        String status = c.getString("status");
+							                        System.out.println(status);
+							                        
+							                        
 							                        String full_name = c.getString("full_name");
 							                        String roll_no=c.getString("roll_no");
 							                        String department = c.getString("department");
 							                        String year = c.getString("year");
 							                        String section=c.getString("section");
 							                        String created_at=c.getString("created_at");
+							                        String statusprofilepicurl=c.getString("profilepicurl");
 							                        Custom d=new Custom();
 							                        
 							                        d.setStatus(status);
 							                        d.setName(full_name);
 							                        d.setTimestamp(created_at);
-							                        
+							                        d.setStatusprofilepicurl(statusprofilepicurl);
 							                        statuslist.add(d);
 							 
 							                       
@@ -164,7 +189,9 @@ public class Status extends Fragment {
 								        
 								        
 								        
-								        
+										} catch (Exception e) {
+											// TODO: handle exception
+										}
 								        
 								
 									
@@ -180,17 +207,21 @@ public class Status extends Fragment {
 									};
 									
 								}.execute();
+								
+					} catch (Exception e2) {
+
+					listview.onRefreshComplete();
+					
+					}
+				}
+				
+				else {
+
+							Toast.makeText(getActivity(), "No Internet Connection", Toast.LENGTH_LONG).show();
+						}
 							
 				
-//				new Handler().postDelayed(new Runnable() {
-//					
-//					@Override
-//					public void run() {
-//						listview.onRefreshComplete();
-//
-//						
-//					}
-//				}, 10000);
+
 				
 			}
 
@@ -203,6 +234,7 @@ public class Status extends Fragment {
 		});
 		
 		
+		if (isInternetPresent) {
 			
 		
 	    new AsyncTask<Void, Void, Void>() {
@@ -276,12 +308,14 @@ public class Status extends Fragment {
 	                        String year = c.getString("year");
 	                        String section=c.getString("section");
 	                        String created_at=c.getString("created_at");
+	                        String statusprofilepicurl=c.getString("profilepicurl");
+	                        
 	                        Custom d=new Custom();
 	                        
 	                        d.setStatus(status);
 	                        d.setName(full_name);
 	                        d.setTimestamp(created_at);
-	                        
+	                        d.setStatusprofilepicurl(statusprofilepicurl);
 	                        statuslist.add(d);
 	 
 	                       
@@ -314,7 +348,12 @@ public class Status extends Fragment {
 	    
 		
 		
+	}
 		
+		else {
+
+					Toast.makeText(getActivity(), "No Internet Connection", Toast.LENGTH_LONG).show();
+				}
 		
 	
 	
@@ -333,28 +372,72 @@ public class Status extends Fragment {
 		private TypedArray statusphoto ;
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			// TODO Auto-generated method stub
+			
+			viewholder holder;
+			if (convertView==null) {
+				holder=new viewholder();
+			
 			LayoutInflater inflater = (LayoutInflater) getActivity()
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			convertView = inflater.inflate(R.layout.status, parent, false);
 			statusphoto = getResources().obtainTypedArray(R.array.status_photos);
 
-			profile_iv = (ImageView) convertView.findViewById(R.id.profilePic);
-			name = (TextView) convertView.findViewById(R.id.name);
-			timestamp = (TextView) convertView.findViewById(R.id.timestamp);
-			status = (TextView) convertView.findViewById(R.id.txtStatusMsg);
+			
+			holder.name = (TextView) convertView.findViewById(R.id.name);
+			holder.timestamp = (TextView) convertView.findViewById(R.id.timestamp);
+			holder.status = (TextView) convertView.findViewById(R.id.txtStatusMsg);
 
-			status_iv = (ImageView) convertView.findViewById(R.id.feedImage1);
-			profile_iv.setImageResource(R.drawable.ic_launcher);
+			holder.status_iv = (ImageView) convertView.findViewById(R.id.feedImage1);
+			
+			
+			
+			
+			holder.profile_iv = (ImageView) convertView.findViewById(R.id.profilePic);
+			
+			
+			
+			
+			
+			convertView.setTag(holder);
+			System.out.println("student status--->"+ statuslist.get(position).getStatus());
+			}
+			else {
+				holder=(viewholder)convertView.getTag();
+				}
+			String statuspicurl=Custom.getImageurl() + statuslist.get(position).getStatusprofilepicurl();
+			
+			if (statuspicurl.equals("http://shypal.com/IGEF/task_manager/uploadedimages/null")) {
+				holder.profile_iv.setImageResource(R.drawable.ic_launcher);
+				
+				System.out.println("No Image of " +statuslist.get(position).name);
+			}
+			else {
+				
+				System.out.println("Loading the image of " +statuslist.get(position).name );
+				
+				System.out.println(statuspicurl);
+				
+				Picasso.with(getActivity())
+		        .load(statuspicurl)
+		        .placeholder(R.drawable.ic_launcher)
+		        .resize(100	, 100)
+		        .centerCrop()
+		        .into(holder.profile_iv);
+				
+			}
 			
 			Random r= new Random();
-			status_iv.setImageResource(statusphoto.getResourceId(r.nextInt(8), 1));
+			holder.status_iv.setImageResource(statusphoto.getResourceId(r.nextInt(8), 1));
 //			status_iv.setImageResource(R.drawable.adminblock);
-			name.setText(statuslist.get(position).name);
-			timestamp.setText(parseDate(position));
-			status.setText(statuslist.get(position).status);
-
+			holder.name.setText(statuslist.get(position).name);
+			holder.timestamp.setText(parseDate(position));
+			holder.status.setText(statuslist.get(position).status);
 			return convertView;
+		}
+		
+		class viewholder{
+			TextView name, timestamp, status;
+			ImageView status_iv,profile_iv;
 		}
 
 		public String parseDate(int position) throws ParseException {
@@ -472,15 +555,15 @@ public class Status extends Fragment {
 		                        String full_name = c.getString("full_name");
 		                        String roll_no=c.getString("roll_no");
 		                        String department = c.getString("department");
-		                        String year = c.getString("year");
 		                        String section=c.getString("section");
 		                        String created_at=c.getString("created_at");
+		                        String statusprofilepicurl=c.getString("profilepicurl");
 		                        Custom d=new Custom();
 		                        
 		                        d.setStatus(status);
 		                        d.setName(full_name);
 		                        d.setTimestamp(created_at);
-		                        
+		                        d.setStatusprofilepicurl(statusprofilepicurl);
 		                        statuslist.add(d);
 		 
 		                       

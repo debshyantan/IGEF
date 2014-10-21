@@ -1,8 +1,5 @@
 package com.userscreen;
 
-
-
-
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -27,6 +24,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import Tool.ConnectionDetector;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -85,6 +83,9 @@ public class MyTimeLine extends Fragment{
 	    };
 ImageView coverphoto;
 
+Boolean isInternetPresent = false;
+ConnectionDetector cd;
+
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -93,12 +94,30 @@ ImageView coverphoto;
 		listview=(PullToRefreshListView)rootView.findViewById(R.id.list);
 		lv=listview.getRefreshableView();
 		statuslist=((App)getActivity().getApplication()).getStatuslist();
+		//connection checking
+		cd = new ConnectionDetector(getActivity().getApplicationContext());
+		isInternetPresent = cd.isConnectingToInternet();
+		System.out.println("Network states:" + isInternetPresent);
+	
 			
 
+		if (isInternetPresent) {
+			//get my status
 		getstatus=new GetMyStatus();
 		getstatus.execute();
+			}
+		
+		else {
+
+		Toast.makeText(getActivity(), "No Internet Connection", Toast.LENGTH_LONG).show();
+				}
+
 		pd=new ProgressDialog(getActivity());
 		
+
+				
+				
+				
 		
 
 		
@@ -142,158 +161,7 @@ ImageView coverphoto;
 		
 		listview.getRefreshableView().addHeaderView(myheader);
 		
-		
-		
-		
-		
-		
-		
-		
-		
-//		listview.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
-//			
-//	
-//			
-//			
-//		
-//
-//			@Override
-//			public void onPullDownToRefresh(
-//					PullToRefreshBase<ListView> refreshView) {
-//			
-//								new AsyncTask<Void , Void, Void>(){
-//									String value;
-//									@Override
-//									protected void onPreExecute() {
-//										if(statuslist!=null){
-//											statuslist.clear();
-//										}
-//										
-//										
-//									};
-//									@Override
-//								
-//									protected Void doInBackground(
-//											Void... params) {
-//										
-//										
-//
-//										// TODO Auto-generated method stub
-//										HttpClient httpclient = new DefaultHttpClient();
-//									    HttpPost httppost = new HttpPost("http://shypal.com/IGEF/task_manager/selectstatus.php");
-//								        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-//								        nameValuePairs.add(new BasicNameValuePair("department", IGEFSharedPrefrence.getDEPARTMENT()));
-//								        nameValuePairs.add(new BasicNameValuePair("year", IGEFSharedPrefrence.getYEAR()));
-//								        
-//								        try {
-//											httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-//										} catch (UnsupportedEncodingException e) {
-//											// TODO Auto-generated catch block
-//											e.printStackTrace();
-//										}
-//								        
-//								        HttpResponse response = null;
-//								        try {
-//											response = httpclient.execute(httppost);
-//										} catch (ClientProtocolException e) {
-//											// TODO Auto-generated catch block
-//											e.printStackTrace();
-//										} catch (IOException e) {
-//											// TODO Auto-generated catch block
-//											e.printStackTrace();
-//										}
-//								        try {
-//											value=EntityUtils.toString(response.getEntity());
-//										} catch (ParseException e) {
-//											// TODO Auto-generated catch block
-//											e.printStackTrace();
-//										} catch (IOException e) {
-//											// TODO Auto-generated catch block
-//											e.printStackTrace();
-//										}
-//								        
-//								        System.out.println(value);
-//								        JSONArray result;
-//								        if (value != null) {
-//							                try {
-//							                    JSONObject jsonObj = new JSONObject(value);
-//							                     
-//							                    // Getting JSON Array node
-//							                    result = jsonObj.getJSONArray("result");
-//							 
-//							                    // looping through All Contacts
-//							                    for (int i = 0; i < result.length(); i++) {
-//							                        JSONObject c = result.getJSONObject(i);
-//							                         
-//							                        String my_status_id = c.getString("status_id");
-//							                        String my_status = c.getString("status");
-//							                        String my_full_name = c.getString("full_name");
-//							                        String my_roll_no=c.getString("roll_no");
-//							                        String my_department = c.getString("department");
-//							                        String my_year = c.getString("year");
-//							                        String my_section=c.getString("section");
-//							                        String my_created_at=c.getString("created_at");
-//							                        Custom d=new Custom();
-//							                       
-//							                        
-//							                        d.setMystatus(my_status);
-//							                        d.setMyname(my_full_name);
-//							                        d.setMytimestamp(my_created_at);
-//							                        d.setMystatus_id(my_status_id);
-//							                        
-//							                        statuslist.add(d);
-//							 
-//							                       
-//							                    }
-//							                } catch (JSONException e) {
-//							                    e.printStackTrace();
-//							                }
-//							            } else {
-//							                Log.e("ServiceHandler", "Couldn't get any data from the url");
-//							            }
-//								        
-//								        
-//								        
-//								        
-//								        
-//								
-//									
-//										
-//										return null;
-//									}
-//									@Override
-//									protected void onPostExecute(Void result) {
-//
-//										adapter=new MyTimelineAdapter(getActivity(), statuslist);
-//										lv.setAdapter(adapter);
-//										listview.onRefreshComplete();
-//									};
-//									
-//								}.execute();
-//							
-//				
-//
-//				
-//			}
-//
-//			@Override
-//			public void onPullUpToRefresh(
-//					PullToRefreshBase<ListView> refreshView) {
-//				// TODO Auto-generated method stub
-//			}
-//			
-//		});
-		
 	
-        
-        
-        
-        
-        
-		
-		
-		
-		
 		return rootView;
 	}
 	
@@ -302,14 +170,7 @@ ImageView coverphoto;
 
 
 	public   class MyTimelineAdapter extends BaseAdapter {
-//		FragmentActivity activity;
-//		ArrayList<Custom> statuslist;
-//
-//		public MyTimelineAdapter(FragmentActivity activity,
-//				ArrayList<Custom> statuslist) {
-//				this.activity=activity;
-//				this.statuslist=statuslist;
-//		}
+
 
 		Bitmap  bb;
 		private TypedArray statusphoto ;
@@ -363,9 +224,16 @@ ImageView coverphoto;
 						
 						adialog.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog,int id) {
+								if (isInternetPresent) {
 								
 						DeleteMyStatusAsncTask deletetask=new DeleteMyStatusAsncTask(getActivity(),  statuslist.get(position).mystatus_id , statuslist, position, lv);
 								deletetask.execute();
+								}
+								
+								else {
+
+							Toast.makeText(getActivity(), "No Internet Connection", Toast.LENGTH_LONG).show();
+							}
 								
 								
 							}
@@ -560,6 +428,7 @@ ImageView coverphoto;
 
 
 	public static void refreshMyStatus() {
+
 
 		new AsyncTask<Void, Void, Void>(){
 

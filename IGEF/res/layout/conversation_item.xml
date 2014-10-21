@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/coversationlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="5dp"
     android:background="@color/feed_bg"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:requiresFadingEdge="horizontal" >
     
     <LinearLayout 
     android:layout_width="match_parent"
@@ -20,15 +22,17 @@
          android:text="Roll No."
          android:textSize="20sp"
          android:textStyle="bold" />
+
      <TextView
          android:id="@+id/c_time"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
          android:layout_alignParentLeft="true"
-         android:text="timestamp" 
          android:layout_marginLeft="5dp"
-         android:textStyle="italic"
-         android:textSize="16sp"/>
+         android:text="timestamp"
+         android:textSize="16sp"
+         android:textStyle="italic" />
+
      </LinearLayout>
 
      <com.SocialNetwork.CustomFonts.NewsFeedFontclass

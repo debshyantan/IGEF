@@ -30,6 +30,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.userscreen.Status.MyAdapter;
 import com.userscreen.UserTask.MyprofileTaskAdapter.viewholder;
 
+import Tool.ConnectionDetector;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -44,12 +45,16 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class CollegeUpdates extends Fragment {
 	PullToRefreshListView listview;
 	static ListView lv;
 	public static ArrayList<Custom> clglist;
 	ClgAdapter adapter;
+	
+	Boolean isInternetPresent = false;
+	ConnectionDetector cd;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater,
@@ -60,6 +65,15 @@ public class CollegeUpdates extends Fragment {
 		lv=listview.getRefreshableView();
 		clglist=((App)getActivity().getApplication()).getClglist();
 		
+		//connection checking
+		cd = new ConnectionDetector(getActivity().getApplicationContext());
+		isInternetPresent = cd.isConnectingToInternet();
+		System.out.println("Network states:" + isInternetPresent);
+		
+		
+		
+		
+		if (isInternetPresent) {
 		
 		
 		new AsyncTask<Void , Void, Void>(){
@@ -168,6 +182,13 @@ public class CollegeUpdates extends Fragment {
 			};
 			
 		}.execute();
+		
+	}
+		
+		else {
+
+					Toast.makeText(getActivity(), "No Internet Connection", Toast.LENGTH_LONG).show();
+				}
 		listview.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
 
 			
@@ -175,6 +196,8 @@ public class CollegeUpdates extends Fragment {
 			@Override
 			public void onPullDownToRefresh(
 					PullToRefreshBase<ListView> refreshView) {
+				
+				if (isInternetPresent) {
 			
 								new AsyncTask<Void , Void, Void>(){
 									String value;
@@ -282,7 +305,12 @@ public class CollegeUpdates extends Fragment {
 									};
 									
 								}.execute();
-							
+				}
+				
+				else {
+
+							Toast.makeText(getActivity(), "No Internet Connection", Toast.LENGTH_LONG).show();
+						}
 
 				
 			}

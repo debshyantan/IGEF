@@ -22,13 +22,16 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import Tool.ConnectionDetector;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.drm.DrmStore.RightsStatus;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.format.DateUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -36,11 +39,14 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.Prefrence.IGEFSharedPrefrence;
 import com.SocialNetwork.igef.R;
+import com.google.android.gms.drive.internal.r;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
@@ -52,6 +58,8 @@ public class GroupMsg extends Fragment {
 	String msg;
 	public static ArrayList<Custom> msglist;
 	GroupAdapter adapter;
+	Boolean isInternetPresent = false;
+	ConnectionDetector cd;
 	
 	
 	@Override
@@ -64,6 +72,16 @@ public class GroupMsg extends Fragment {
 		msglist=new ArrayList<Custom>();
 		
 		
+		//connection checking
+		cd = new ConnectionDetector(getActivity().getApplicationContext());
+		isInternetPresent = cd.isConnectingToInternet();
+		System.out.println("Network states:" + isInternetPresent);
+		
+		
+		
+	
+		
+		
 		chatmsg=(EditText)rootView.findViewById(R.id.text_msg);
 		
 		
@@ -74,6 +92,9 @@ public class GroupMsg extends Fragment {
 			
 			@Override
 			public void onClick(View v) {
+				
+				
+				if (isInternetPresent) {
 				// TODO Auto-generated method stub
 				msg=chatmsg.getText().toString();
 				
@@ -142,9 +163,20 @@ public class GroupMsg extends Fragment {
 					};
 				}.execute();
 				
+			
+
+			}
+			
+			else {
+
+						Toast.makeText(getActivity(), "No Internet Connection", Toast.LENGTH_LONG).show();
+					}
+			
 			}
 		});
 		
+		
+		if (isInternetPresent) {
 		new AsyncTask<Void , Void, Void>(){
 			String value;
 			@Override
@@ -257,6 +289,13 @@ public class GroupMsg extends Fragment {
 			};
 			
 		}.execute();
+		
+	}
+		
+		else {
+
+					Toast.makeText(getActivity(), "No Internet Connection", Toast.LENGTH_LONG).show();
+				}
 
 		
 listview.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
@@ -266,6 +305,9 @@ listview.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>
 			@Override
 			public void onPullDownToRefresh(
 					PullToRefreshBase<ListView> refreshView) {
+				
+
+				if (isInternetPresent) {
 			
 								new AsyncTask<Void , Void, Void>(){
 									String value;
@@ -376,6 +418,13 @@ listview.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>
 									
 								}.execute();
 							
+								
+				}
+				
+				else {
+
+							Toast.makeText(getActivity(), "No Internet Connection", Toast.LENGTH_LONG).show();
+						}
 
 				
 			}
@@ -394,6 +443,7 @@ listview.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>
 	
 		
 	class GroupAdapter extends BaseAdapter{
+		
 
 		@Override
 		public int getCount() {
@@ -425,15 +475,38 @@ listview.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>
 			holder.groll=(TextView)convertView.findViewById(R.id.c_roll);
 			holder.gmsg=(TextView)convertView.findViewById(R.id.c_msg);
 			holder.gtime=(TextView)convertView.findViewById(R.id.c_time);
+			holder.mycoversation=(LinearLayout)convertView.findViewById(R.id.coversationlayout);
+			
 			
 			convertView.setTag(holder);
 			}
 			else {
 			holder=(viewholder)convertView.getTag();
 			}
-			holder.groll.setText(msglist.get(position).g_roll);
-			holder.gmsg.setText(msglist.get(position).g_msg);
-			holder.gtime.setText(parseDate(position));
+			
+////			if(msglist.get(position).g_roll.equals(IGEFSharedPrefrence.getROLL_NO())){
+//				
+//				System.out.println("Array List Rollno ---->"+ msglist.get(position).g_roll );
+//				System.out.println("Sharedpresfrence rollno---->"+IGEFSharedPrefrence.getROLL_NO() );
+//				
+//				
+//				holder.mycoversation.setBackgroundColor(getResources().getColor(R.color.mycoversationcolor));
+////				holder.groll.setGravity(Gravity.RIGHT);
+//				holder.gmsg.setGravity(Gravity.RIGHT);
+////				holder.gtime.setGravity(Gravity.RIGHT);
+//				
+//				/*holder.groll.setText(msglist.get(position).g_roll);
+//				holder.gmsg.setText(msglist.get(position).g_msg);
+//				holder.gtime.setText(parseDate(position));*/
+				
+			
+			
+			
+				holder.groll.setText(msglist.get(position).g_roll);
+				holder.gmsg.setText(msglist.get(position).g_msg);
+				holder.gtime.setText(parseDate(position));
+			
+			
 			return convertView;
 		}
 		public String parseDate(int position) throws ParseException {
@@ -457,6 +530,7 @@ listview.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>
 		}
 		class viewholder{
 			TextView groll,gmsg,gtime;
+			LinearLayout mycoversation;
 		}
 		
 	}

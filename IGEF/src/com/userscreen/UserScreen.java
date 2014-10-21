@@ -1,6 +1,7 @@
 package com.userscreen;
 
 
+import Tool.ConnectionDetector;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
@@ -10,7 +11,9 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.Prefrence.IGEFSharedPrefrence;
 import com.SocialNetwork.igef.R;
 import com.SocialNewtwork.AsyncTask.ProfilePhotoAsyncTask;
 
@@ -18,7 +21,8 @@ import com.SocialNewtwork.AsyncTask.ProfilePhotoAsyncTask;
 public class UserScreen extends ActionBarActivity implements ActionBar.TabListener{
 	
 
-    
+	Boolean isInternetPresent = false;
+	ConnectionDetector cd;
 	
 	ActionBar actionBar;
 	private ViewPager viewPager;
@@ -34,6 +38,12 @@ protected void onCreate(Bundle savedInstanceState) {
 // TODO Auto-generated method stub
 super.onCreate(savedInstanceState);
 setContentView(R.layout.first);
+
+//connection checking
+		cd = new ConnectionDetector(getApplicationContext());
+		isInternetPresent = cd.isConnectingToInternet();
+		System.out.println("Network states:" + isInternetPresent);
+		
 
 
 
@@ -89,10 +99,26 @@ setContentView(R.layout.first);
 
 
   
+    //run the Asynctask only if thier is some value in the shared prefrence
     
+    if (!IGEFSharedPrefrence.getPROFILEPICURL().equals("null")) {
+    	//Asynk Task to download Profile Photo of User
+    	
+    	
+		if (isInternetPresent) {
+    	new ProfilePhotoAsyncTask(UserScreen.this).execute();
+    	
+
+		}
+		
+		else {
+
+				
+				}
+		
+	}
     
-  //Asynk Task to download Profile Photo of User
-	new ProfilePhotoAsyncTask(UserScreen.this).execute();
+  
 
 }
 	@Override

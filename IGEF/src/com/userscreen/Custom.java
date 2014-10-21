@@ -2,10 +2,35 @@ package com.userscreen;
 
 public class Custom {
 
-	String name,status,timestamp, friendname, roll_no, title;
-	String cname,ctime,cnews;
-	String tname,atime, ldate, section,adetails;
+	String name, status, timestamp, friendname, roll_no, title,
+			statusprofilepicurl;
+
+	String cname, ctime, cnews;
+	String profilepicurls;
+	String tname, atime, ldate, section, adetails;
 	String g_roll, g_msg, g_time;
+	static String imageurl = "http://shypal.com/IGEF/task_manager/uploadedimages/";
+
+	public String getStatusprofilepicurl() {
+		return statusprofilepicurl;
+	}
+
+	public void setStatusprofilepicurl(String statusprofilepicurl) {
+		this.statusprofilepicurl = statusprofilepicurl;
+	}
+
+	public String getProfilepicurls() {
+		return profilepicurls;
+	}
+
+	public void setProfilepicurls(String profilepicurls) {
+		this.profilepicurls = profilepicurls;
+	}
+
+	public static String getImageurl() {
+		return imageurl;
+	}
+
 	public String getG_roll() {
 		return g_roll;
 	}
@@ -102,7 +127,7 @@ public class Custom {
 		this.title = title;
 	}
 
-	String myname,mystatus,mytimestamp,mystatus_id;
+	String myname, mystatus, mytimestamp, mystatus_id;
 
 	public String getMyname() {
 		return myname;
@@ -173,6 +198,7 @@ public class Custom {
 	}
 
 	public void setStatus(String status) {
+
 		this.status = status;
 	}
 }

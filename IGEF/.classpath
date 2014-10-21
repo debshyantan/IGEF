@@ -5,6 +5,7 @@
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
-	<classpathentry exported="true" kind="lib" path="/home/rahul/Parse-1.5.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="E:/Android/Android Libraries, jars and Samples/jars/Parse-1.5.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="E:/Android/Android Libraries, jars and Samples/jars/picasso-2.3.4.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

@@ -16,6 +16,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
+import Tool.ConnectionDetector;
 import android.app.ProgressDialog;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
@@ -27,6 +28,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.Prefrence.IGEFSharedPrefrence;
 import com.SocialNetwork.igef.R;
@@ -35,6 +37,10 @@ import com.SocialNetwork.igef.R;
 public class PostStatus extends Fragment {
 	Button post, reset;
 	EditText statusUpdate;
+	
+	Boolean isInternetPresent = false;
+	ConnectionDetector cd;
+	
 	public PostStatus() {
 		
 	}
@@ -51,6 +57,15 @@ public class PostStatus extends Fragment {
 		
 		post=(Button)rootView.findViewById(R.id.post);
 		reset=(Button)rootView.findViewById(R.id.reset);
+		
+		
+		
+		//connection checking
+			cd = new ConnectionDetector(getActivity().getApplicationContext());
+			isInternetPresent = cd.isConnectingToInternet();
+			System.out.println("Network states:" + isInternetPresent);
+			
+			
 		
 		//clear all the status updates
 		reset.setOnClickListener(new OnClickListener() {
@@ -74,6 +89,8 @@ public class PostStatus extends Fragment {
 		//		IGEFSharedPrefrence obj = new IGEFSharedPrefrence(getActivity());
 				System.out.println("shared preference fullnae" + IGEFSharedPrefrence.getFULL_NAME());
 				System.out.println("shared preference rollno " + IGEFSharedPrefrence.getROLL_NO());
+				
+				if (isInternetPresent) {
 				
 				
 				new AsyncTask<Void, Void, Void>(){
@@ -173,7 +190,12 @@ public class PostStatus extends Fragment {
 				
 				
 				
+				}
 				
+				else {
+
+							Toast.makeText(getActivity(), "No Internet Connection", Toast.LENGTH_LONG).show();
+						}
 				
 				
 				

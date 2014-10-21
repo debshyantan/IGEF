@@ -22,6 +22,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import Tool.ConnectionDetector;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -35,6 +36,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.Chat.App;
 import com.Prefrence.IGEFSharedPrefrence;
@@ -48,6 +50,8 @@ public class Assignments extends Fragment {
 	static ListView lv;
 	public static ArrayList<Custom> asgnlist;
 	AsgnAdapter adapter;
+	Boolean isInternetPresent = false;
+	ConnectionDetector cd;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater,
@@ -58,6 +62,18 @@ public class Assignments extends Fragment {
 		listview=(PullToRefreshListView)rootView.findViewById(R.id.list);
 		lv=listview.getRefreshableView();
 		asgnlist=((App)getActivity().getApplication()).getAsgnlist();
+		
+		
+		
+		//connection checking
+			cd = new ConnectionDetector(getActivity().getApplicationContext());
+			isInternetPresent = cd.isConnectingToInternet();
+			System.out.println("Network states:" + isInternetPresent);
+			
+			
+			
+			
+			if (isInternetPresent) {
 		
 		new AsyncTask<Void , Void, Void>(){
 			String value;
@@ -180,6 +196,13 @@ public class Assignments extends Fragment {
 			
 		}.execute();
 		
+			}
+			
+			else {
+
+						Toast.makeText(getActivity(), "No Internet Connection", Toast.LENGTH_LONG).show();
+					}
+		
 listview.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
 
 			
@@ -187,6 +210,8 @@ listview.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>
 			@Override
 			public void onPullDownToRefresh(
 					PullToRefreshBase<ListView> refreshView) {
+
+				if (isInternetPresent) {
 			
 								new AsyncTask<Void , Void, Void>(){
 									String value;
@@ -304,7 +329,12 @@ listview.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>
 									};
 									
 								}.execute();
-							
+				}
+				
+				else {
+
+							Toast.makeText(getActivity(), "No Internet Connection", Toast.LENGTH_LONG).show();
+						}
 
 				
 			}
